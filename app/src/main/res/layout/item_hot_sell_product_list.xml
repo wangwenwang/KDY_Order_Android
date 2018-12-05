@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="1dp"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    android:paddingTop="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_listview_shap_selector"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/listview_item_paddingbottom"
+        android:paddingLeft="@dimen/listview_item_paddingleft"
+        android:paddingRight="@dimen/listview_item_paddingright"
+        android:paddingTop="@dimen/listview_item_paddingtop">
+
+        <ImageView
+            android:id="@+id/iv_product"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_gift" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="名称:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/listview_titletextsize" />
+
+                <TextView
+                    android:id="@+id/tv_productName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/minefragment_block_righttextview_marginLeft"
+                    android:text="大瓶怡宝水"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/listview_contenttestsize" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="规格:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/listview_titletextsize" />
+
+                <TextView
+                    android:id="@+id/tv_product_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/minefragment_block_righttextview_marginLeft"
+                    android:text="500ML"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/listview_contenttestsize" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="价格:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/listview_titletextsize" />
+
+                <TextView
+                    android:id="@+id/tv_origin_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/minefragment_block_righttextview_marginLeft"
+                    android:text="1"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/listview_contenttestsize" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/ic_hot_sell_product" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="热卖"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

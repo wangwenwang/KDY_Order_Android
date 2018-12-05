@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/title_background"
+        app:layout_heightPercent="@string/fragment_title_height"
+        app:layout_widthPercent="@string/fragment_title_width">
+        <ImageView
+            android:id="@+id/button_goback"
+            android:layout_width="38dp"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/title_imageview_paddingleft"
+            android:paddingRight="@dimen/title_imageview_paddingright"
+            android:paddingTop="@dimen/title_imageview_paddingtop"
+            android:paddingBottom="@dimen/title_imageview_paddingbottom"
+            android:src="@drawable/back"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/menue_fee_Party"
+            android:textColor="@color/text_title_color"
+            android:textStyle="bold"
+            android:textSize="@dimen/title_size" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/makeorder_fragment_search_edittext_bg"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/ic_search"
+            />
+
+        <EditText
+            android:id="@+id/edittext_headview_content"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="20dp"
+            android:paddingLeft="5dp"
+            android:hint="按客户名称关键字搜索"
+            android:textSize="14sp"
+            android:textColor="@color/text_color_normal"
+            android:gravity="center_vertical"
+            android:background="@null"
+            />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <com.kaidongyuan.app.kdyorder.widget.xlistview.XListView
+        android:id="@+id/lv_select_customer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minHeight="30dp"
+        android:background="@color/line_color"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:cacheColorHint="#00000000"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        >
+        <Button
+            android:id="@+id/bt_addparty"
+            android:text="新\t增\t客\t户"
+            android:textSize="@dimen/text_size_bigger"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background_blue_selector"
+            android:layout_marginTop="@dimen/checkorderpicture_textview_margintop"
+            android:layout_marginBottom="@dimen/checkorderpicture_imageview_margintop"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/textview_nodata"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/no_data_textview_marginBottom"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/no_dataandrefresh"
+        android:textColor="@color/loginactivity_line_color"
+        android:textSize="@dimen/no_data_textview_textsize"
+        android:visibility="gone"
+        />
+
+</com.zhy.android.percent.support.PercentLinearLayout>
+
+
+
+

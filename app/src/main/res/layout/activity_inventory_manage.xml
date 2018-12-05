@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/default_bg">
+    <View
+        android:id="@+id/topview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/title_background"
+        />
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:id="@+id/percentRL_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent="@string/title_width"
+        app:layout_heightPercent="@string/title_height"
+        android:background="@color/title_background"
+        >
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text="客户库存登记列表"
+            android:textSize="@dimen/title_size"
+            android:textColor="@color/text_title_color"
+            android:textStyle="bold"
+            />
+        <ImageView
+            android:id="@+id/button_goback"
+            android:layout_width="38dp"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/title_imageview_paddingleft"
+            android:paddingRight="@dimen/title_imageview_paddingright"
+            android:paddingTop="@dimen/title_imageview_paddingtop"
+            android:paddingBottom="@dimen/title_imageview_paddingbottom"
+            android:src="@drawable/back"
+            />
+        <TextView
+            android:id="@+id/tv_makeAppStock"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="@dimen/title_imageview_paddingleft"
+            android:paddingTop="@dimen/title_imageview_paddingtop"
+            android:paddingBottom="@dimen/title_imageview_paddingbottom"
+            android:text="新\t建"
+            android:textSize="@dimen/text_size_bigger"
+            android:textColor="@color/text_title_color"
+            android:gravity="center_vertical|right"
+            android:layout_alignParentRight="true"
+            />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+    <com.kaidongyuan.app.kdyorder.widget.xlistview.XListView
+        android:id="@+id/lv_stock_fleet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/line_color"
+        android:divider="@null"
+        android:scrollbars="vertical"
+        android:minHeight="@dimen/xlistview_minheight"
+        android:cacheColorHint="#00000000"
+        />
+
+    <include
+        layout="@layout/layout_no_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        />
+</com.zhy.android.percent.support.PercentLinearLayout>

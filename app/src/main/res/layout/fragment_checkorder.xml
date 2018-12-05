@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/default_bg"
+    android:layout_height="match_parent">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="@string/fragment_title_height"
+        app:layout_widthPercent="@string/fragment_title_width"
+        android:background="@color/title_background"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/menue_checkOrder"
+            android:textSize="@dimen/title_size"
+            android:textStyle="bold"
+            android:textColor="@color/text_title_color"
+            />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:id="@+id/pll1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent="100%w"
+        app:layout_heightPercent="6%h"
+        android:layout_below="@id/title">
+        <Button
+            android:id="@+id/button_inTransOrder"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="在途"
+            android:gravity="center"
+            android:textColor="@color/checkorder_topbutton_textcolor_unSelected"
+            android:textSize="@dimen/checkorder_topbutton_textSize"
+            android:background="@null"
+            />
+        <Button
+            android:id="@+id/button_completeOrder"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="已完成"
+            android:gravity="center"
+            android:textColor="@color/checkorder_topbutton_textcolor_unSelected"
+            android:textSize="@dimen/checkorder_topbutton_textSize"
+            android:background="@null"
+            />
+        <Button
+            android:id="@+id/button_cancelOrder"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="已取消"
+            android:gravity="center"
+            android:textColor="@color/checkorder_topbutton_textcolor_unSelected"
+            android:textSize="@dimen/checkorder_topbutton_textSize"
+            android:background="@null"
+            />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_order"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/pll1"
+        android:background="#FFFFFF"
+        />
+
+</com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+
+

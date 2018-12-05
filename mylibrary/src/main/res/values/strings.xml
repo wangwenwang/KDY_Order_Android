@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Library</string>
+
+    <!--时间选择控件用到的-->
+    <item name="gray_holo_dark" type="color">#ff464646</item>
+    <item name="gray_holo_light" type="color">#ffd0d0d0</item>
+</resources>

@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kaidongyuan.app.kdyorder">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!--****************************************** 百度地图SDK权限配置开始 ******************************************-->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!--****************************************** 百度地图SDK权限配置结束 ******************************************-->
+
+
+    <!--****************************************** 个推SDK权限配置开始 ******************************************-->
+    <!-- 如果app项目本身或者百度地图中已使用权限则个推的权限中相同的权限将被删除，否则报错 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- iBeancon功能与个推3.0电子围栏功能所需要的权限为非必需的可选择权限，可以选择性配置，以便使用个推3.0电子围栏功能 -->;
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- 个推3.0电子围栏功能所需权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 浮动通知权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- 自定义权限 -->
+    <uses-permission android:name="getui.permission.GetuiService.com.kaidongyuan.app.kdyorder" />
+    <!--替换为第三方应用的包名-->
+    <permission
+        android:name="getui.permission.GetuiService.com.kaidongyuan.app.kdyorder"
+        android:protectionLevel="normal">
+    </permission>
+    <!--替换为第三方应用的包名-->
+    <!--****************************************** 个推SDK权限配置结束 ******************************************-->
+
+
+    <application
+        android:name=".app.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:theme="@android:style/Theme.Light.NoTitleBar">
+
+        <!--启动欢迎界面-->
+        <activity
+            android:name=".ui.activity.WelcomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:persistent="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--登录界面-->
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <!--注册界面-->
+        <activity
+            android:name=".ui.activity.RegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            />
+        <activity android:name=".ui.activity.ChooseProvinceActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            />
+        <!--主界面-->
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--货物轨迹查询界面-->
+        <activity
+            android:name=".ui.activity.SearchOrderTrajectoryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <!--查看物流订单列表-->
+        <activity android:name=".ui.activity.CheckTmsOrderListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            />
+        <activity android:name=".ui.activity.TmsOrderPartyActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            />
+        <!--查看物流订单界面-->
+        <activity android:name=".ui.activity.TmsOrderActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            />
+
+        <!--订单查看界面-->
+        <activity
+            android:name=".ui.activity.ChartCheckActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--热销产品界面-->
+        <activity
+            android:name=".ui.activity.HotSellProductActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--最新资讯界面-->
+        <activity
+            android:name=".ui.activity.NewestInformationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--资讯详情界面-->
+        <activity
+            android:name=".ui.activity.NewestInformationDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <!--库存登记列表界面-->
+        <activity android:name=".ui.activity.InventoryManageActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--库存登记客户列表界面-->
+        <activity
+            android:name=".ui.activity.InventoryPartyActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--创建库存登记表界面-->
+        <activity android:name=".ui.activity.MakeAppStockActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            />
+        <!--提交库存登记表界面-->
+        <activity android:name=".ui.activity.InventoryConfirmActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            />
+        <!--库存登记表详情界面-->
+        <activity android:name=".ui.activity.AppStockDetailsActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            />
+        <!--费用账单客户列表界面-->
+        <activity android:name=".ui.activity.FeePartyActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            />
+        <!--客户费用账单列表界面-->
+        <activity android:name=".ui.activity.BillFeeListActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            />
+        <!--费用账单详情界面-->
+        <activity android:name=".ui.activity.BusinessFeeActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            />
+        <!--库存管理客户列表界面-->
+        <activity android:name=".ui.activity.InventoryPartyListActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <activity android:name=".ui.activity.PartyInventoryActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--产品库存详情-->
+        <activity android:name=".ui.activity.ProductStockDetailActivity"
+            android:launchMode="standard"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--产品库存流水-->
+        <activity android:name=".ui.activity.ProductStockDetailMoreActivity"
+            android:launchMode="standard"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--库存入库选择商品-->
+        <activity android:name=".ui.activity.InputInventoryActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--库存出库提交入库单-->
+        <activity android:name=".ui.activity.InPutOrderConfirmActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--库存出库选择商品-->
+        <activity android:name=".ui.activity.OutputInventoryActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--库存出库选择收货信息-->
+        <activity android:name=".ui.activity.OutputPartyListActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--库存出库提交出库单-->
+        <activity android:name=".ui.activity.OutPutOrderConfirmActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--出库明细/出库单列表-->
+        <activity android:name=".ui.activity.OutputOrderListActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--出库明细/出库单-->
+        <activity android:name=".ui.activity.OutPutOrderDetailActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--入库明细/入库单列表-->
+        <activity android:name=".ui.activity.InputOrderListActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--出库明细/出库单-->
+        <activity android:name=".ui.activity.InPutOrderDetailActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <!--业务代码对于仓库库存查看-->
+        <activity android:name=".ui.activity.BusinessInventoryActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <activity android:name=".ui.activity.ProductStock2BDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            />
+        <activity android:name=".ui.activity.PreOrderManageActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            />
+        <activity android:name=".ui.activity.PreOrderDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            />
+        <activity android:name=".ui.activity.MakePreOrderActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            />
+        <activity android:name=".ui.activity.PreOrderConfirmActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            />
+        <!--订单详情界面-->
+        <activity
+            android:name=".ui.activity.OrderDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--查看物流信息界面-->
+        <activity
+            android:name=".ui.activity.OrderTransInformationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--物流信息详情界面-->
+        <activity
+            android:name=".ui.activity.OrderTmsDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--订单进度界面-->
+        <activity
+            android:name=".ui.activity.OrderTimeNodeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--订单线路界面-->
+        <activity
+            android:name=".ui.activity.OrderPathActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <!--下单客户管理界面-->
+        <activity android:name=".ui.activity.PartyManageActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/mActivityTheme"
+            />
+        <activity android:name=".ui.activity.PartyAddressManageActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/mActivityTheme"
+            />
+        <!--修改密码界面-->
+        <activity
+            android:name=".ui.activity.UpdataPasswordActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <!--下单界面-->
+        <activity
+            android:name=".ui.activity.MakeOrderActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--查看促销信息界面-->
+        <activity
+            android:name=".ui.activity.PromotionInformationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--订单确认界面-->
+        <activity
+            android:name=".ui.activity.OrderConfirmActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
+        <!--添加赠品界面-->
+        <activity
+            android:name=".ui.activity.AddGiftActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--查看签名和交货现场图片界面-->
+        <activity
+            android:name=".ui.activity.CheckOrderPictureActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <!--图片查看界面-->
+
+        <activity
+            android:name=".ui.activity.ZoomImageviewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--关于界面-->
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+
+        <!--****************************************** 百度地图配置开始 ******************************************-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="yGwwmy0MwPE0rrxp1BQw1Y56" />
+
+        <!--****************************************** 个推SDK配置开始 ******************************************-->
+        <!-- 配置的第三方参数属性 -->
+        <meta-data
+            android:name="PUSH_APPID"
+            android:value="bZmU5pX5hT7ZijVqzsWmm4" />
+        <!--替换为第三方应用的APPID-->
+        <meta-data
+            android:name="PUSH_APPKEY"
+            android:value="4Vi2JHBcSW71e6E7A9DOeA" />
+        <!--替换为第三方应用的APPKEY-->
+        <meta-data
+            android:name="PUSH_APPSECRET"
+            android:value="hd02OR684d56pSlQNOCaD6" />
+        <!--替换为第三方应用的APPSECRET-->
+        <!-- 配置SDK核心服务 -->
+        <service
+            android:name="com.igexin.sdk.PushService"
+            android:exported="true"
+            android:label="NotificationCenter"
+            android:process=":pushservice" />
+        <service
+            android:name="com.igexin.sdk.PushServiceUser"
+            android:exported="true"
+            android:label="NotificationCenterUser" />
+
+        <receiver android:name="com.igexin.sdk.PushReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="com.igexin.sdk.action.refreshls" />
+                <!-- 以下三项为可选的action声明，可大大提高service存活率和消息到达速度 -->
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.igexin.sdk.PushManagerReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.igexin.sdk.action.pushmanager" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.igexin.sdk.PushActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:process=":pushservice"
+            android:taskAffinity="com.igexin.sdk.PushActivityTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.igexin.sdk.GActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:process=":pushservice"
+            android:taskAffinity="com.igexin.sdk.PushActivityTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <service
+            android:name="com.igexin.download.DownloadService"
+            android:process=":pushservice" />
+
+        <receiver android:name="com.igexin.download.DownloadReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="com.igexin.download.DownloadProvider"
+            android:authorities="downloads.com.kaidongyuan.app.kdyorder"
+            android:exported="true"
+            android:process=":pushservice" />
+        <!--替换为第三方应用的包名-->
+
+        <activity
+            android:name="com.igexin.getuiext.activity.GetuiExtActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:process=":pushservice"
+            android:taskAffinity="android.task.myServicetask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <receiver
+            android:name="com.igexin.getuiext.service.PayloadReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4" />
+                <action android:name="com.igexin.sdk.action.bZmU5pX5hT7ZijVqzsWmm4" />
+                <!--替换为第三方应用的APPID-->
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="com.igexin.getuiext.service.GetuiExtService"
+            android:process=":pushservice" />
+        <!--****************************************** 个推SDK配置结束 ******************************************-->
+    </application>
+
+</manifest>

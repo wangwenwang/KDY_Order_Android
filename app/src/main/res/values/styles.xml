@@ -1,0 +1,39 @@
+<resources>
+
+    <!--xlistview 中使用-->
+    <style name="progressBar_style">
+        <item name="android:indeterminateDrawable">@anim/refresh_loading</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--自定义 Dialog 中使用-->
+    <style name="widgetDialog" parent="@android:style/Theme.Dialog">
+        <!-- 设置无边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 设置无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 设置完全透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 设置屏幕变暗 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--重写布局？-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+    </style>
+    <!--自定义style AppCompat FullScreen  -->
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+        <!--自定义PartyManageActivity style-->
+    <style name="mActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+
+</resources>

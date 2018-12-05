@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_background_normal"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp">
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="输入库存数量："
+            android:textColor="@color/black"
+            android:textSize="@dimen/dialog_title_textsize" />
+
+        <EditText
+            android:id="@+id/edittext_inputnumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="40%w"
+            android:padding="5dp"
+            android:layout_gravity="center_horizontal"
+            android:inputType="number"
+            android:background="@drawable/rounded_white_box_bg"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/red"
+            />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="输入生产日期："
+            android:textColor="@color/black"
+            android:textSize="@dimen/dialog_title_textsize" />
+
+        <TextView
+            android:id="@+id/textview_inputtiem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="40%w"
+            android:padding="5dp"
+            android:layout_gravity="center_horizontal"
+            android:inputType="number"
+            android:background="@drawable/rounded_white_box_bg"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/red"
+            />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:layout_widthPercent="66%w">
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background_normal_selector"
+            android:text="取消"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dialog_button_textsize" />
+
+        <Button
+            android:id="@+id/button_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_background_normal_selector"
+            android:text="确认"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dialog_button_textsize" />
+    </LinearLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>
+
+

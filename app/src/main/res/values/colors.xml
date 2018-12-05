@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--字体颜色重-->
+    <color name="text_color_heavy">#F44336</color>
+    <!--字体颜色正常-->
+    <color name="text_color_normal">#F57C00</color>
+    <!--顶部标题栏背景颜色-->
+    <color name="title_background">#f08300</color>
+    <!--顶部标题字体颜色-->
+    <color name="text_title_color">#FAFAFA</color>
+    <!--按钮背景颜色-->
+    <color name="button_bg">#FFAB00</color>
+    <!--按钮按下时背景颜色-->
+    <color name="button_bg_pressed">#FFC400</color>
+    <!--按钮不可以点击是的背景颜色-->
+    <color name="button_bg_unenable">#FFC400</color>
+    <!--MineFragment中item按下时背景颜色-->
+    <color name="minefragment_item_pressed">#EEEEEE</color>
+    <!--ListView中Item按下时的背景颜色-->
+    <color name="listview_item_pressed">#EEEEEE</color>
+    <!--体统默认背景颜色-->
+    <color name="default_bg">#F5F5F5</color>
+    <!--LoginActivity背景颜色-->
+    <color name="loginactivity_bg">#EEEEEE</color>
+    <!--Dialog 背景颜色-->
+    <color name="dialog_bg">#E0E0E0</color>
+    <!--布局分割线颜色-->
+    <color name="line_color">#E0E0E0</color>
+    <!--LoginActivity分割线颜色-->
+    <color name="loginactivity_line_color">#BDBDBD</color>
+    <!--白色-->
+    <color name="white">#FFFFFF</color>
+    <!--黑色-->
+    <color name="black">#212121</color>
+    <!--红色-->
+    <color name="red">#F44336</color>
+    <color name="dark_green">#009A4D</color>
+    <!--蓝色-->
+    <color name="blue">#37BAFF</color>
+    <color name="dark_blue">#0068B8</color>
+    <!--输入框提示颜色-->
+    <color name="edittext_hint">#E0E0E0</color>
+    <!--已选商品底部背景颜色-->
+    <color name="choiced_product_orgift_bg">#aa000000</color>
+    <!--已选赠品和商品背景颜色-->
+    <color name="choicedgift_orproduct_bg">#2b2b2b</color>
+    <color name="kdy_bg_top">#f08300</color>
+    <color name="kdy_bg_center">#66f08300</color>
+    <color name="transparent">#00000000</color>
+    <!--自定义控件相关-->
+    <color name="loading_circle">#1ad6fd</color>
+
+    <!--WelcomeActivity-->
+    <color name="button_welcomeActivity_skip">#AA2B2B2B</color>
+
+    <!-- MainActivity -->
+    <color name="indexmenue_text_unselected">#777777</color>
+    <color name="indexmenue_text_selected">#F57C00</color>
+    <color name="menue_bg">#EAEAEA</color>
+
+    <!--MineFragment-->
+    <color name="minefragment_block_textcolor">#212121</color>
+
+    <!--CheckOrderFragment部分-->
+    <color name="checkorder_topbutton_textcolor_unSelected">#F57C00</color>
+    <color name="checkorder_topbutton_textcolor_Selected">#F44336</color>
+    <color name="checkorder_topbutton_background_unSelected">#EEEEEE</color>
+    <color name="checkorder_topbutton_background_Selected">#FFFFFF</color>
+    <color name="details_text">#ff333333</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#F57C00</color>
+
+</resources>

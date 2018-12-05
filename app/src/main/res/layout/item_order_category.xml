@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:orientation="horizontal"
+    android:background="@drawable/item_listview_selector"
+    android:padding="1dp"
+    >
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="@string/no_set"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="可选: "
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_gifgttotalchoicesize"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="0"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@color/red"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:text="剩余: "
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_gifgchoicesize"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="0"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@color/red"
+        />
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+

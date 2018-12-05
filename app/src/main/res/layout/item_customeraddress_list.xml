@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:background="@null"
+    android:padding="1dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/listview_item_paddingbottom"
+        android:paddingLeft="@dimen/listview_item_paddingleft"
+        android:paddingRight="@dimen/listview_item_paddingright"
+        android:paddingTop="@dimen/listview_item_paddingtop"
+        android:background="@drawable/item_listview_shap_selector"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系人:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_contact_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:text="text"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+
+            <TextView
+                android:id="@+id/tv_contact_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:text="photonumber"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地址代码:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_address_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:text="YBHN0-0600"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地址详情:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_address_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:text="宝安沙井街道环镇路街边小区北路巷1号一楼"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+

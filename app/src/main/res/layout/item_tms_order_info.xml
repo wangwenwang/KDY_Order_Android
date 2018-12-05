@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:orientation="horizontal"
+    android:paddingBottom="1dp"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    android:paddingTop="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_listview_shap_selector"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/listview_item_paddingbottom"
+        android:paddingLeft="@dimen/listview_item_paddingleft"
+        android:paddingRight="@dimen/listview_item_paddingright"
+        android:paddingTop="@dimen/listview_item_paddingtop">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="物流编号:"
+                    android:textSize="@dimen/listview_titletextsize" />
+
+                <TextView
+                    android:id="@+id/tv_order_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                    android:text="@string/no_set"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/listview_contenttestsize" />
+
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="创建时间:"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_order_addDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:text="@string/no_set"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="订单数量:"
+                    android:textSize="@dimen/listview_titletextsize" />
+
+                <TextView
+                    android:id="@+id/tv_order_qty"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                    android:background="@null"
+                    android:text="@string/no_set"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/listview_contenttestsize" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="物流数量:"
+                    android:textSize="@dimen/listview_titletextsize" />
+
+                <TextView
+                    android:id="@+id/tv_tms_qty"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                    android:background="@null"
+                    android:text="@string/no_set"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/listview_contenttestsize" />
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="订单总重:"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_order_weight"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:background="@null"
+                android:text="@string/no_set"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="物流总重:"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_tms_weight"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:background="@null"
+                android:text="@string/no_set"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="订单体积:"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_order_volume"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:background="@null"
+                android:text="@string/no_set"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="物流体积:"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_tms_volume"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:background="@null"
+                android:text="@string/no_set"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="客户名称:"
+                    android:textSize="@dimen/listview_titletextsize" />
+
+                <TextView
+                    android:id="@+id/tv_customer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                    android:background="@null"
+                    android:text="@string/no_set"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/listview_contenttestsize" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="目的地址:"
+                    android:textSize="@dimen/listview_titletextsize" />
+
+                <TextView
+                    android:id="@+id/tv_order_toaddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                    android:background="@null"
+                    android:text="@string/no_set"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/listview_contenttestsize" />
+
+            </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/listview_item_paddingleft"
+    android:layout_marginRight="@dimen/listview_item_paddingright"
+    android:paddingLeft="@dimen/listview_item_paddingleft"
+    android:paddingRight="@dimen/listview_item_paddingright"
+
+    android:background="@drawable/item_listview_shap_selector"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="费用名称:"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/black"
+            />
+
+        <com.kaidongyuan.app.kdyorder.widget.MyTextView
+            android:id="@+id/tv_BUSINESSFEE_NAME"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/minefragment_block_righttextview_marginLeft"
+            android:textSize="@dimen/text_size_normal"
+            android:text="@string/no_set"
+            android:textColor="@color/red"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="费用金额:"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/black"
+            />
+
+        <com.kaidongyuan.app.kdyorder.widget.MyTextView
+            android:id="@+id/tv_BUSINESSFEE_COST"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/minefragment_block_righttextview_marginLeft"
+            android:textSize="@dimen/text_size_normal"
+            android:text="@string/no_set"
+            android:textColor="@color/red"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="3dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="费用时间:"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/black"
+            />
+
+        <com.kaidongyuan.app.kdyorder.widget.MyTextView
+            android:id="@+id/tv_BUSINESSFEE_TIME"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/minefragment_block_righttextview_marginLeft"
+            android:textSize="@dimen/text_size_normal"
+            android:text="@string/no_set"
+            android:textColor="@color/red"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

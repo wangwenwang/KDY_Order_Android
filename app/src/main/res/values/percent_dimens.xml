@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--*************************************************** 百分比尺寸 *******************************************************-->
+    <!--顶部标题栏高度-->
+    <string name="title_height">8%h</string>
+    <!--顶部标题栏宽度-->
+    <string name="title_width">100%w</string>
+    <!--底部菜单栏高度-->
+    <string name="bottom_menue_height">8.2%h</string>
+    <string name="bottom_menue_width">100%w</string>
+    <string name="bottom_menue_margintop">91.8%h</string>
+    <string name="framelayout_fragment_height">91.8%h</string>
+    <string name="framelayout_fragment_width">100%w</string>
+
+    <!--Fragment通用部分 标题高度要与LoginActivity中标题高度一致，计算-->
+    <string name="fragment_title_width">100%w</string>
+    <string name="fragment_title_height">8.7%h</string>
+    <string name="fragment_body_width">100%w</string>
+    <string name="fragment_body_height">91.3%h</string>
+
+    <!--MainActivity部分-->
+    <!--块部分每个块由ImageView和TextView组成，两个总高度100%-->
+    <!--ImageView部分-->
+    <string name="menue_imageview_width">28%w</string>
+    <string name="menue_imageview_height">48%h</string>
+    <string name="menue_marginTopPercent">7%h</string>
+    <string name="menue_marginRightPercent">36%w</string>
+    <string name="menue_marginLeftPercent">36%w</string>
+    <!--TextView部分-->
+    <string name="menue_textview_width">100%w</string>
+    <string name="menue_textview_height">35%h</string>
+    <string name="menue_textview_marginBottomPercent">7%h</string>
+    <!--ImageView-->
+
+    <!--HomeFragment部分-->
+    <!--块部分每个块由ImageView和TextView组成，两个总高度100%-->
+    <!--ImageView部分-->
+    <string name="block_imageview_width">36%w</string>
+    <string name="block_imageview_height">50%h</string>
+    <string name="block_marginTopPercent">14%h</string>
+    <string name="block_marginBottomPercent">1%h</string>
+    <string name="block_marginLeftPercent">32%w</string>
+    <string name="block_marginRightPercent">32%w</string>
+    <!--TextView部分-->
+    <string name="block_textview_width">100%w</string>
+    <string name="block_textview_height">33%h</string>
+    <!--客户库存管理各块部分由ImageView和TextView组成，两个总高度100%-->
+    <string name="block_partyInventory_imageview_width">50%w</string>
+    <string name="block_partyInventory_imageview_height">50%h</string>
+    <string name="block_partyInventory_marginTopPercent">10%h</string>
+    <string name="block_partyInventory_marginBottomPercent">1%h</string>
+    <string name="block_partyInventory_marginLeftPercent">25%w</string>
+    <string name="block_partyInventory_marginRightPercent">25%w</string>
+    <!--TextView部分-->
+    <string name="block_partyInventory_textview_width">100%w</string>
+    <string name="block_partyInventory_textview_height">35%h</string>
+
+    <!--PreOrderManageActivity-->
+    <string name="framlayout_perordermanage_height">100%h</string>
+
+</resources>

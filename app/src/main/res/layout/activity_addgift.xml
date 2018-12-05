@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical"
+    tools:context=".ui.activity.AddGiftActivity">
+
+    <View
+        android:id="@+id/topview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/title_background"
+        />
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:id="@+id/percentRL_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/title_background"
+        app:layout_heightPercent="@string/title_height"
+        app:layout_widthPercent="@string/title_width">
+
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="订单确认"
+            android:textColor="@color/text_title_color"
+            android:textSize="@dimen/title_size"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/button_goback"
+            android:layout_width="38dp"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/title_imageview_paddingbottom"
+            android:paddingLeft="@dimen/title_imageview_paddingleft"
+            android:paddingRight="@dimen/title_imageview_paddingright"
+            android:paddingTop="@dimen/title_imageview_paddingtop"
+            android:src="@drawable/back" />
+
+        <Button
+            android:id="@+id/button_sureAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:padding="15dp"
+            android:text="确认添加"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/white"
+            />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+         >
+        <LinearLayout
+            android:id="@+id/ll_giftmessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:text="品类:"
+                    android:textSize="18sp"
+                    android:textColor="@color/red"
+                    />
+                <ListView
+                    android:id="@+id/listview_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="产品:"
+                android:textSize="18sp"
+                android:textColor="@color/red"
+                android:background="@color/default_bg"
+                />
+            <ListView
+                android:id="@+id/listview_commodity"
+                android:layout_width="match_parent"
+                android:background="@color/default_bg"
+                android:layout_height="0dp"
+                android:layout_weight="9"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_choicegiftdetial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:visibility="gone"
+            >
+            <View
+                android:id="@+id/view_hide"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_alignParentBottom="true"
+                android:background="#2b2b2b"/>
+            <Button
+                android:id="@+id/bt_hidgiftdetail"
+                android:layout_width="150dp"
+                android:layout_height="25dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_back_bottom"
+                />
+            <ListView
+                android:id="@+id/listview_choicegiftdetial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/bt_hidgiftdetail"
+                android:background="#2b2b2b"/>
+            <TextView
+                android:id="@+id/textView_choicegifttitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingLeft="5dp"
+                android:layout_above="@id/listview_choicegiftdetial"
+                android:text="已选赠品详情："
+                android:textColor="@color/white"
+                android:background="#2b2b2b"
+                android:textSize="18sp"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_totalgiftsize"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="horizontal"
+        android:background="#aa000000">
+        <Button
+            android:id="@+id/bt_cleargiftchoice"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:text="重选"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:background="@null"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="可选:\t"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/tv_totalgiftsize"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0"
+                android:textSize="16sp"
+                android:textColor="@color/red"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="已选:\t"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/tv_choicegiftsize"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0"
+                android:textSize="16sp"
+                android:textColor="@color/red"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
+        <Button
+            android:id="@+id/bt_gigrchoicedetial"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:text="详情"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:background="@null"
+            />
+    </LinearLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>
+
+
+
+
+
+
+
+
+
+
+

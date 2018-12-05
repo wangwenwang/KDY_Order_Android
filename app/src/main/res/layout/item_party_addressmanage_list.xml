@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="1dp"
+    android:paddingLeft="3dp"
+    android:paddingRight="1dp"
+    android:paddingBottom="1dp"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@drawable/item_listview_shap_selector"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/listview_item_paddingbottom"
+        android:paddingLeft="@dimen/listview_item_paddingleft"
+        android:paddingRight="@dimen/listview_item_paddingright"
+        android:paddingTop="@dimen/listview_item_paddingtop">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="客户类型:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/listview_titletextsize"
+                />
+
+            <TextView
+                android:id="@+id/tv_party_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:text="用户名"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="所属区域:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_address_belong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:singleLine="true"
+                android:text="XXXXXXXHHHHHHHH"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="详细地址:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_address_addressinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:text="客户地址门牌号码"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系人:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_address_person"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:text="姓名"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系电话:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/listview_titletextsize" />
+
+            <TextView
+                android:id="@+id/tv_address_tel"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/listview_spantexttotitle"
+                android:text="手机号码"
+                android:textColor="@color/red"
+                android:textSize="@dimen/listview_contenttestsize" />
+        </LinearLayout>
+    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_address_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 删 除 "
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/ic_del"
+            android:paddingBottom="3dp"
+            android:textColor="@color/indexmenue_text_unselected"
+            android:layout_gravity="end"
+            />
+
+</LinearLayout>
+

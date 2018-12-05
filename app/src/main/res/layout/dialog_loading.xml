@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tipTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="loading..."
+        android:textSize="21sp"
+        android:layout_marginBottom="15dp"
+        android:visibility="gone"
+        android:textColor="@color/loading_circle" />
+
+
+    <com.kaidongyuan.app.kdyorder.widget.loadingdialog.NewtonCradleLoading
+        android:id="@+id/loading_balls"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

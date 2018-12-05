@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg">
+
+    <com.kaidongyuan.app.kdyorder.widget.xlistview.XListView
+        android:id="@+id/lv_completeOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/line_color"
+        android:divider="@null"
+        android:minHeight="@dimen/xlistview_minheight"
+        android:cacheColorHint="#00000000"/>
+
+    <TextView
+        android:id="@+id/textview_nodata"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/no_data_textview_marginBottom"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/no_dataandrefresh"
+        android:textColor="@color/loginactivity_line_color"
+        android:textSize="@dimen/no_data_textview_textsize"
+        android:visibility="gone" />
+
+</com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+
+
+
+
+
+
+
+
+

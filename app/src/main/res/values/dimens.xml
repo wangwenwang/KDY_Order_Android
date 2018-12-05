@@ -1,0 +1,77 @@
+<resources>
+
+    <!--字体小-->
+    <dimen name="text_size_small">13sp</dimen>
+    <!--字体正常大小-->
+    <dimen name="text_size_normal">14sp</dimen>
+    <!--字体大-->
+    <dimen name="text_size_bigger">16sp</dimen>
+
+    <!--标题部分-->
+    <!--顶部标题栏字体大小-->
+    <dimen name="title_size">20sp</dimen>
+    <!--顶部返回按钮图片-->
+    <dimen name="title_imageview_paddingleft">5dp</dimen>
+    <dimen name="title_imageview_paddingright">10dp</dimen>
+    <dimen name="title_imageview_paddingtop">8dp</dimen>
+    <dimen name="title_imageview_paddingbottom">8dp</dimen>
+
+    <!--LIstView 公用部分-->
+    <!--标题字体大小-->
+    <dimen name="listview_titletextsize">13sp</dimen>
+    <!--内容字体大小-->
+    <dimen name="listview_contenttestsize">14sp</dimen>
+    <!--内容局标题间隔-->
+    <dimen name="listview_spantexttotitle">5dp</dimen>
+    <!--顶部Padding-->
+    <dimen name="listview_item_paddingtop">5dp</dimen>
+    <!--底部Padding-->
+    <dimen name="listview_item_paddingbottom">5dp</dimen>
+    <!--左边Padding-->
+    <dimen name="listview_item_paddingleft">10dp</dimen>
+    <!--右边Padding-->
+    <dimen name="listview_item_paddingright">10dp</dimen>
+
+    <!--Dialog中按钮文字大小-->
+    <dimen name="dialog_button_textsize">14sp</dimen>
+    <!--Dialog中标题文字大小-->
+    <dimen name="dialog_title_textsize">14sp</dimen>
+
+
+    <!--登录界面-->
+    <dimen name="edittext_size">16sp</dimen>
+    <dimen name="login_button">16sp</dimen>
+
+    <!-- MainActivity -->
+    <dimen name="indexSize">13dp</dimen>
+    <dimen name="blockTextSize">14sp</dimen>
+
+    <!--MineFragment-->
+    <dimen name="minefragment_block_paddingTop">8dp</dimen>
+    <dimen name="minefragment_block_paddingBottom">8dp</dimen>
+    <dimen name="minefragment_block_marginBottom">1dp</dimen>
+    <dimen name="minefragment_block_paddingLeft">10dp</dimen>
+    <dimen name="minefragment_block_paddingRight">5dp</dimen>
+    <dimen name="minefragment_block_lefttextview_textsize">14sp</dimen>
+    <dimen name="minefragment_block_righttextview_textsize">16sp</dimen>
+    <dimen name="minefragment_block_righttextview_marginLeft">5dp</dimen>
+    <dimen name="minefragment_block_rightimageview_width">30dp</dimen>
+    <dimen name="mimefragment_bloce_leftimageview_width">25dp</dimen>
+    <dimen name="mimefragment_bloce_leftimageview_height">25dp</dimen>
+
+    <!--CheckOrderFragment部分-->
+    <dimen name="checkorder_topbutton_textSize">15sp</dimen>
+    <dimen name="no_data_textview_marginBottom">80dp</dimen>
+    <dimen name="no_data_textview_textsize">18sp</dimen>
+    <dimen name="xlistview_minheight">100dp</dimen>
+    <dimen name="xlistview_maxheight">600dp</dimen>
+    <!--CheckOrderPictureActivity部分-->
+    <dimen name="checkorderpicture_imageview_margintop">5dp</dimen>
+    <dimen name="checkorderpicture_imageview_marginleft">60dp</dimen>
+    <dimen name="checkorderpicture_imageview_marginright">60dp</dimen>
+    <dimen name="checkorderpicture_textview_margintop">10dp</dimen>
+    <dimen name="checkorderpicture_textview_paddingleft">40dp</dimen>
+    <dimen name="checkorderpicture_textview_paddingright">40dp</dimen>
+
+
+</resources>
