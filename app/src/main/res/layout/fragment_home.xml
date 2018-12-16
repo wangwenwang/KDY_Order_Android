@@ -161,7 +161,7 @@
                         app:layout_heightPercent="30%h"
                         android:layout_alignParentBottom="true"
                         android:gravity="center_horizontal|top"
-                        android:text="最新资讯"
+                        android:text="客户拜访"
                         android:textSize="@dimen/blockTextSize"
                         android:textColor="@color/text_color_normal"
                         />

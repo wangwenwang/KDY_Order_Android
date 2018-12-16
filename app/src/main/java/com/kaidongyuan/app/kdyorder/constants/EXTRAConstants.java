@@ -176,6 +176,15 @@ public class EXTRAConstants {
      */
     public static final String TMS_ORDER="TMS_ORDER";
 
+    /**
+     * 从客户拜访列表界面传给客户拜访详情界面时的 id
+     */
+    public static final String CUSTOMERMEETING_ID = "CUSTOMERMEETING_ID";
+
+    /**
+     * 递显示本地图片的 path
+     */
+    public static final String EXTRA_IMAGE_PATH = "EXTRA_IMAGE_PATH";
 
 }
 

@@ -15,6 +15,7 @@ import com.kaidongyuan.app.kdyorder.constants.BusinessConstants;
 import com.kaidongyuan.app.kdyorder.ui.activity.BusinessInventoryActivity;
 import com.kaidongyuan.app.kdyorder.ui.activity.ChartCheckActivity;
 import com.kaidongyuan.app.kdyorder.ui.activity.CheckTmsOrderListActivity;
+import com.kaidongyuan.app.kdyorder.ui.activity.CustomerMeetingsActivity;
 import com.kaidongyuan.app.kdyorder.ui.activity.FeePartyActivity;
 import com.kaidongyuan.app.kdyorder.ui.activity.HotSellProductActivity;
 import com.kaidongyuan.app.kdyorder.ui.activity.InventoryManageActivity;
@@ -267,9 +268,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     Intent chartCheckIntent = new Intent(this.getActivity(), ChartCheckActivity.class);
                     startActivity(chartCheckIntent);
                     break;
-                case R.id.percentrl_information://跳转到最新资讯界面
-                    Intent newestInformationIntent = new Intent(this.getActivity(), NewestInformationActivity.class);
-                    startActivity(newestInformationIntent);
+                case R.id.percentrl_information:
+                    //跳转到最新资讯界面
+//                    Intent newestInformationIntent = new Intent(this.getActivity(), NewestInformationActivity.class);
+//                    startActivity(newestInformationIntent);
+                    startActivity(new Intent(this.getActivity(), CustomerMeetingsActivity.class));
                     break;
                 case R.id.percentrl_selling://跳转到热销产品界面
                     Intent hotSellProductIntent = new Intent(this.getActivity(), HotSellProductActivity.class);

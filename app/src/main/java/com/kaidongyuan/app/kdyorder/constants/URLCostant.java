@@ -276,6 +276,13 @@ public class URLCostant {
     public static final String GetWmsProductZong=BASE_URL+"GetWmsProductZong";
     //1.2 分的列表
     public static final String GetWmsProductSum=BASE_URL+"GetWmsProductSum";
+    /*******************************20181210 客户拜访 start*******************************************************************/
+    public static final String GetPartyVisitLine=BASE_URL+"GetPartyVisitLine";
+    public static final String GetPartyVisitList=BASE_URL+"GetPartyVisitList";
+    public static final String GetPartyVisitChannel=BASE_URL+"GetPartyVisitChannel";
+    public static final String AddAddress=BASE_URL+"AddAddress";
+    public static final String GetPartyVisitInsert=BASE_URL+"GetPartyVisitInsert";
+    public static final String GetVisitConfirmCustomer=BASE_URL+"GetVisitConfirmCustomer";
 }
 
 

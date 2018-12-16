@@ -235,7 +235,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (Build.VERSION.SDK_INT>=23){
             if (MPermissionsUtil.checkAndRequestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION,
-                       Manifest.permission.WRITE_EXTERNAL_STORAGE}
+                       Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_CONTACTS}
                     ,RequestPermission_STATUS_CODE0)){
 
                 checkVersion(true);
@@ -523,6 +523,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             for (int i=0;i<permissions.length;i++){
                 if (grantResults[i]== PackageManager.PERMISSION_DENIED) {
                     switch (permissions[i]){
+                        case Manifest.permission.READ_CONTACTS:
+                            ToastUtil.showToastBottom("请授权应用读取联系客户,00", Toast.LENGTH_SHORT);
+                            break;
                         case Manifest.permission.WRITE_EXTERNAL_STORAGE:
                             ToastUtil.showToastBottom("请允许应用使用SD卡存储", Toast.LENGTH_SHORT);
                            // showToastMsg("请允许应用使用SD卡存储",3000);

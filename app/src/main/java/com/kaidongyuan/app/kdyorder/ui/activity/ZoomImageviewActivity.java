@@ -6,6 +6,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,8 @@ import com.kaidongyuan.app.kdyorder.util.DensityUtil;
 import com.kaidongyuan.app.kdyorder.util.ExceptionUtil;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
+
+import java.io.File;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -98,6 +101,12 @@ public class ZoomImageviewActivity extends BaseActivity implements View.OnClickL
                 String url = intent.getStringExtra(EXTRAConstants.EXTRA_IMAGE_URL);
                 Picasso.with(this).load(url).error(R.drawable.ic_imageview_default_bg)
                         .transform(new CropSquareTransformation()).into(mImageViewZoom);
+            }else if (intent.hasExtra(EXTRAConstants.EXTRA_IMAGE_PATH)){
+                String path=intent.getStringExtra(EXTRAConstants.EXTRA_IMAGE_PATH);
+                Uri uri=Uri.fromFile(new File(path));
+                mImageViewZoom.setImageURI(uri);
+                return;
+
             }
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);

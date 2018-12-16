@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.NewestInformationActivity">
+
+    <View
+        android:id="@+id/topview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/title_background"
+        />
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:id="@+id/percentRL_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/title_background"
+        app:layout_heightPercent="@string/title_height"
+        app:layout_widthPercent="@string/title_width">
+
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="客户拜访"
+            android:textColor="@color/text_title_color"
+            android:textSize="@dimen/title_size"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/button_goback"
+            android:layout_width="38dp"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/title_imageview_paddingbottom"
+            android:paddingLeft="@dimen/title_imageview_paddingleft"
+            android:paddingRight="@dimen/title_imageview_paddingright"
+            android:paddingTop="@dimen/title_imageview_paddingtop"
+            android:src="@drawable/back" />
+        <TextView
+            android:id="@+id/tv_title_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="新建客户"
+            android:paddingRight="10dp"
+            android:gravity="center"
+            android:textColor="@color/text_title_color"
+            android:textSize="@dimen/text_size_normal"
+            />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/ll_meeting_type"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:gravity="center"
+            android:background="@color/gray_holo_light">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="拜访线路:"
+                android:textSize="@dimen/text_size_normal"
+                />
+            <TextView
+                android:id="@+id/tv_meeting_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无数据"
+                android:textSize="@dimen/text_size_normal"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/more_black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_meeting_state"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="3dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:background="@color/gray_holo_light">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="拜访状态:"
+                android:textSize="@dimen/text_size_normal"
+                />
+            <TextView
+                android:id="@+id/tv_meeting_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全部"
+                android:textSize="@dimen/text_size_normal"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/more_black"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:background="@color/indexmenue_text_unselected">
+    <EditText
+        android:id="@+id/ed_search"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:hint="  客户名称搜索"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_bg"/>
+    <ImageView
+        android:id="@+id/iv_search"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_search"/>
+
+    </LinearLayout>
+    <com.kaidongyuan.app.kdyorder.widget.xlistview.XListView
+        android:id="@+id/lv_customer_meetings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="@dimen/xlistview_minheight"
+        android:cacheColorHint="#00000000"/>
+
+    <TextView
+        android:id="@+id/textview_nodata"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/no_data_textview_marginBottom"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/no_data"
+        android:textColor="@color/loginactivity_line_color"
+        android:textSize="@dimen/no_data_textview_textsize"
+        android:visibility="gone" />
+
+
+</com.zhy.android.percent.support.PercentLinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
