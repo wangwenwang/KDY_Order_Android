@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* 客户拜访列表业务类
+ * 客户拜访列表业务类
  */
 public class CustomerMeetingsActivityBiz {
 
@@ -51,23 +51,23 @@ public class CustomerMeetingsActivityBiz {
      * 保存客户拜访数据集合
      */
     private List<CustomerMeeting> customerMeetingList;
-    private final String mTagGetPartyVisitLine="mTagGetPartyVisitLine";
+    private final String mTagGetPartyVisitLine = "mTagGetPartyVisitLine";
     private final String mTagGetMeetingList = "mTagGetMeetingList";
 
     public CustomerMeetingsActivityBiz(CustomerMeetingsActivity activity) {
         this.mActivity = activity;
-        customerMeetingList=new ArrayList<>();
+        customerMeetingList = new ArrayList<>();
     }
 
     /**
      * 获取客户拜访线路类型
      */
-    public boolean GetPartyVisitLines(){
+    public boolean GetPartyVisitLines() {
         try {
             StringRequest request = new StringRequest(Request.Method.POST, URLCostant.GetPartyVisitLine, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Logger.w(CustomerMeetingsActivityBiz.this.getClass() + ".GetPartyVisitLine:" + response);
+                    Logger.w(CustomerMeetingsActivityBiz.this.getClass() + ".GetPartyVisitLine----:" + response);
                     GetCustomerMeetingLinesSuccess(response);
                 }
             }, new Response.ErrorListener() {
@@ -134,9 +134,9 @@ public class CustomerMeetingsActivityBiz {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
                     params.put("strUserID", MyApplication.getInstance().getUser().getIDX());
-                    params.put("strSearch",mActivity.strSearch);
-                    params.put("strLine",mActivity.strLine);
-                    params.put("strStates",mActivity.strState);
+                    params.put("strSearch", mActivity.strSearch);
+                    params.put("strLine", mActivity.strLine);
+                    params.put("strStates", mActivity.strState);
                     params.put("strPage", mPageIndex + "");
                     params.put("strPageCount", mPageSize + "");
                     params.put("strLicense", "");
@@ -158,6 +158,7 @@ public class CustomerMeetingsActivityBiz {
 
     /**
      * 刷新列表数据
+     *
      * @return 发送网络请求是否成功
      */
     public boolean reFreshCustomerMeetingDatas() {
@@ -191,8 +192,10 @@ public class CustomerMeetingsActivityBiz {
             return false;
         }
     }
+
     /**
      * 处理网络请求返回数据成功
+     *
      * @param response 返回的数据
      */
     private void GetCustomerMeetingLinesSuccess(String response) {
@@ -200,11 +203,15 @@ public class CustomerMeetingsActivityBiz {
             JSONObject object = JSON.parseObject(response);
             int type = object.getInteger("type");
             if (type == 1) {
-                meetingLines=new ArrayList<>();
-                if (object.containsKey("result")){
-                    meetingLines= JSON.parseArray(object.getString("result"), CustomerMeetingLine.class);
+                meetingLines = new ArrayList<>();
+                if (object.containsKey("result")) {
+                    meetingLines = JSON.parseArray(object.getString("result"), CustomerMeetingLine.class);
                 }
-
+                // 添加『全部』
+                CustomerMeetingLine allLine = new CustomerMeetingLine();
+                allLine.setIDX("10086");
+                allLine.setITEM_NAME("全部");
+                meetingLines.add(allLine);
                 mActivity.getMeetingLinesSuccess(meetingLines);
 
             } else {
@@ -219,6 +226,7 @@ public class CustomerMeetingsActivityBiz {
 
     /**
      * 处理网络请求返回数据成功
+     *
      * @param response 返回的数据
      */
     private void GetCustomerMeetingDataSuccess(String response) {
@@ -226,12 +234,12 @@ public class CustomerMeetingsActivityBiz {
             JSONObject object = JSON.parseObject(response);
             int type = object.getInteger("type");
             if (type == 1) {
-                if (mPageIndex == mInitPagerIndex&&customerMeetingList!=null) {//刷新或初次加载，清除集合中的数据
+                if (mPageIndex == mInitPagerIndex && customerMeetingList != null) {//刷新或初次加载，清除集合中的数据
                     customerMeetingList.clear();
                 }
-                List<CustomerMeeting> tmpCustomerMeetings=new ArrayList<>();
-                if (object.containsKey("result")){
-                    tmpCustomerMeetings= JSON.parseArray(object.getString("result"), CustomerMeeting.class);
+                List<CustomerMeeting> tmpCustomerMeetings = new ArrayList<>();
+                if (object.containsKey("result")) {
+                    tmpCustomerMeetings = JSON.parseArray(object.getString("result"), CustomerMeeting.class);
                 }
 
                 customerMeetingList.addAll(tmpCustomerMeetings);
@@ -250,7 +258,6 @@ public class CustomerMeetingsActivityBiz {
     public List<CustomerMeeting> getCustomerMeetingList() {
         return customerMeetingList;
     }
-
 
 
     /**

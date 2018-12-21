@@ -36,6 +36,7 @@ import com.kaidongyuan.app.kdyorder.constants.SharedPreferenceConstants;
 import com.kaidongyuan.app.kdyorder.interfaces.OnClickListenerStrInterface;
 import com.kaidongyuan.app.kdyorder.model.CustomerMeetingsActivityBiz;
 import com.kaidongyuan.app.kdyorder.model.NewestInformationActivityBiz;
+import com.kaidongyuan.app.kdyorder.util.DateUtil;
 import com.kaidongyuan.app.kdyorder.util.DensityUtil;
 import com.kaidongyuan.app.kdyorder.util.ExceptionUtil;
 import com.kaidongyuan.app.kdyorder.util.SharedPreferencesUtil;
@@ -283,7 +284,15 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
     public void getMeetingLinesSuccess(List<CustomerMeetingLine> customerMeetingLines) {
         if (mLoadingDialog != null) mLoadingDialog.dismiss();
         if (customerMeetingLines != null && customerMeetingLines.size() > 0) {
-            strLine = customerMeetingLines.get(0).getITEM_NAME();
+            // 拜访线路定位到当天
+            for (int i = 0; i < customerMeetingLines.size(); i++) {
+                String line = customerMeetingLines.get(i).getITEM_NAME();
+                if(line.equals(DateUtil.GetCurrWeek())) {
+                    strLine = line;
+                    break;
+                }
+            }
+            strLine = strLine.equals("") ? customerMeetingLines.get(0).getITEM_NAME() : strLine;
             tvMeetingType.setText(strLine);
             if (mBiz.reFreshCustomerMeetingDatas()){
                 showLoadingDialog();
@@ -397,16 +406,23 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
                     return;
                 }
                 mCurrentLineIndex = position;
-                List<CustomerMeetingLine> meetingLines = mBiz.getMeetingLines();
-                if (meetingLines.size() <= 0) {//集合中没有数据网络请求数据
-                    mBiz.GetPartyVisitLines();
-                    showLoadingDialog();
-                } else {//集合中已有数据，直接显示
-                    strLine = mBiz.getMeetingLines().get(mCurrentLineIndex).getITEM_NAME();
-                    tvMeetingType.setText(strLine);
-                    showLoadingDialog();
-                    mBiz.reFreshCustomerMeetingDatas();
+                if(position == mBiz.getCustomerMeetingList().size() + 1) {
+
+                    // 全部
+                    tvMeetingType.setText("全部");
+                }else {
+
+                    List<CustomerMeetingLine> meetingLines = mBiz.getMeetingLines();
+                    if (meetingLines.size() <= 0) {//集合中没有数据网络请求数据
+                        mBiz.GetPartyVisitLines();
+                        showLoadingDialog();
+                    } else {//集合中已有数据，直接显示
+                        strLine = mBiz.getMeetingLines().get(mCurrentLineIndex).getITEM_NAME();
+                        tvMeetingType.setText(strLine);
+                    }
                 }
+                showLoadingDialog();
+                mBiz.reFreshCustomerMeetingDatas();
 
             } catch (Exception e) {
                 ExceptionUtil.handlerException(e);
