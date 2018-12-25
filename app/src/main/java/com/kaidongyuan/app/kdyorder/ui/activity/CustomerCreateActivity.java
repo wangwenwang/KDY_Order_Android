@@ -32,6 +32,7 @@ import com.kaidongyuan.app.kdyorder.bean.CustomerChannel;
 import com.kaidongyuan.app.kdyorder.bean.CustomerMeetingLine;
 import com.kaidongyuan.app.kdyorder.bean.NormalAddress;
 import com.kaidongyuan.app.kdyorder.model.CustomerCreateActivityBiz;
+import com.kaidongyuan.app.kdyorder.util.DateUtil;
 import com.kaidongyuan.app.kdyorder.util.DensityUtil;
 import com.kaidongyuan.app.kdyorder.util.ExceptionUtil;
 import com.kaidongyuan.app.kdyorder.util.StringUtils;
@@ -137,6 +138,7 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_create_party);
         try {
             initData();
@@ -388,7 +390,15 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
     public void getMeetingLinesSuccess(List<CustomerMeetingLine> customerMeetingLines) {
         if (mLoadingDialog != null) mLoadingDialog.dismiss();
         if (customerMeetingLines != null && customerMeetingLines.size() > 0) {
-            strLine = customerMeetingLines.get(0).getITEM_NAME();
+            // 拜访线路定位到当天
+            for (int i = 0; i < customerMeetingLines.size(); i++) {
+                String line = customerMeetingLines.get(i).getITEM_NAME();
+                if (line.equals(DateUtil.GetCurrWeek())) {
+                    strLine = line;
+                    break;
+                }
+            }
+            strLine = strLine.equals("") ? customerMeetingLines.get(0).getITEM_NAME() : strLine;
             tvMeetingType.setText(strLine);
         }
     }
@@ -621,12 +631,16 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
 
                 break;
             case RequestAddressBelong:
-                pv=data.getParcelableExtra("province");
-                ct=data.getParcelableExtra("city");
-                ar=data.getParcelableExtra("area");
-                ru=data.getParcelableExtra("rural");
-                tvAddressBelong.setText(pv.getITEM_NAME().trim()+ct.getITEM_NAME().trim()
-                        +ar.getITEM_NAME().trim()+ru.getITEM_NAME().trim());
+                try{
+                    pv=data.getParcelableExtra("province");
+                    ct=data.getParcelableExtra("city");
+                    ar=data.getParcelableExtra("area");
+                    ru=data.getParcelableExtra("rural");
+                    tvAddressBelong.setText(pv.getITEM_NAME().trim()+ct.getITEM_NAME().trim()
+                            +ar.getITEM_NAME().trim()+ru.getITEM_NAME().trim());
+                } catch (Exception e) {
+                    ExceptionUtil.handlerException(e);
+                }
                 break;
             default:
                 break;

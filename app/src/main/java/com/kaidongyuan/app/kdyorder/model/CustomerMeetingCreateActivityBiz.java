@@ -1,6 +1,7 @@
 package com.kaidongyuan.app.kdyorder.model;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -62,20 +63,29 @@ public class CustomerMeetingCreateActivityBiz {
         try {
             JSONObject object = JSON.parseObject(response);
             int type = object.getInteger("type");
+
             if (type == 1) {
+
+                // 服务器刚刚返回的『客户拜访IDX』写入传递的模型里
+                JSONArray VISIT_IDXs = object.getJSONArray("result");
+                JSONObject VISIT_IDXo = (JSONObject) VISIT_IDXs.get(0);
+                String VISIT_IDX = VISIT_IDXo.getString("VISIT_IDX");
+                CustomerMeeting customerM = this.getCustomerMeeting();
+                customerM.setVISIT_IDX(VISIT_IDX);
+                this.setCustomerMeeting(customerM);
+
                 mActivity.getPartyVisitInsertSuccess();
             } else {
-                mActivity.getPartyVisitInsertSuccess();
                 mActivity.updataError(response);
             }
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
-            mActivity.updataPartyError("上传客户信息失败!");
+            mActivity.updataPartyError(response);
         }
     }
 
     /**
-     * 处理网络请求返回客户地址成功
+     * 处理网络请求返回修改客户信息成功
      *
      * @param response 返回的数据
      */
@@ -83,21 +93,22 @@ public class CustomerMeetingCreateActivityBiz {
         try {
             JSONObject object = JSON.parseObject(response);
             int type = object.getInteger("type");
+            String msg = object.getString("msg");
             if (type == 1) {
 
-                mActivity.getVisitConfirmCustomerSuccess();
+                mActivity.getVisitConfirmCustomerSuccess(msg);
 
             } else {
-                mActivity.updataPartyError(object.getString("msg"));
+                mActivity.updataPartyError(msg);
             }
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
-            mActivity.updataPartyError("上传客户地址失败!");
+            mActivity.updataPartyError("修改客户信息失败!");
         }
     }
 
     /**
-     * 上传客户信息
+     * 确认客户信息
      */
     public boolean GetPartyVisitInsert() {
         try {
@@ -112,7 +123,7 @@ public class CustomerMeetingCreateActivityBiz {
                 public void onErrorResponse(VolleyError error) {
                     Logger.w(CustomerMeetingCreateActivityBiz.this.getClass() + ".GetPartyVisitInsert:" + error.toString());
                     if (NetworkUtil.isNetworkAvailable()) {
-                        mActivity.updataError("上传信息失败!");
+                        mActivity.updataError("确认客户信息失败!");
                     } else {
                         mActivity.updataError("请检查网络是否正常连接！");
                     }
@@ -126,17 +137,17 @@ public class CustomerMeetingCreateActivityBiz {
                     params.put("CONTACTS", customerMeeting.getCONTACTS());
                     params.put("CONTACTS_TEL", customerMeeting.getCONTACTS_TEL());
                     params.put("PARTY_ADDRESS", customerMeeting.getPARTY_ADDRESS());
-                    params.put("USER_NAME", customerMeeting.getUSER_NAME());
-                    params.put("USER_NO", customerMeeting.getUSER_NO());
-                    params.put("CHANNEL_NO", customerMeeting.getCHANNEL());
+                    params.put("USER_NAME", MyApplication.getInstance().getUser().getUSER_NAME()); // 业代姓名？
+                    params.put("USER_NO", MyApplication.getInstance().getUser().getUSER_CODE());   // 业代编号？
+                    params.put("CHANNEL", customerMeeting.getCHANNEL());
                     params.put("PARTY_LEVEL", customerMeeting.getPARTY_LEVEL());
                     params.put("WEEKLY_VISIT_FREQUENCY", customerMeeting.getWEEKLY_VISIT_FREQUENCY());
                     params.put("VISIT_DATE", customerMeeting.getVISIT_DATE());
-                    params.put("OPERATOR_IDX", customerMeeting.getIDX());
+                    params.put("OPERATOR_IDX", MyApplication.getInstance().getUser().getIDX());
                     params.put("PARTY_STATES", customerMeeting.getPARTY_STATES());
                     params.put("REACH_THE_SITUATION", customerMeeting.getREACH_THE_SITUATION());
                     params.put("BUSINESS_IDX", MyApplication.getInstance().getBusiness().getBUSINESS_IDX());
-                    params.put("ORGANIZATION_IDX", customerMeeting.getIDX());
+                    params.put("ORGANIZATION_IDX", "2");
                     params.put("LINE", customerMeeting.getLINE());
                     params.put("strLicense", "");
                     return params;
@@ -156,7 +167,7 @@ public class CustomerMeetingCreateActivityBiz {
     }
 
     /**
-     * 上传客户地址
+     * 修改客户信息
      */
     public boolean GetVisitConfirmCustomer(final String partyName, final String partyAddress, final String contactName, final String contactTel) {
         try {
@@ -175,7 +186,7 @@ public class CustomerMeetingCreateActivityBiz {
                 public void onErrorResponse(VolleyError error) {
                     Logger.w(CustomerMeetingCreateActivityBiz.this.getClass() + ".GetVisitConfirmCustomer:" + error.toString());
                     if (NetworkUtil.isNetworkAvailable()) {
-                        mActivity.updataPartyError("上传修改失败!");
+                        mActivity.updataPartyError("修改客户信息失败!");
                     } else {
                         mActivity.updataPartyError("请检查网络是否正常连接！");
                     }

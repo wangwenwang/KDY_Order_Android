@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         multiDexEnabled true
@@ -33,7 +33,7 @@ dependencies {
     compile project(':MPChartLib')
     compile 'com.android.support:support-v13:23.+'
     //百分布局库
-    compile 'com.zhy:percent-support-extends:1.0.1'
+    implementation 'com.zhy:percent-support-extends:1.0.1'
     compile files('libs/fastjson-1.2.6.jar')
     compile files('libs/GetuiExt-2.0.3.jar')
     compile files('libs/GetuiSDK2.8.1.0.jar')

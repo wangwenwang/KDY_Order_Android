@@ -110,7 +110,7 @@ public class CustomerMeetingsActivityBiz {
      *
      * @return 发送请求是否成功
      */
-    private boolean GetCustomerMeetingDatas() {
+    public boolean GetCustomerMeetingDatas() {
 
         try {
             StringRequest request = new StringRequest(Request.Method.POST, URLCostant.GetPartyVisitList, new Response.Listener<String>() {
@@ -246,6 +246,9 @@ public class CustomerMeetingsActivityBiz {
                 mActivity.getMeetingsDataSuccess();
                 mPageIndex++;
             } else {
+                if (mPageIndex == mInitPagerIndex) {//第一页并且没有数据，清空列表
+                    customerMeetingList.clear();
+                }
                 mActivity.getMeetingsDataError(object.getString("msg"));
             }
         } catch (Exception e) {

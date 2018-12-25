@@ -186,6 +186,11 @@ public class EXTRAConstants {
      */
     public static final String EXTRA_IMAGE_PATH = "EXTRA_IMAGE_PATH";
 
+    /**
+     * 传递拜访IDX
+     */
+    public static final String EXTRA_VISIT_IDX = "EXTRA_VISIT_IDX";
+
 }
 
 

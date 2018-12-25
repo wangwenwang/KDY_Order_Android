@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.android.percent.support.PercentRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_arrived_store"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:fitsSystemWindows="true"
-   >
+    android:fitsSystemWindows="true">
+
     <View
         android:id="@+id/topview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/title_background"
-        />
+        android:background="@color/title_background" />
 
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:id="@+id/percentRL_title"
@@ -46,38 +44,36 @@
             android:src="@drawable/back" />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
-      <LinearLayout
+    <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@null"
-          android:layout_below="@+id/percentRL_title"
-        android:orientation="vertical"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/percentRL_title"
+        android:background="@null"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="3dp"
             android:text="拍照图片:"
             android:textColor="@color/red"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="2dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
             android:background="@null"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -85,28 +81,28 @@
                 android:layout_weight="1"
                 android:background="@color/transparent"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
+
                 <ImageView
                     android:id="@+id/imageView_picture"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/ic_imageview_default_bg"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_imageview_default_bg" />
 
                 <Button
                     android:id="@+id/button_addPicture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:padding="5dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/button_background_small_selector"
+                    android:padding="5dp"
+                    android:text="门店照一"
                     android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:text="门店照一" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -115,70 +111,82 @@
                 android:layout_weight="1"
                 android:background="@color/transparent"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
+
                 <ImageView
                     android:id="@+id/imageView_picture2"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/ic_imageview_default_bg"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_imageview_default_bg" />
 
                 <Button
                     android:id="@+id/button_addPicture2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:padding="5dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/button_background_small_selector"
+                    android:padding="5dp"
+                    android:text="门店照二（选填）"
                     android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:text="门店照二（选填）" />
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_currAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="3dp"
+            android:text="当前位置:"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:id="@+id/linearLayout_bottom2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:background="@null"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/button_cancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_centerHorizontal="true"
-                android:text="取   消"
-                android:textSize="16sp"
-                android:textColor="@color/white"
+                android:layout_weight="1"
                 android:background="@drawable/button_background_blue_selector"
-                />
+                android:padding="5dp"
+                android:text="取   消"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
             <Button
                 android:id="@+id/button_submit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_centerHorizontal="true"
-                android:text="下一步"
-                android:textSize="16sp"
-                android:textColor="@color/white"
+                android:layout_weight="1"
                 android:background="@drawable/button_background_normal_selector"
-                />
+                android:padding="5dp"
+                android:text="下一步"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 

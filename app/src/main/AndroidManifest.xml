@@ -34,8 +34,7 @@
     <!--替换为第三方应用的包名-->
     <permission
         android:name="getui.permission.GetuiService.com.kaidongyuan.app.kdyorder"
-        android:protectionLevel="normal">
-    </permission>
+        android:protectionLevel="normal"></permission>
     <!--替换为第三方应用的包名-->
     <!--****************************************** 个推SDK权限配置结束 ******************************************-->
     <!--获取通讯录权限-->
@@ -76,23 +75,22 @@
             android:launchMode="singleTask"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            />
-        <activity android:name=".ui.activity.ChooseProvinceActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <activity
+            android:name=".ui.activity.ChooseProvinceActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="standard"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
-            />
+            android:windowSoftInputMode="adjustNothing" />
         <!--主界面-->
         <activity
             android:name=".ui.activity.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:persistent="true"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="adjustNothing" />
 
         <!--货物轨迹查询界面-->
@@ -104,28 +102,28 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
         <!--查看物流订单列表-->
-        <activity android:name=".ui.activity.CheckTmsOrderListActivity"
+        <activity
+            android:name=".ui.activity.CheckTmsOrderListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="standard"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
-            />
-        <activity android:name=".ui.activity.TmsOrderPartyActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.activity.TmsOrderPartyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="standard"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
-            />
+            android:windowSoftInputMode="adjustNothing" />
         <!--查看物流订单界面-->
-        <activity android:name=".ui.activity.TmsOrderActivity"
+        <activity
+            android:name=".ui.activity.TmsOrderActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
-            />
+            android:windowSoftInputMode="adjustNothing" />
 
         <!--订单查看界面-->
         <activity
@@ -163,197 +161,196 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
         <!--库存登记列表界面-->
-        <activity android:name=".ui.activity.InventoryManageActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.InventoryManageActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!--库存登记客户列表界面-->
         <activity
             android:name=".ui.activity.InventoryPartyActivity"
-            android:launchMode="singleTop"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!--创建库存登记表界面-->
-        <activity android:name=".ui.activity.MakeAppStockActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.MakeAppStockActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <!--提交库存登记表界面-->
-        <activity android:name=".ui.activity.InventoryConfirmActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.InventoryConfirmActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <!--库存登记表详情界面-->
-        <activity android:name=".ui.activity.AppStockDetailsActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.AppStockDetailsActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <!--费用账单客户列表界面-->
-        <activity android:name=".ui.activity.FeePartyActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.FeePartyActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <!--客户费用账单列表界面-->
-        <activity android:name=".ui.activity.BillFeeListActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.BillFeeListActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <!--费用账单详情界面-->
-        <activity android:name=".ui.activity.BusinessFeeActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.BusinessFeeActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <!--库存管理客户列表界面-->
-        <activity android:name=".ui.activity.InventoryPartyListActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.InventoryPartyListActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
-        <activity android:name=".ui.activity.PartyInventoryActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.PartyInventoryActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!--产品库存详情-->
-        <activity android:name=".ui.activity.ProductStockDetailActivity"
-            android:launchMode="standard"
+        <activity
+            android:name=".ui.activity.ProductStockDetailActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <!--产品库存流水-->
-        <activity android:name=".ui.activity.ProductStockDetailMoreActivity"
+        <activity
+            android:name=".ui.activity.ProductStockDetailMoreActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
             android:launchMode="standard"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:exported="false"
-            />
+            android:screenOrientation="portrait" />
         <!--库存入库选择商品-->
-        <activity android:name=".ui.activity.InputInventoryActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.InputInventoryActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!--库存出库提交入库单-->
-        <activity android:name=".ui.activity.InPutOrderConfirmActivity"
+        <activity
+            android:name=".ui.activity.InPutOrderConfirmActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:screenOrientation="portrait" />
         <!--库存出库选择商品-->
-        <activity android:name=".ui.activity.OutputInventoryActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.OutputInventoryActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!--库存出库选择收货信息-->
-        <activity android:name=".ui.activity.OutputPartyListActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.OutputPartyListActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!--库存出库提交出库单-->
-        <activity android:name=".ui.activity.OutPutOrderConfirmActivity"
+        <activity
+            android:name=".ui.activity.OutPutOrderConfirmActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:screenOrientation="portrait" />
         <!--出库明细/出库单列表-->
-        <activity android:name=".ui.activity.OutputOrderListActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.OutputOrderListActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!--出库明细/出库单-->
-        <activity android:name=".ui.activity.OutPutOrderDetailActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.OutPutOrderDetailActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!--入库明细/入库单列表-->
-        <activity android:name=".ui.activity.InputOrderListActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.InputOrderListActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!--出库明细/出库单-->
-        <activity android:name=".ui.activity.InPutOrderDetailActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.InPutOrderDetailActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!--业务代码对于仓库库存查看-->
-        <activity android:name=".ui.activity.BusinessInventoryActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".ui.activity.BusinessInventoryActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:exported="false"
-            />
-        <activity android:name=".ui.activity.ProductStock2BDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ProductStock2BDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
-            />
-        <activity android:name=".ui.activity.PreOrderManageActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.activity.PreOrderManageActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
-            />
-        <activity android:name=".ui.activity.PreOrderDetailsActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.activity.PreOrderDetailsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
-            />
-        <activity android:name=".ui.activity.MakePreOrderActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.activity.MakePreOrderActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
-            />
-        <activity android:name=".ui.activity.PreOrderConfirmActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.activity.PreOrderConfirmActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            />
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <!--订单详情界面-->
         <activity
             android:name=".ui.activity.OrderDetailsActivity"
@@ -399,22 +396,22 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
         <!--下单客户管理界面-->
-        <activity android:name=".ui.activity.PartyManageActivity"
+        <activity
+            android:name=".ui.activity.PartyManageActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
             android:theme="@style/mActivityTheme"
-            />
-        <activity android:name=".ui.activity.PartyAddressManageActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.activity.PartyAddressManageActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
             android:theme="@style/mActivityTheme"
-            />
+            android:windowSoftInputMode="adjustNothing" />
         <!--修改密码界面-->
         <activity
             android:name=".ui.activity.UpdataPasswordActivity"
@@ -487,42 +484,80 @@
             android:windowSoftInputMode="adjustNothing" />
 
         <!--客户拜访列表-->
-        <activity android:name=".ui.activity.CustomerMeetingsActivity"
+        <activity
+            android:name=".ui.activity.CustomerMeetingsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="standard"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
-            />
+            android:windowSoftInputMode="adjustNothing" />
         <!--新建客户-->
-        <activity android:name=".ui.activity.CustomerCreateActivity"
+        <activity
+            android:name=".ui.activity.CustomerCreateActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="standard"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
-            />
+            android:windowSoftInputMode="adjustNothing" />
         <!--新建拜访-->
-        <activity android:name=".ui.activity.CustomerMeetingCreateActivity"
+        <activity
+            android:name=".ui.activity.CustomerMeetingCreateActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="standard"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
-            />
+            android:windowSoftInputMode="adjustNothing" />
         <!--进店-->
-        <activity android:name=".ui.activity.ArrivedStoreActivity"
+        <activity
+            android:name=".ui.activity.ArrivedStoreActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="standard"
             android:persistent="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            />
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--检查库存-->
+        <activity
+            android:name=".ui.activity.CustomerMeetingCheckInventoryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!--建议订单-->
+        <activity
+            android:name=".ui.activity.CustomerMeetingRecomOrderActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustNothing" />
+        <!--生动化陈列-->
+        <activity
+            android:name=".ui.activity.CustomerMeetingDisplayActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustNothing" />
+        <!--离店-->
+        <activity
+            android:name=".ui.activity.CustomerMeetingShowStepActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:persistent="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustNothing" />
         <!--****************************************** 百度地图配置开始 ******************************************-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="yGwwmy0MwPE0rrxp1BQw1Y56" />
+            android:value="YqhWT98q5UNFobu714NakZAqzwDD0YP5" />
 
         <!--****************************************** 个推SDK配置开始 ******************************************-->
         <!-- 配置的第三方参数属性 -->

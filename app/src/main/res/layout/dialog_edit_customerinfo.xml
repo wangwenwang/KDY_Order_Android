@@ -1,94 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background_normal"
     android:orientation="vertical"
-    android:paddingBottom="5dp"
-    android:background="@drawable/dialog_background_normal">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="修\t改\t客\t户\t信\t息"
-    android:textStyle="bold"
-    android:textColor="@color/white"
-    android:padding="10dp"
-    android:gravity="center_horizontal"
-    android:background="@color/kdy_bg_top"
-    android:textSize="@dimen/text_size_bigger"
-    />
+    android:paddingBottom="5dp">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/kdy_bg_top"
+        android:gravity="center_horizontal"
+        android:padding="12dp"
+        android:text="修\t改\t客\t户\t信\t息"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_bigger"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:orientation="horizontal"
-        >
+        android:visibility="gone">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="省："
-            />
+            android:text="省：" />
+
         <TextView
             android:id="@+id/ed_ADDRESS_PROVINCE"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="\t必填"
             android:textSize="14sp"
 
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="市："
-            />
+            android:text="市：" />
+
         <EditText
             android:id="@+id/ed_ADDRESS_CITY"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:layout_weight="1"
             android:hint="\t必填"
-            />
+            android:textSize="14sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:orientation="horizontal"
-        >
+        android:visibility="gone">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="区/县"
-            />
+            android:text="区/县" />
+
         <EditText
             android:id="@+id/ed_ADDRESS_AREA"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:layout_weight="1"
             android:hint="\t必填"
-            />
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="街道/乡镇"
-            />
+            android:text="街道/乡镇" />
+
         <EditText
             android:id="@+id/ed_ADDRESS_RURAL"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:layout_weight="1"
             android:hint="\t必填"
-            />
+            android:textSize="14sp" />
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -96,19 +95,20 @@
         android:orientation="horizontal"
 
         >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="客户名称:"
-            android:textColor="@color/details_text"
-            />
+            android:textColor="@color/details_text" />
+
         <EditText
             android:id="@+id/ed_customer_name"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="\t必填"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -116,100 +116,100 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="地址详情:"
-            android:textColor="@color/details_text"
-            />
+            android:textColor="@color/details_text" />
+
         <EditText
             android:id="@+id/ed_customer_address"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:hint="\t必填"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" 联 系 人 ："
-            android:textColor="@color/details_text"
-            />
+            android:textColor="@color/details_text" />
+
         <EditText
             android:id="@+id/ed_ADDRESS_PERSON"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="\t必填"
-            android:textSize="14sp"
-            />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="联系电话："
-        android:textColor="@color/details_text"
-        />
-    <EditText
-        android:id="@+id/ed_ADDRESS_TEL"
-        android:layout_width="0dp"
-        android:layout_weight="2"
-        android:inputType="phone"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:hint="\t必填"
-        />
-</LinearLayout>
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginBottom="2dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="联系电话："
+            android:textColor="@color/details_text" />
 
-    >
-    <Button
-        android:id="@+id/bt_dialog_cancel"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="取\t\t消"
-        android:textSize="14sp"
-        android:textColor="@color/white"
-        android:background="@drawable/button_background_blue_selector"
-        />
-    <Button
-        android:id="@+id/bt_dialog_update"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:text="确\t\t定"
-        android:textSize="14sp"
-        android:textColor="@color/white"
-        android:background="@drawable/button_background_normal_selector"
-        />
+        <EditText
+            android:id="@+id/ed_ADDRESS_TEL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="\t必填"
+            android:inputType="phone"
+            android:textSize="14sp" />
+    </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+
+        >
+
+        <Button
+            android:id="@+id/bt_dialog_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background_blue_selector"
+            android:text="取\t\t消"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/bt_dialog_update"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background_normal_selector"
+            android:text="确\t\t定"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -277,12 +277,32 @@ public class URLCostant {
     //1.2 分的列表
     public static final String GetWmsProductSum=BASE_URL+"GetWmsProductSum";
     /*******************************20181210 客户拜访 start*******************************************************************/
+    // 客户拜访线路
     public static final String GetPartyVisitLine=BASE_URL+"GetPartyVisitLine";
+    // 获取客户拜访列表
     public static final String GetPartyVisitList=BASE_URL+"GetPartyVisitList";
+    // 客户拜访：获取渠道
     public static final String GetPartyVisitChannel=BASE_URL+"GetPartyVisitChannel";
+    // 增加地址
     public static final String AddAddress=BASE_URL+"AddAddress";
+    // 添加客户拜访
     public static final String GetPartyVisitInsert=BASE_URL+"GetPartyVisitInsert";
+    // 确认客户资料信息
     public static final String GetVisitConfirmCustomer=BASE_URL+"GetVisitConfirmCustomer";
+    // 进店
+    public static final String GetVisitEnterShop=BASE_URL+"GetVisitEnterShop";
+    // 检查库存
+    public static final String GetVisitCheckInventory=BASE_URL+"GetVisitCheckInventory";
+    // 建议订单
+    public static final String GetVisitRecommendedOrder=BASE_URL+"GetVisitRecommendedOrder";
+    // 生动化陈列
+    public static final String GetVisitVividDisplay=BASE_URL+"GetVisitVividDisplay";
+    // 离店
+    public static final String GetVisitLeaveShop=BASE_URL+"GetVisitLeaveShop";
+    // 获取客户拜访订单
+    public static final String GetVisitAppOrder=BASE_URL+"GetVisitAppOrder";
+    // 获取客户拜访照片
+    public static final String GetPictureByVisitIdx=BASE_URL+"GetPictureByVisitIdx";
 }
 
 

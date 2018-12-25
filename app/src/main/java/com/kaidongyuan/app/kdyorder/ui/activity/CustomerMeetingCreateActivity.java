@@ -74,6 +74,7 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_create_meeting);
         try {
             initView();
@@ -134,6 +135,7 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
      * @param message 要显示的消息
      */
     public void updataError(String message) {
+        if (mLoadingDialog!=null)mLoadingDialog.dismiss();
         try {
             ToastUtil.showToastBottom(String.valueOf(message), Toast.LENGTH_SHORT);
         } catch (Exception e) {
@@ -204,28 +206,29 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
 
 
     /**
-     * 保存客户成功
+     * 确认客户信息成功
      * @param
      */
     public void getPartyVisitInsertSuccess() {
         try {
             if (mLoadingDialog!=null)mLoadingDialog.dismiss();
-            ToastUtil.showToastBottom("新增客户拜访成功", Toast.LENGTH_SHORT);
-            startActivity(new Intent(this,ArrivedStoreActivity.class));
-            finish();
+            Intent intent = new Intent(this, ArrivedStoreActivity.class);
+            intent.putExtra("CustomerMeeting", mBiz.getCustomerMeeting());
+            startActivity(intent);
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }
     }
+
     /**
-     * 保存客户成功
+     * 修改客户信息成功
      * @param
      */
-    public void getVisitConfirmCustomerSuccess() {
+    public void getVisitConfirmCustomerSuccess(String msg) {
         try {
             if (mLoadingDialog!=null)mLoadingDialog.dismiss();
 
-            ToastUtil.showToastBottom("修改客户拜访成功", Toast.LENGTH_SHORT);
+            ToastUtil.showToastBottom(msg, Toast.LENGTH_SHORT);
             setData();
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
@@ -239,6 +242,7 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
      */
     public void updataPartyError(String message) {
         try {
+            if (mLoadingDialog!=null)mLoadingDialog.dismiss();
             ToastUtil.showToastBottom(String.valueOf(message), Toast.LENGTH_SHORT);
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
@@ -251,6 +255,7 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
             mDialog=new Dialog(CustomerMeetingCreateActivity.this);
         }
         mDialog.setCanceledOnTouchOutside(false);
+        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);//这句话，就是决定上面的那个黑框，也就是dialog的title。
         mDialog.show();
         Window window = mDialog.getWindow();
         window.setContentView(R.layout.dialog_edit_customerinfo);

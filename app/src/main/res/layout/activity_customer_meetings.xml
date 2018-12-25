@@ -105,7 +105,7 @@
                 android:id="@+id/tv_meeting_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="全部"
+                android:text="未拜访"
                 android:textSize="@dimen/text_size_normal"
                 />
             <ImageView

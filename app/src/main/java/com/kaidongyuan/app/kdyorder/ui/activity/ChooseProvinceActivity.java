@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ import java.util.List;
  * ${PEOJECT_NAME}
  * Created by Administrator on 2017/6/1.
  */
-public class ChooseProvinceActivity extends BaseActivity {
+public class ChooseProvinceActivity extends BaseActivity implements View.OnClickListener {
     private ListView lv_proviences;
     private TextView tv_nodata;
     private ProvincesAdapter madapter;
@@ -41,6 +42,10 @@ public class ChooseProvinceActivity extends BaseActivity {
     private final int mRequestcode=1003;
     private NormalAddress mProvince,mCity,mArea,mRural;
     private ChooseProvinceActivityBiz mBiz;
+    /**
+     * 返回上一界面按钮
+     */
+    private ImageView mImageViewGoBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,7 @@ public class ChooseProvinceActivity extends BaseActivity {
         init();
         initView();
         getProvinces();
+        mImageViewGoBack.setOnClickListener(this);
     }
 
     private void init() {
@@ -58,6 +64,22 @@ public class ChooseProvinceActivity extends BaseActivity {
         }
 
     }
+
+    @Override
+    public void onClick(View v) {
+        try {
+            switch (v.getId()) {
+                case R.id.button_goback:
+                    this.finish();
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
+        }
+    }
+
 
 
 
@@ -95,6 +117,7 @@ public class ChooseProvinceActivity extends BaseActivity {
 //    }
 
     private void initView() {
+        mImageViewGoBack = (ImageView) this.findViewById(R.id.button_goback);
         lv_proviences= (ListView) this.findViewById(R.id.lv_provinces);
         tv_nodata= (TextView) this.findViewById(R.id.textview_nodata);
         tv_nodata.setOnClickListener(new View.OnClickListener() {

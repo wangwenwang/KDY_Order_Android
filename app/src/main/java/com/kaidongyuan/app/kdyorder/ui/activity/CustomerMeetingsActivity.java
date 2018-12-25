@@ -7,7 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -21,25 +21,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kaidongyuan.app.kdyorder.R;
-import com.kaidongyuan.app.kdyorder.adapter.ChartChoiceAdapter;
 import com.kaidongyuan.app.kdyorder.adapter.CustomerMeetingAdapter;
-import com.kaidongyuan.app.kdyorder.adapter.InformationAdapter;
 import com.kaidongyuan.app.kdyorder.adapter.LineChoiceAdapter;
 import com.kaidongyuan.app.kdyorder.adapter.StateChoiceAdapter;
 import com.kaidongyuan.app.kdyorder.app.MyApplication;
 import com.kaidongyuan.app.kdyorder.bean.CustomerMeeting;
 import com.kaidongyuan.app.kdyorder.bean.CustomerMeetingLine;
-import com.kaidongyuan.app.kdyorder.bean.Information;
-import com.kaidongyuan.app.kdyorder.constants.BusinessConstants;
-import com.kaidongyuan.app.kdyorder.constants.EXTRAConstants;
-import com.kaidongyuan.app.kdyorder.constants.SharedPreferenceConstants;
 import com.kaidongyuan.app.kdyorder.interfaces.OnClickListenerStrInterface;
 import com.kaidongyuan.app.kdyorder.model.CustomerMeetingsActivityBiz;
-import com.kaidongyuan.app.kdyorder.model.NewestInformationActivityBiz;
 import com.kaidongyuan.app.kdyorder.util.DateUtil;
 import com.kaidongyuan.app.kdyorder.util.DensityUtil;
 import com.kaidongyuan.app.kdyorder.util.ExceptionUtil;
-import com.kaidongyuan.app.kdyorder.util.SharedPreferencesUtil;
 import com.kaidongyuan.app.kdyorder.util.ToastUtil;
 import com.kaidongyuan.app.kdyorder.widget.loadingdialog.MyLoadingDialog;
 import com.kaidongyuan.app.kdyorder.widget.xlistview.XListView;
@@ -64,7 +56,7 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
      */
     private XListView mXlistViewInformations;
     /**
-     * 显示最新资讯 ListView 的 Adapter
+     * 客户拜访列表 ListView 的 Adapter
      */
     private CustomerMeetingAdapter mAdapter;
     /**
@@ -86,8 +78,8 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
     private ImageView ivSearch;
     public String strSearch = "";
     public String strLine = "";
-    public String strState = "全部";//已拜访,未拜访,拜访中,全部
-    private List<String> statelist = new ArrayList<String>(Arrays.asList("全部", "未拜访", "拜访中", "已拜访"));
+    public String strState = "未拜访";//已拜访,未拜访,拜访中,全部
+    private List<String> statelist = new ArrayList<String>(Arrays.asList("未拜访", "拜访中", "已拜访", "全部"));
     /**
      * 选择拜访线路的 Dialog
      */
@@ -125,6 +117,7 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_meetings);
+        Log.d("LM", "onCreate: ");
         try {
             initData();
             setTop();
@@ -137,7 +130,41 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("LM", "onRestart: ");
+        mBiz.reFreshCustomerMeetingDatas();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("LM", "onStart: ");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("LM", "onResume: ");
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("LM", "onPause: ");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("LM", "onStop: ");
+    }
+
+    @Override
     protected void onDestroy() {
+        Log.d("LM", "onDestroy: ");
         try {
             super.onDestroy();
             if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
@@ -173,13 +200,13 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
 
     private void initView() {
         try {
-            tvTitleRight= (TextView) findViewById(R.id.tv_title_right);
+            tvTitleRight = (TextView) findViewById(R.id.tv_title_right);
             llMeetingType = (LinearLayout) findViewById(R.id.ll_meeting_type);
             tvMeetingType = (TextView) findViewById(R.id.tv_meeting_type);
             llMeetingState = (LinearLayout) findViewById(R.id.ll_meeting_state);
             tvMeetingState = (TextView) findViewById(R.id.tv_meeting_state);
-            edSearch= (EditText) findViewById(R.id.ed_search);
-            ivSearch= (ImageView) findViewById(R.id.iv_search);
+            edSearch = (EditText) findViewById(R.id.ed_search);
+            ivSearch = (ImageView) findViewById(R.id.iv_search);
             this.mXlistViewInformations = (XListView) this.findViewById(R.id.lv_customer_meetings);
             mXlistViewInformations.setPullLoadEnable(false);
             mXlistViewInformations.setPullRefreshEnable(false);
@@ -207,7 +234,7 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    strSearch=charSequence.toString().trim();
+                    strSearch = charSequence.toString().trim();
                 }
 
                 @Override
@@ -231,7 +258,7 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
     private void getMeetingLineDatas() {
         try {
             if (mBiz.GetPartyVisitLines()) {
-              //  showLoadingDialog();
+                //  showLoadingDialog();
             } else {
                 ToastUtil.showToastBottom(MyApplication.getmRes().getString(R.string.sendrequest_fail), Toast.LENGTH_SHORT);
             }
@@ -287,14 +314,14 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
             // 拜访线路定位到当天
             for (int i = 0; i < customerMeetingLines.size(); i++) {
                 String line = customerMeetingLines.get(i).getITEM_NAME();
-                if(line.equals(DateUtil.GetCurrWeek())) {
+                if (line.equals(DateUtil.GetCurrWeek())) {
                     strLine = line;
                     break;
                 }
             }
             strLine = strLine.equals("") ? customerMeetingLines.get(0).getITEM_NAME() : strLine;
             tvMeetingType.setText(strLine);
-            if (mBiz.reFreshCustomerMeetingDatas()){
+            if (mBiz.reFreshCustomerMeetingDatas()) {
                 showLoadingDialog();
             }
 
@@ -375,16 +402,16 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
 
     @Override
     public boolean onClick(int position, String... tags) {
-        if (tags!=null&&tags.length>0){
-            switch (tags[0]){
+        if (tags != null && tags.length > 0) {
+            switch (tags[0]) {
                 case "tv_read":
 
                     break;
                 case "tv_write":
                     break;
                 case "tv_create":
-                    Intent intent0=new Intent(CustomerMeetingsActivity.this,CustomerMeetingCreateActivity.class);
-                    intent0.putExtra("CustomerMeeting",mBiz.getCustomerMeetingList().get(position));
+                    Intent intent0 = new Intent(CustomerMeetingsActivity.this, CustomerMeetingCreateActivity.class);
+                    intent0.putExtra("CustomerMeeting", mBiz.getCustomerMeetingList().get(position));
                     startActivity(intent0);
                     break;
                 default:
@@ -402,24 +429,18 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             try {
                 mChoiceLineDialog.dismiss();
-                if (mCurrentLineIndex == position&&mBiz.getCustomerMeetingList().size()>0) {
+                if (mCurrentLineIndex == position && mBiz.getMeetingLines().size() > 0) {
                     return;
                 }
                 mCurrentLineIndex = position;
-                if(position == mBiz.getCustomerMeetingList().size() + 1) {
 
-                    // 全部
-                    tvMeetingType.setText("全部");
-                }else {
-
-                    List<CustomerMeetingLine> meetingLines = mBiz.getMeetingLines();
-                    if (meetingLines.size() <= 0) {//集合中没有数据网络请求数据
-                        mBiz.GetPartyVisitLines();
-                        showLoadingDialog();
-                    } else {//集合中已有数据，直接显示
-                        strLine = mBiz.getMeetingLines().get(mCurrentLineIndex).getITEM_NAME();
-                        tvMeetingType.setText(strLine);
-                    }
+                List<CustomerMeetingLine> meetingLines = mBiz.getMeetingLines();
+                if (meetingLines.size() <= 0) {//集合中没有数据网络请求数据
+                    mBiz.GetPartyVisitLines();
+                    showLoadingDialog();
+                } else {//集合中已有数据，直接显示
+                    strLine = mBiz.getMeetingLines().get(mCurrentLineIndex).getITEM_NAME();
+                    tvMeetingType.setText(strLine);
                 }
                 showLoadingDialog();
                 mBiz.reFreshCustomerMeetingDatas();
@@ -438,7 +459,7 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             try {
                 mChoiceStateDialog.dismiss();
-                if (mCurrentStateIndex == position&&mBiz.getCustomerMeetingList().size()>0) {
+                if (mCurrentStateIndex == position && mBiz.getCustomerMeetingList().size() > 0) {
                     return;
                 }
                 mCurrentStateIndex = position;
@@ -493,7 +514,7 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
                     this.finish();
                     break;
                 case R.id.tv_title_right:
-                    startActivity(new Intent(CustomerMeetingsActivity.this,CustomerCreateActivity.class));
+                    startActivity(new Intent(CustomerMeetingsActivity.this, CustomerCreateActivity.class));
                     break;
                 case R.id.ll_meeting_type:
                     showChoiceLineDialog();
@@ -516,16 +537,44 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         try {
-            Intent intent = new Intent(this, NewestInformationDetailsActivity.class);
-            CustomerMeeting meeting = mBiz.getCustomerMeetingList().get(position - 1);//位置为点击的-1 XListView 中有headView
-            intent.putExtra(EXTRAConstants.CUSTOMERMEETING_ID, meeting.getIDX());
-            startActivity(intent);
+            //位置为点击的-1 XListView 中有headView
+            CustomerMeeting customerM = mBiz.getCustomerMeetingList().get(position - 1);
+            String status = customerM.getVISIT_STATES();
+            if (status.equals("")) {
+
+                Intent intent = new Intent(CustomerMeetingsActivity.this, CustomerMeetingCreateActivity.class);
+                intent.putExtra("CustomerMeeting", customerM);
+                startActivity(intent);
+            } else if (status.equals("新建") || status.equals("确认客户信息")) {
+
+                Intent intent = new Intent(CustomerMeetingsActivity.this, ArrivedStoreActivity.class);
+                intent.putExtra("CustomerMeeting", customerM);
+                startActivity(intent);
+            } else if(status.equals("进店")){
+
+                Intent intent = new Intent(CustomerMeetingsActivity.this, CustomerMeetingCheckInventoryActivity.class);
+                intent.putExtra("CustomerMeeting", customerM);
+                startActivity(intent);
+            }else if(status.equals("检查库存")) {
+
+                Intent intent = new Intent(this, CustomerMeetingRecomOrderActivity.class);
+                intent.putExtra("CustomerMeeting", customerM);
+                startActivity(intent);
+            }else if(status.equals("建议订单")) {
+
+                Intent intent = new Intent(this, CustomerMeetingDisplayActivity.class);
+                intent.putExtra("CustomerMeeting", customerM);
+                startActivity(intent);
+            }else if(status.equals("生动化陈列")) {
+
+                Intent intent = new Intent(this, CustomerMeetingShowStepActivity.class);
+                intent.putExtra("CustomerMeeting", customerM);
+                startActivity(intent);
+            }
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }
     }
-
-
 }
 
 
