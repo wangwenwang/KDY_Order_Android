@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:top="http://schemas.android.com/apk/res-auto"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <View
+        android:id="@+id/yb_statebar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/yb_main_color"/>
+    <RelativeLayout
+        android:id="@+id/yb_all_keyboard_hide_rel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/activity_all_title"/>
+        <!-- android:background="@color/yb_fragment_my_bg"-->
+        <LinearLayout
+            android:background="@color/yb_fragment_my_bg"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/all_title_high"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                style="@style/my_line" />
+
+            <RelativeLayout
+                android:paddingLeft="20dp"
+                android:background="@color/white"
+                android:id="@+id/yb_fragment_home_title_view"
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
+                <TextView
+                    android:textSize="@dimen/yb_text_size_16"
+                    android:layout_marginLeft="2dp"
+                    android:layout_centerVertical="true"
+                    android:text="深圳"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="35dp"
+                    android:background="@drawable/yb_home_search_top_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+                    <ImageView
+                        android:id="@+id/yb_my_addr_serch_icon"
+                        android:src="@drawable/yb_fragment_home_title_serch_icon"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp" />
+                    <EditText
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:layout_toRightOf="@id/yb_my_addr_serch_icon"
+                        android:imeOptions="actionSearch"
+                        android:singleLine="true"
+                        android:inputType="text"
+                        android:layout_marginRight="30dp"
+                        android:background="@null"
+                        android:id="@+id/yb_my_addr_search_edt"
+                        android:layout_centerVertical="true"
+                        android:hint="请输入小区或者大厦名称"
+                        android:textSize="@dimen/yb_text_size_14"
+                        android:textColor="@color/yb_main_text_black"
+                        android:layout_marginLeft="5dp"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/yb_my_addr_search_edt_del"
+                        android:layout_marginRight="15dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/yb_login_clear_icon"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <com.baidu.mapapi.map.MapView
+                    android:id="@+id/bmapView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp"
+                    android:clickable="true" />
+
+                <ImageView
+                    android:id="@+id/yb_my_addr_bls_img"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/yb_my_company_addr_icon" />
+            </RelativeLayout>
+
+            <ListView
+                android:background="@color/white"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:divider="#ffffffff"
+                android:dividerHeight="1px"
+                android:id="@+id/yb_my_addr_bls_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
+        </LinearLayout>
+        <ListView
+            android:paddingLeft="35dp"
+            android:paddingRight="35dp"
+            android:divider="#ffffffff"
+            android:dividerHeight="1px"
+            android:visibility="gone"
+            android:layout_marginTop="96dp"
+            android:id="@+id/yb_my_addr_search_lv"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+
+
+
+
+    </RelativeLayout>
+</LinearLayout>

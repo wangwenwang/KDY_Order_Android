@@ -29,6 +29,7 @@ public class OutPutOrder  {
     public String ADD_USER;//	制单人
     public String ADD_DATE;//	制单时间
     public String OPER_USER;//	操作人
+    public String VISIT_IDX;// 拜访ID，添加时间2018/12/27，王文望
 
 
     public OutPutInfo Info;
@@ -59,6 +60,7 @@ public class OutPutOrder  {
         public String BATCH_NUMBER;//	批次号
         public String PRODUCT_STATE;//	货物状态
         public String OPER_USER;//	操作人
+        public String VISIT_IDX;
 
 
 

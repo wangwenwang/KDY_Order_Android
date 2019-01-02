@@ -405,14 +405,18 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
         if (tags != null && tags.length > 0) {
             switch (tags[0]) {
                 case "tv_read":
-
+                    Intent intent1 = new Intent(this, CustomerMeetingShowStepActivity.class);
+                    intent1.putExtra("CustomerMeeting", mBiz.getCustomerMeetingList().get(position));
+                    intent1.putExtra("isShowStep", true);
+                    startActivity(intent1);
                     break;
                 case "tv_write":
+                    visits(position);
                     break;
                 case "tv_create":
-                    Intent intent0 = new Intent(CustomerMeetingsActivity.this, CustomerMeetingCreateActivity.class);
-                    intent0.putExtra("CustomerMeeting", mBiz.getCustomerMeetingList().get(position));
-                    startActivity(intent0);
+                    Intent intent2 = new Intent(this, CustomerMeetingCreateActivity.class);
+                    intent2.putExtra("CustomerMeeting", mBiz.getCustomerMeetingList().get(position));
+                    startActivity(intent2);
                     break;
                 default:
                     break;
@@ -536,9 +540,15 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        //位置为点击的-1 XListView 中有headView
+        visits(position - 1);
+    }
+
+    private void visits(int position) {
+
         try {
-            //位置为点击的-1 XListView 中有headView
-            CustomerMeeting customerM = mBiz.getCustomerMeetingList().get(position - 1);
+            CustomerMeeting customerM = mBiz.getCustomerMeetingList().get(position);
             String status = customerM.getVISIT_STATES();
             if (status.equals("")) {
 
@@ -550,25 +560,32 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
                 Intent intent = new Intent(CustomerMeetingsActivity.this, ArrivedStoreActivity.class);
                 intent.putExtra("CustomerMeeting", customerM);
                 startActivity(intent);
-            } else if(status.equals("进店")){
+            } else if (status.equals("进店")) {
 
                 Intent intent = new Intent(CustomerMeetingsActivity.this, CustomerMeetingCheckInventoryActivity.class);
                 intent.putExtra("CustomerMeeting", customerM);
                 startActivity(intent);
-            }else if(status.equals("检查库存")) {
+            } else if (status.equals("检查库存")) {
 
                 Intent intent = new Intent(this, CustomerMeetingRecomOrderActivity.class);
                 intent.putExtra("CustomerMeeting", customerM);
                 startActivity(intent);
-            }else if(status.equals("建议订单")) {
+            } else if (status.equals("建议订单")) {
 
                 Intent intent = new Intent(this, CustomerMeetingDisplayActivity.class);
                 intent.putExtra("CustomerMeeting", customerM);
                 startActivity(intent);
-            }else if(status.equals("生动化陈列")) {
+            } else if (status.equals("生动化陈列")) {
 
                 Intent intent = new Intent(this, CustomerMeetingShowStepActivity.class);
                 intent.putExtra("CustomerMeeting", customerM);
+                intent.putExtra("isShowStep", false);
+                startActivity(intent);
+            } else if (status.equals("离店")) {
+
+                Intent intent = new Intent(this, CustomerMeetingShowStepActivity.class);
+                intent.putExtra("CustomerMeeting", customerM);
+                intent.putExtra("isShowStep", true);
                 startActivity(intent);
             }
         } catch (Exception e) {
@@ -576,17 +593,3 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

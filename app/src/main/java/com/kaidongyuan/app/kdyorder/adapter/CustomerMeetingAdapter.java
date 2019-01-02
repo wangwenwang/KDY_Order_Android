@@ -87,6 +87,7 @@ public class CustomerMeetingAdapter extends BaseAdapter {
                 holder.tv_read.setVisibility(View.GONE);
                 holder.tv_write.setVisibility(View.GONE);
                 holder.tv_create.setVisibility(View.VISIBLE);
+                holder.tv_time.setVisibility(View.GONE);
                 break;
             case "离店":
                 holder.tv_state.setText("已拜访");
@@ -94,13 +95,15 @@ public class CustomerMeetingAdapter extends BaseAdapter {
                 holder.tv_read.setVisibility(View.VISIBLE);
                 holder.tv_write.setVisibility(View.GONE);
                 holder.tv_create.setVisibility(View.GONE);
+                holder.tv_time.setVisibility(View.VISIBLE);
                 break;
             default:
                 holder.tv_state.setText("拜访中");
                 holder.tv_state.setTextColor(mContext.getResources().getColor(R.color.text_color_normal));
-                holder.tv_read.setVisibility(View.GONE);
+                holder.tv_read.setVisibility(View.VISIBLE);
                 holder.tv_write.setVisibility(View.VISIBLE);
                 holder.tv_create.setVisibility(View.GONE);
+                holder.tv_time.setVisibility(View.GONE);
                 break;
         }
         holder.tv_customer_address.setText(customerMeeting.getPARTY_ADDRESS());

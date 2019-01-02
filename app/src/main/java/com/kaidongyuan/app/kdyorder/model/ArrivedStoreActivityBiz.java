@@ -1,5 +1,7 @@
 package com.kaidongyuan.app.kdyorder.model;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.AuthFailureError;
@@ -45,12 +47,14 @@ public class ArrivedStoreActivityBiz {
                 public void onResponse(String response) {
                     Logger.w(ArrivedStoreActivityBiz.this.getClass() + ".GetVisitEnterShop:" + response);
                     EnterShopSuccess(response);
+                    Log.d("LM", "进店|完成: ");
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Logger.w(ArrivedStoreActivityBiz.this.getClass() + ".GetVisitEnterShop:" + error.toString());
                     if (NetworkUtil.isNetworkAvailable()) {
+                        Log.d("LM", "进店|请求失败: " + error.toString());
                         mActivity.EnterShopError("请求失败!");
                     } else {
                         mActivity.EnterShopError("请检查网络是否正常连接！");

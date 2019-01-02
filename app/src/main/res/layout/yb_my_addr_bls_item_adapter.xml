@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:minHeight="61dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="10dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/yb_my_addr_loc"
+            android:layout_centerVertical="true"
+            android:layout_width="15dp"
+            android:layout_height="19dp" />
+        <TextView
+
+           android:layout_marginLeft="26dp"
+            android:id="@+id/yb_my_addr_item_addr_name"
+            android:text="朝阳南街一坊5号楼 拷贝 2"
+            android:textColor="@color/yb_main_text_black"
+            android:textSize="@dimen/yb_text_size_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_below="@+id/yb_my_addr_item_addr_name"
+            android:layout_marginTop="3dp"
+           android:layout_marginLeft="26dp"
+            android:id="@+id/yb_my_addr_item_addr_detail"
+            android:text="深南大道南头古垣（南山大道西）"
+            android:textColor="@color/yb_main_text_gray_9"
+            android:textSize="@dimen/yb_text_size_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+    <View
+        style="@style/my_line" />
+    
+
+</LinearLayout>

@@ -34,6 +34,7 @@ import com.kaidongyuan.app.kdyorder.adapter.OrderBrandsAdapter;
 import com.kaidongyuan.app.kdyorder.adapter.OrderTypesAdapter;
 import com.kaidongyuan.app.kdyorder.adapter.PartyInventoryProductAdapter;
 import com.kaidongyuan.app.kdyorder.adapter.PaymentTypeAdapter;
+import com.kaidongyuan.app.kdyorder.bean.OutPutToAddress;
 import com.kaidongyuan.app.kdyorder.bean.Product;
 import com.kaidongyuan.app.kdyorder.constants.BusinessConstants;
 import com.kaidongyuan.app.kdyorder.constants.EXTRAConstants;
@@ -269,6 +270,11 @@ public class OutputInventoryActivity extends BaseActivity implements View.OnClic
     private Handler mHandler;
 
     private String strOutputOrderType;
+    /**
+     * 客户拜访，拜访ID
+     */
+    private String VISIT_IDX;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -327,6 +333,7 @@ public class OutputInventoryActivity extends BaseActivity implements View.OnClic
             mRlChoiceProductdetial = null;
             mListViewChoicegiftdetial = null;
             mChoicedProductAdapter = null;
+            VISIT_IDX = null;
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }
@@ -380,6 +387,17 @@ public class OutputInventoryActivity extends BaseActivity implements View.OnClic
             }
             if (intent.hasExtra(EXTRAConstants.OUTPUT_ORDER_TYPE)){
                 strOutputOrderType=intent.getStringExtra(EXTRAConstants.OUTPUT_ORDER_TYPE);
+            }
+            if(strOutputOrderType.equals("output_visit_sale")) {
+                if (intent.hasExtra("OutPutToAddress")) {
+                    OutPutToAddress OT = intent.getParcelableExtra("OutPutToAddress");
+                    mOutPutToPartyCode = OT.getITEM_CODE();
+                    mOutPutToPartyName = OT.getPARTY_NAME();
+                    mOutPutToPartyAddress = OT.getADDRESS_INFO();
+                }
+            }
+            if (intent.hasExtra(EXTRAConstants.OUTPUT_VISIT_IDX)){
+                VISIT_IDX=intent.getStringExtra(EXTRAConstants.OUTPUT_VISIT_IDX);
             }
             mHandler = new InnerHandler(this);
         } catch (Exception e) {
@@ -447,6 +465,11 @@ public class OutputInventoryActivity extends BaseActivity implements View.OnClic
             mChoicedProductAdapter = new ChoicedProductAdapter(this, null);
             mListViewChoicegiftdetial.setAdapter(mChoicedProductAdapter);
             setProductListViewWidth();
+
+            // 客户拜访 --> 建议订单（销售出库）
+            if(strOutputOrderType.equals("output_visit_sale")) {
+                tv_outputto_info.setText("发货地址：" + CheckStringEmptyUtil.checkStringIsEmptyWithNoSet(mOutPutToPartyAddress));
+            }
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }
@@ -637,6 +660,10 @@ public class OutputInventoryActivity extends BaseActivity implements View.OnClic
                     }
                     break;
                 case R.id.tv_outputto_info://跳转到选择收货地址的页面
+                    // 客户拜访 --> 建议订单（销售出库），不能更改收货信息
+                    if(strOutputOrderType.equals("output_visit_sale")) {
+                        return;
+                    }
                     Intent intent=new Intent(this,OutputPartyListActivity.class);
                     intent.putExtra(EXTRAConstants.ORDER_PARTY_ADDRESS_IDX,mOrderAddressIdx);
                     startActivityForResult(intent,REQUESETCODE_OUTPUTPARTYLIST);
@@ -675,6 +702,7 @@ public class OutputInventoryActivity extends BaseActivity implements View.OnClic
             intent.putExtra(EXTRAConstants.OUTPUT_TOPARTYCODE,mOutPutToPartyCode);
             intent.putExtra(EXTRAConstants.OUTPUT_TOPARTYNAME,mOutPutToPartyName);
             intent.putExtra(EXTRAConstants.OUTPUT_TOADDRESS,mOutPutToPartyAddress);
+            intent.putExtra("VISIT_IDX",VISIT_IDX);
             if (strOutputOrderType!=null){
                 intent.putExtra(EXTRAConstants.OUTPUT_ORDER_TYPE,strOutputOrderType);
             }

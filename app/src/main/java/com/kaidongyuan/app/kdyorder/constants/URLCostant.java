@@ -303,6 +303,10 @@ public class URLCostant {
     public static final String GetVisitAppOrder=BASE_URL+"GetVisitAppOrder";
     // 获取客户拜访照片
     public static final String GetPictureByVisitIdx=BASE_URL+"GetPictureByVisitIdx";
+    // 获取生动化陈列
+    public static final String VividDisplayCBX=BASE_URL+"VividDisplayCBX";
+    // 根据客户地址id，获取上级地址id
+    public static final String GetFatherAddress=BASE_URL+"GetFatherAddress";
 }
 
 

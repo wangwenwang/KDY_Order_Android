@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/yb_main_color_bg">
+
+    <RelativeLayout
+        android:id="@+id/layout_title_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/all_title_high"
+        android:background="@color/yb_main_color_bg">
+
+        <ImageView
+            android:id="@+id/title_left_image"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/all_title_left_img"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/all_title_left_img_marginleft"
+
+            android:scaleType="center"
+            android:src="@drawable/yb_all_title_back_img" />
+
+        <Button
+            android:id="@+id/title_left_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/all_title_left_img"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="left|center_vertical"
+            android:background="@null"
+            android:paddingLeft="@dimen/all_title_left_img_marginleft"
+            android:text="@string/yb_cancel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/yb_text_size_14"
+            android:visibility="gone"
+           />
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/title_text"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/yb_main_text_black"
+            android:textSize="@dimen/all_title_size" />
+
+        <Button
+            android:gravity="right|center_vertical"
+            android:id="@+id/title_right_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/all_title_left_img"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:paddingRight="@dimen/all_title_left_img_marginleft"
+
+            android:textColor="@color/white"
+            android:textSize="@dimen/yb_text_size_14"
+            android:visibility="gone"
+
+
+            />
+        <!--    这个控件本来不能设置marginRight的，设置paddingRight的，可是在查看消息界面设置右上角的popup有问题      -->
+        <ImageView
+            android:id="@+id/title_right_image"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/all_title_left_img"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/all_title_left_img_marginleft"
+            android:scaleType="center"
+
+            android:visibility="gone" />
+
+        <!--         <View -->
+        <!--             android:id="@+id/title_line" -->
+        <!--             style="@style/my_line" -->
+        <!--             android:layout_alignParentBottom="true" /> -->
+    </RelativeLayout>
+
+</RelativeLayout>

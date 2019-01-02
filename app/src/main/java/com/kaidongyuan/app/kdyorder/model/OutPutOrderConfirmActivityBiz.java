@@ -1,6 +1,7 @@
 package com.kaidongyuan.app.kdyorder.model;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -262,6 +263,10 @@ public class OutPutOrderConfirmActivityBiz {
                     }else {
                         outPutOrder.OUTPUT_TYPE="销售出库";
                     }
+                    // 如果是客户拜访，参数加上VISIT_IDX
+                    if (mActivity.strOutputOrderType!=null&&mActivity.strOutputOrderType.equals("output_visit_sale")){
+                        outPutOrder.VISIT_IDX=mActivity.VISIT_IDX;
+                    }
                     outPutOrder.OPER_USER=MyApplication.getInstance().getUser().getUSER_NAME();
                     outPutOrder.PRICE=mOrder.ORG_PRICE;
                     outPutOrder.OUTPUT_VOLUME=mOrder.TOTAL_VOLUME;
@@ -273,6 +278,7 @@ public class OutPutOrderConfirmActivityBiz {
                     String strorder=JSON.toJSONString(outPutOrder);
                     params.put("result",strorder);
                     params.put("strLicense", "");
+                    Log.d("LM", "--" + params);
                     return params;
                 }
             };

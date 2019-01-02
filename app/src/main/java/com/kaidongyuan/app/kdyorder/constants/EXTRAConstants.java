@@ -172,6 +172,10 @@ public class EXTRAConstants {
       */
     public static final String OUTPUT_ORDER_TYPE="OUTPUT_ORDER_TYPE";
     /**
+     * 客户拜访IDX
+     */
+    public static final String OUTPUT_VISIT_IDX="OUTPUT_VISIT_IDX";
+    /**
      * 物流订单TMSOrder 序列化对象
      */
     public static final String TMS_ORDER="TMS_ORDER";

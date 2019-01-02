@@ -3,12 +3,15 @@ package com.kaidongyuan.app.kdyorder.ui.activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -39,6 +42,7 @@ import com.kaidongyuan.app.kdyorder.util.StringUtils;
 import com.kaidongyuan.app.kdyorder.util.ToastUtil;
 import com.kaidongyuan.app.kdyorder.widget.loadingdialog.MyLoadingDialog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,7 +57,6 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
     private CustomerCreateActivityBiz mBiz;
 
 
-
     /**
      * 网络请求时显示的 Dialog
      */
@@ -63,7 +66,12 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
      */
     private ImageView mImageViewGoBack;
 
-    private LinearLayout llMeetingType, llPartyChannel;
+
+    private AlertDialog linesAlertDialog;    // 拜访线路多选框
+    private ArrayList<Boolean> linesCheckedList;                    // 记住多选的item
+    public String linesParmas;
+
+    private LinearLayout llMeetingType, llPartyChannel, llSendAddress;
     private TextView tvMeetingType, tvPartyChannel;
     public EditText edPartyName, edPartyCode;
     public String strSearch = "";
@@ -129,12 +137,14 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
     private TextView tvAddressGps;
     private Button buttonUpdata;
     private final int RequestAddContact = 1001;
-    private final int RequestAddressBelong=1008;
+    private final int RequestAddressBelong = 1008;
     /**
      *
      */
-    public NormalAddress pv,ct,ar,ru;
-    public double lat=1,lng=1;
+    public NormalAddress pv, ct, ar, ru;
+    public String latitude = "";
+    public String longitude = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -200,8 +210,9 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
             tvAddContact = (TextView) findViewById(R.id.tv_add_contact);
             tvAddressBelong = (TextView) findViewById(R.id.tv_address_belong);
             tvAddressGps = (TextView) findViewById(R.id.tv_address_gps);
-            buttonUpdata= (Button) findViewById(R.id.button_updata);
+            buttonUpdata = (Button) findViewById(R.id.button_updata);
             mImageViewGoBack = (ImageView) this.findViewById(R.id.button_goback);
+            llSendAddress = (LinearLayout) findViewById(R.id.ll_send_address);
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }
@@ -215,6 +226,7 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
             tvAddContact.setOnClickListener(this);
             tvAddressBelong.setOnClickListener(this);
             buttonUpdata.setOnClickListener(this);
+            llSendAddress.setOnClickListener(this);
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }
@@ -325,6 +337,7 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
             ExceptionUtil.handlerException(e);
         }
     }
+
     /**
      * 获取客户拜访线路类型失败
      *
@@ -341,12 +354,14 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
 
     public void getChannelsSuccess(List<CustomerChannel> channels) {
         if (mLoadingDialog != null) mLoadingDialog.dismiss();
-        if (channels != null && channels.size() > 0) {
-            strChannel = channels.get(0).getITEM_NAME();
-            tvPartyChannel.setText(strChannel);
-
-        }
+        // 不给默认
+//        if (channels != null && channels.size() > 0) {
+//            strChannel = channels.get(0).getITEM_NAME();
+//            tvPartyChannel.setText(strChannel);
+//
+//        }
     }
+
     /**
      * 获取客户拜访线路类型失败
      *
@@ -359,13 +374,15 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
             ExceptionUtil.handlerException(e);
         }
     }
+
     /**
      * 保存客户成功
+     *
      * @param
      */
     public void updataPartySuccess() {
         try {
-            if (mLoadingDialog!=null)mLoadingDialog.dismiss();
+            if (mLoadingDialog != null) mLoadingDialog.dismiss();
             ToastUtil.showToastBottom("新增客户成功", Toast.LENGTH_SHORT);
             finish();
         } catch (Exception e) {
@@ -388,19 +405,19 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
     }
 
     public void getMeetingLinesSuccess(List<CustomerMeetingLine> customerMeetingLines) {
-        if (mLoadingDialog != null) mLoadingDialog.dismiss();
-        if (customerMeetingLines != null && customerMeetingLines.size() > 0) {
-            // 拜访线路定位到当天
-            for (int i = 0; i < customerMeetingLines.size(); i++) {
-                String line = customerMeetingLines.get(i).getITEM_NAME();
-                if (line.equals(DateUtil.GetCurrWeek())) {
-                    strLine = line;
-                    break;
-                }
-            }
-            strLine = strLine.equals("") ? customerMeetingLines.get(0).getITEM_NAME() : strLine;
-            tvMeetingType.setText(strLine);
-        }
+//        if (mLoadingDialog != null) mLoadingDialog.dismiss();
+//        if (customerMeetingLines != null && customerMeetingLines.size() > 0) {
+//            // 拜访线路定位到当天
+//            for (int i = 0; i < customerMeetingLines.size(); i++) {
+//                String line = customerMeetingLines.get(i).getITEM_NAME();
+//                if (line.equals(DateUtil.GetCurrWeek())) {
+//                    strLine = line;
+//                    break;
+//                }
+//            }
+//            strLine = strLine.equals("") ? customerMeetingLines.get(0).getITEM_NAME() : strLine;
+//            tvMeetingType.setText(strLine);
+//        }
     }
 
     /**
@@ -443,12 +460,13 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
             ExceptionUtil.handlerException(e);
         }
     }
+
     /**
      * 显示选择线路 Dialog
      */
     private void showChoiceChannelDialog() {
         try {
-            if (mBiz.getChannels()==null||mBiz.getChannels().size()<=0){
+            if (mBiz.getChannels() == null || mBiz.getChannels().size() <= 0) {
                 getMeetingLineDatas();
                 return;
             }
@@ -476,66 +494,89 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
             ExceptionUtil.handlerException(e);
         }
     }
+
     /**
      * 显示选择线路 Dialog
      */
     private void showChoiceLineDialog() {
+        Context mContext = this;
         try {
-            if (mBiz.getMeetingLines()==null||mBiz.getMeetingLines().size()<=0){
-               getMeetingLineDatas();
+            if (mBiz.getMeetingLines() == null || mBiz.getMeetingLines().size() <= 0) {
+                getMeetingLineDatas();
                 return;
             }
-            if (mChoiceLineDialog == null) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.create();
-                mChoiceLineDialog = builder.show();
-                mChoiceLineDialog.setCanceledOnTouchOutside(false);
-                Window window = mChoiceLineDialog.getWindow();
-                window.setContentView(R.layout.dialog_line_choice);
-                window.findViewById(R.id.button_cancel).setOnClickListener(new View.OnClickListener() {
+            final String[] items = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
+            // 让当天默认选中
+            if (linesCheckedList == null) {
+                linesCheckedList = new ArrayList();
+                linesCheckedList.add(DateUtil.GetCurrWeek().equals(items[0]));
+                linesCheckedList.add(DateUtil.GetCurrWeek().equals(items[1]));
+                linesCheckedList.add(DateUtil.GetCurrWeek().equals(items[2]));
+                linesCheckedList.add(DateUtil.GetCurrWeek().equals(items[3]));
+                linesCheckedList.add(DateUtil.GetCurrWeek().equals(items[4]));
+                linesCheckedList.add(DateUtil.GetCurrWeek().equals(items[5]));
+                linesCheckedList.add(DateUtil.GetCurrWeek().equals(items[6]));
+            }
+
+            boolean[] array = new boolean[linesCheckedList.size()];
+            for (int i = 0; i < linesCheckedList.size(); i++) {
+                array[i] = linesCheckedList.get(i);
+            }
+            if (linesAlertDialog == null) {
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(mContext);
+                alertBuilder.setTitle("请选择拜访线路");
+                alertBuilder.setMultiChoiceItems(items, array, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
-                    public void onClick(View view) {
-                        mChoiceLineDialog.dismiss();
+                    public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
+                        linesCheckedList.set(i, isChecked);
                     }
                 });
-                mListViewChoiceLines = (ListView) window.findViewById(R.id.listView_chart_choice);
-                mLinesChoiceAdapter = new LineChoiceAdapter(null, this);
-                mListViewChoiceLines.setAdapter(mLinesChoiceAdapter);
-                mListViewChoiceLines.setOnItemClickListener(new CustomerCreateActivity.InnerOnItemClickListener());
+                alertBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        List<String> selectedString = new ArrayList();
+                        for (int u = 0; u < linesCheckedList.size(); u++) {
+
+                            if (linesCheckedList.get(u)) {
+                                selectedString.add(items[u]);
+                            }
+                        }
+                        if (selectedString.size() == 0) {
+                            return;
+                        }
+                        linesAlertDialog.dismiss();
+                        if (selectedString.size() == 1) {
+                            tvMeetingType.setText(selectedString.get(0));
+                        } else {
+                            String weeksString = "";
+                            for (int j = 0; j < selectedString.size(); j++) {
+                                weeksString = weeksString + selectedString.get(j) + "  ";
+                            }
+                            weeksString = weeksString.replace("星期", "");
+                            tvMeetingType.setText(weeksString);
+                        }
+                        for (int j = 0; j < selectedString.size(); j++) {
+                            if (j == 0) {
+                                linesParmas = selectedString.get(j);
+                            } else {
+                                linesParmas = linesParmas + "," + selectedString.get(j);
+                            }
+                        }
+                        Log.d("LM", "onClick: ");
+                    }
+                });
+                alertBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        linesAlertDialog.dismiss();
+                    }
+                });
+                linesAlertDialog = alertBuilder.create();
+                Log.d("LM", "onClick: ");
             }
-            mChoiceLineDialog.show();
-            mLinesChoiceAdapter.notifyChange(mBiz.getMeetingLines());
+            linesAlertDialog.show();
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
-        }
-    }
-
-
-    /**
-     * Dialog 中选择拜访线路的监听
-     */
-    private class InnerOnItemClickListener implements AdapterView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            try {
-                mChoiceLineDialog.dismiss();
-                if (mCurrentLineIndex == position) {
-                    return;
-                }
-                mCurrentLineIndex = position;
-                List<CustomerMeetingLine> meetingLines = mBiz.getMeetingLines();
-                if (meetingLines.size() <= 0) {//集合中没有数据网络请求数据
-                    mBiz.GetPartyVisitLines();
-                    showLoadingDialog();
-                } else {//集合中已有数据，直接显示
-                    strLine = mBiz.getMeetingLines().get(mCurrentLineIndex).getITEM_NAME();
-                    tvMeetingType.setText(strLine);
-
-                }
-
-            } catch (Exception e) {
-                ExceptionUtil.handlerException(e);
-            }
         }
     }
 
@@ -555,6 +596,7 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
             }
         }
     }
+
     /**
      * Dialog 中选择客户渠道的监听
      */
@@ -563,11 +605,11 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             try {
                 mChoiceChannelDialog.dismiss();
-                if (mCurrentChannelIndex == position) {
-                    return;
-                }
+//                if (mCurrentChannelIndex == position) {
+//                    return;
+//                }
                 mCurrentChannelIndex = position;
-                strChannel=mBiz.getChannels().get(mCurrentChannelIndex).getITEM_NAME();
+                strChannel = mBiz.getChannels().get(mCurrentChannelIndex).getITEM_NAME();
                 tvPartyChannel.setText(strChannel);
             } catch (Exception e) {
                 ExceptionUtil.handlerException(e);
@@ -583,6 +625,7 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
                     this.finish();
                     break;
                 case R.id.ll_meeting_type:
+
                     showChoiceLineDialog();
                     break;
                 case R.id.ll_party_channel:
@@ -594,19 +637,23 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
                     startActivityForResult(intent, RequestAddContact);
                     break;
                 case R.id.tv_address_belong:
-                    intent=new Intent(CustomerCreateActivity.this, ChooseProvinceActivity.class);
-                    startActivityForResult(intent,RequestAddressBelong);
+                    intent = new Intent(CustomerCreateActivity.this, ChooseProvinceActivity.class);
+                    startActivityForResult(intent, RequestAddressBelong);
                     break;
                 case R.id.button_updata:
-                    if (StringUtils.isBlank(edPartyName.getText().toString())||StringUtils.isBlank(edPartyCode.getText().toString())||StringUtils.isBlank(strChannel)
-                            ||StringUtils.isBlank(strLine)||fatherPartyAddress==null||StringUtils.isBlank(edContactPerson.getText().toString())
-                            ||StringUtils.isBlank(edContactTel.getText().toString()) ||pv==null||StringUtils.isBlank(edAddressDetail.getText().toString())
-                            ||lat<=0||lng<=0){
-                            updataPartyError("请填写完整新建客户资料必填项");
-                    }else {
+                    if (StringUtils.isBlank(edPartyName.getText().toString()) || StringUtils.isBlank(edPartyCode.getText().toString()) || StringUtils.isBlank(strChannel)
+                            || StringUtils.isBlank(linesParmas) || fatherPartyAddress == null || StringUtils.isBlank(edContactPerson.getText().toString())
+                            || StringUtils.isBlank(edContactTel.getText().toString()) || pv == null || StringUtils.isBlank(edAddressDetail.getText().toString())
+                            || latitude.length() <= 0 || latitude.length() <= 0) {
+                        updataPartyError("请填写完整新建客户资料必填项");
+                    } else {
                         showLoadingDialog();
                         mBiz.AddParty();
                     }
+                    break;
+                case R.id.ll_send_address:
+                    Intent bls = new Intent(CustomerCreateActivity.this, YBMyAddressAdd2.class);
+                    startActivityForResult(bls, 110);
                     break;
                 default:
                     break;
@@ -618,6 +665,20 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if ((requestCode == 110) && (resultCode == 120)) {
+//            String aa=data.getExtras().getString("address");
+            String addressDetail = data.getExtras().getString("addressDetail");
+            latitude = data.getExtras().getString("latitude");
+            longitude = data.getExtras().getString("longitude");
+            float latitudeF = Float.parseFloat(latitude);
+            float longitudeF = Float.parseFloat(longitude);
+            String latitudeS = String.format("%.6f", latitudeF);
+            String longitudeS = String.format("%.6f", longitudeF);
+            tvAddressGps.setText(latitudeS + "，" + longitudeS + "（" + addressDetail + "附近）");//得到新Activity 关闭后返回的数据
+//            addrEdt.setText(bb);//得到新Activity 关闭后返回的数据
+        }
+
         switch (requestCode) {
             case RequestAddContact:
                 if (data == null) {
@@ -631,13 +692,13 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
 
                 break;
             case RequestAddressBelong:
-                try{
-                    pv=data.getParcelableExtra("province");
-                    ct=data.getParcelableExtra("city");
-                    ar=data.getParcelableExtra("area");
-                    ru=data.getParcelableExtra("rural");
-                    tvAddressBelong.setText(pv.getITEM_NAME().trim()+ct.getITEM_NAME().trim()
-                            +ar.getITEM_NAME().trim()+ru.getITEM_NAME().trim());
+                try {
+                    pv = data.getParcelableExtra("province");
+                    ct = data.getParcelableExtra("city");
+                    ar = data.getParcelableExtra("area");
+                    ru = data.getParcelableExtra("rural");
+                    tvAddressBelong.setText(pv.getITEM_NAME().trim() + ct.getITEM_NAME().trim()
+                            + ar.getITEM_NAME().trim() + ru.getITEM_NAME().trim());
                 } catch (Exception e) {
                     ExceptionUtil.handlerException(e);
                 }

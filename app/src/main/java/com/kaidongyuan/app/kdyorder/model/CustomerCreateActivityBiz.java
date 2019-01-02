@@ -495,7 +495,7 @@ public class CustomerCreateActivityBiz {
                     params.put("PARTY_CITY",mActivity.ct.getITEM_NAME());
                     params.put("PARTY_REMARK",mActivity.edPartyRemark.getText().toString().trim());
                     params.put("BUSINESS_IDX",MyApplication.getInstance().getBusiness().getBUSINESS_IDX());
-                    params.put("strLINE",mActivity.strLine);
+                    params.put("strLINE",mActivity.linesParmas);
                     params.put("strCHANNEL",mActivity.strChannel);
                     params.put("strLicense", "");
                     return params;
@@ -551,8 +551,8 @@ public class CustomerCreateActivityBiz {
                     params.put("CONTACT_TEL",mActivity.edContactTel.getText().toString().trim());
                     params.put("ADDRESS_INFO",mActivity.pv.getITEM_NAME()+mActivity.ct.getITEM_NAME()+mActivity.ar.getITEM_NAME()+mActivity.ru.getITEM_NAME()+mActivity.edAddressDetail.getText().toString());
                     params.put("strFatherPartyIDX",mActivity.fatherPartyAddress.getIDX());
-                    params.put("LONGITUDE",mActivity.lng+"");
-                    params.put("LATITUDE",mActivity.lat+"");
+                    params.put("LONGITUDE",mActivity.longitude);
+                    params.put("LATITUDE",mActivity.latitude);
                     params.put("strLicense", "");
                     return params;
                 }

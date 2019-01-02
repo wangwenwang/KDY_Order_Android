@@ -143,17 +143,17 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }else if (OrderUtil.getBusinessType()==BusinessConstants.BUSINESS_TYPE_KANGSHIFU){
                 mPercentrlInventoryManage.setVisibility(View.INVISIBLE);
                 mPercentrlBillFeeManage.setVisibility(View.INVISIBLE);
-                mPercentrlPartyInventory.setVisibility(View.INVISIBLE);
+                mPercentrlPartyInventory.setVisibility(View.VISIBLE);
                 mPercentrlPreorderManage.setVisibility(View.VISIBLE);
             }else if (OrderUtil.getBusinessType()==BusinessConstants.BUSINESS_TYPE_KDYMY){
                 mPercentrlInventoryManage.setVisibility(View.INVISIBLE);
                 mPercentrlBillFeeManage.setVisibility(View.INVISIBLE);
-                mPercentrlPartyInventory.setVisibility(View.INVISIBLE);
+                mPercentrlPartyInventory.setVisibility(View.VISIBLE);
                 mPercentrlPreorderManage.setVisibility(View.VISIBLE);
             }else {
                 mPercentrlInventoryManage.setVisibility(View.INVISIBLE);
                 mPercentrlBillFeeManage.setVisibility(View.INVISIBLE);
-                mPercentrlPartyInventory.setVisibility(View.INVISIBLE);
+                mPercentrlPartyInventory.setVisibility(View.VISIBLE);
                 mPercentrlPreorderManage.setVisibility(View.INVISIBLE);
             }
         } catch (Exception e) {

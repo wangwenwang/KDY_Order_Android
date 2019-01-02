@@ -170,6 +170,11 @@ public class OutPutOrderConfirmActivity extends BaseFragmentActivity implements 
     public String strToAddress;
     public String strOutputOrderType;
 
+    /**
+     * 客户拜访，拜访ID
+     */
+    public String VISIT_IDX;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -217,6 +222,7 @@ public class OutPutOrderConfirmActivity extends BaseFragmentActivity implements 
             mGiftData = null;
             mReturnGiftData = null;
             mGiftCategoryData = null;
+            VISIT_IDX = null;
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }
@@ -266,6 +272,9 @@ public class OutPutOrderConfirmActivity extends BaseFragmentActivity implements 
             }
             if (intent.hasExtra(EXTRAConstants.OUTPUT_ORDER_TYPE)){
                 strOutputOrderType=intent.getStringExtra(EXTRAConstants.OUTPUT_ORDER_TYPE);
+            }
+            if (intent.hasExtra("VISIT_IDX")){
+                VISIT_IDX=intent.getStringExtra("VISIT_IDX");
             }
 
             //所选出库产品

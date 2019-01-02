@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +23,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.kaidongyuan.app.kdyorder.R;
+import com.kaidongyuan.app.kdyorder.adapter.GridImageAdapter;
 import com.kaidongyuan.app.kdyorder.bean.CustomerMeeting;
 import com.kaidongyuan.app.kdyorder.constants.EXTRAConstants;
 import com.kaidongyuan.app.kdyorder.model.ArrivedStoreActivityBiz;
@@ -27,8 +31,14 @@ import com.kaidongyuan.app.kdyorder.util.BitmapUtil;
 import com.kaidongyuan.app.kdyorder.util.ExceptionUtil;
 import com.kaidongyuan.app.kdyorder.util.ToastUtil;
 import com.kaidongyuan.app.kdyorder.widget.loadingdialog.MyLoadingDialog;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ${PEOJECT_NAME}
@@ -46,50 +56,8 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
      */
     private MyLoadingDialog mLoadingDialog;
 
-    private String strVisitIdx;
     private final String Tag_Visit = "Tag_Visit";//客户拜访TAG
-    private ImageView imageView1, imageView2;
-    private Button button1, button2, cancelbutton, submitbutton;
-    /**
-     * 保存图片和签名的文件夹
-     */
-    private final String mCacheFileName = "kaidongyuan";
-    /**
-     * 照片1保存的文件名
-     */
-    private final String mPictureFileName = "stopImage.jpg";
-    /**
-     * 　照片1调用系统相机是的请求码
-     */
-    private final int SystemCapture = 10;
-    /**
-     * 　照片保存的绝对路径
-     */
-    private String mPictureFilePath;
-    /**
-     * 照片2保存的文件名
-     */
-    private final String mPictureFileName2 = "stopImage2.jpg";
-    /**
-     * 照片2调用系统相机是的请求码2
-     */
-    private final int SystemCapture2 = 11;
-    /**
-     * 　照片2保存的绝对路径
-     */
-    private String mPictureFilePath2;
-    /**
-     * 储存添加照片是的临时文件名
-     */
-    private String mTempPictureFileName;
-    /**
-     * 储存添加照片时的临时请求码
-     */
-    private int mTempRequestCode;
-    /**
-     * 储存添加照片时的临时文件路径
-     */
-    private String mTempPictureFilePath;
+    private Button cancelbutton, submitbutton;
     /**
      * 　签名和照片文件宽度 单位（px）
      */
@@ -103,18 +71,22 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
     /*** 20180122 交付时提交当前定位坐标**/
     private RequestQueue mRequestQueue;
     private final static String Tag_Upload_Position = "Tag_Upload_Position";
-    private double currentLocationLat, currntLocationLng;
-    private String currentLocationAds;
     /**
      * 返回上一界面按钮
      */
     private ImageView mImageViewGoBack;
 
+    // 位置
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
     private TextView currAddress;
     private String strAddress;
     private CustomerMeeting customerM;
+
+    // 照片
+    private List<LocalMedia> selectList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private GridImageAdapter adapter;
 
     //BDAbstractLocationListener为7.2版本新增的Abstract类型的监听接口
 //原有BDLocationListener接口暂时同步保留。具体介绍请参考后文第四步的说明
@@ -178,22 +150,49 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
     private void initview() {
 
         mImageViewGoBack = (ImageView) this.findViewById(R.id.button_goback);
-        Intent intent = getIntent();
-
-        imageView1 = (ImageView) findViewById(R.id.imageView_picture);
-        imageView1.setOnClickListener(this);
-        imageView2 = (ImageView) findViewById(R.id.imageView_picture2);
-        imageView2.setOnClickListener(this);
-        button1 = (Button) findViewById(R.id.button_addPicture);
-        button1.setOnClickListener(this);
-        button2 = (Button) findViewById(R.id.button_addPicture2);
-        button2.setOnClickListener(this);
         cancelbutton = (Button) findViewById(R.id.button_cancel);
         cancelbutton.setOnClickListener(this);
         submitbutton = (Button) findViewById(R.id.button_submit);
         submitbutton.setOnClickListener(this);
         currAddress = (TextView) findViewById(R.id.tv_currAddress);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        FullyGridLayoutManager manager = new FullyGridLayoutManager(ArrivedStoreActivity.this, 4, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
+        adapter = new GridImageAdapter(ArrivedStoreActivity.this, onAddPicClickListener);
+        adapter.setList(selectList);
+        adapter.setSelectMax(2);
+        recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new GridImageAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                if (selectList.size() > 0) {
+                    LocalMedia media = selectList.get(position);
+                    String pictureType = media.getPictureType();
+                    int mediaType = PictureMimeType.pictureToVideo(pictureType);
+                    switch (mediaType) {
+                        case 1:
+                            int themeId = R.style.picture_default_style;
+                            // 预览图片 可自定长按保存路径
+                            PictureSelector.create(ArrivedStoreActivity.this).externalPicturePreview(position, selectList);
+                            break;
+                    }
+                }
+            }
+        });
     }
+
+    private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
+        @Override
+        public void onAddPicClick() {
+            // 单独拍照
+            PictureSelector.create(ArrivedStoreActivity.this)
+                    .openCamera(PictureMimeType.ofImage())
+                    .selectionMedia(selectList)
+                    .forResult(PictureConfig.CHOOSE_REQUEST);
+        }
+
+    };
 
     @Override
     protected void onDestroy() {
@@ -224,46 +223,6 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
             case R.id.button_goback:
                 this.finish();
                 break;
-            case R.id.imageView_picture:
-                if (choicsSnackbar != null && choicsSnackbar.isShown()) {
-                    choicsSnackbar.dismiss();
-                    return;
-                }
-                if (mPictureFilePath == null || mPictureFilePath.length() <= 0) {
-                    addPicture(mPictureFileName, SystemCapture);
-                } else {
-                    Intent intent = new Intent(this, ZoomImageviewActivity.class);
-                    intent.putExtra(EXTRAConstants.EXTRA_IMAGE_PATH, mPictureFilePath);
-                    startActivity(intent);
-                }
-                break;
-            case R.id.imageView_picture2:
-                if (choicsSnackbar != null && choicsSnackbar.isShown()) {
-                    choicsSnackbar.dismiss();
-                    return;
-                }
-                if (mPictureFilePath2 == null || mPictureFilePath2.length() <= 0) {
-                    addPicture(mPictureFileName2, SystemCapture2);
-                } else {
-                    Intent intent = new Intent(this, ZoomImageviewActivity.class);
-                    intent.putExtra(EXTRAConstants.EXTRA_IMAGE_PATH, mPictureFilePath2);
-                    startActivity(intent);
-                }
-                break;
-            case R.id.button_addPicture:
-                if (choicsSnackbar != null && choicsSnackbar.isShown()) {
-                    choicsSnackbar.dismiss();
-                    return;
-                }
-                addPicture(mPictureFileName, SystemCapture);
-                break;
-            case R.id.button_addPicture2:
-                if (choicsSnackbar != null && choicsSnackbar.isShown()) {
-                    choicsSnackbar.dismiss();
-                    return;
-                }
-                addPicture(mPictureFileName2, SystemCapture2);
-                break;
             case R.id.button_cancel:
                 finish();
                 break;
@@ -273,18 +232,21 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-
     private void nextOnclick() {
-        if ((mPictureFilePath != null && mPictureFilePath.length() > 0)
-                ) {
-            Bitmap pictureBitmap = BitmapUtil.resizeImage(mPictureFilePath, mBitmapWidth);
+        if (selectList.size() > 0) {
+
+            LocalMedia LM = selectList.get(0);
+            Bitmap pictureBitmap1 = BitmapUtil.resizeImage(LM.getPath(), mBitmapWidth);
+            Log.d("LM", "进店图片1大小|" + BitmapUtil.getBitmapSize(pictureBitmap1));
             Bitmap pictureBitmap2 = null;
-            if (mPictureFilePath2 != null && mPictureFilePath2.length() > 0) {
-                pictureBitmap2 = BitmapUtil.resizeImage(mPictureFilePath2, mBitmapWidth);
+            if (selectList.size() > 1) {
+                LM = selectList.get(1);
+                pictureBitmap2 = BitmapUtil.resizeImage(LM.getPath(), mBitmapWidth);
+                Log.d("LM", "进店图片2大小|" + BitmapUtil.getBitmapSize(pictureBitmap2));
             }
-            if (pictureBitmap != null) {
+            if (pictureBitmap1 != null) {
                 try {
-                    String strpicture = BitmapUtil.changeBitmapToString(pictureBitmap);
+                    String strpicture = BitmapUtil.changeBitmapToString(pictureBitmap1);
                     String strpicture2 = (pictureBitmap2 != null) ? BitmapUtil.changeBitmapToString(pictureBitmap2) : "";
                     showLoadingDialog();
                     strAddress = (strAddress == null) ? "" : strAddress;
@@ -300,90 +262,31 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-
-    private void addPicture(String mPictureFileName, int systemCapture) {
-        mTempPictureFileName = mPictureFileName;
-        mTempRequestCode = systemCapture;
-        showUpdataChoice();
-    }
-
-    private void showUpdataChoice() {
-        // tv_snackbar.setPadding(50,50,50,50);
-        if (onlyphotograph) {
-            choicsSnackbar = Snackbar.make(findViewById(R.id.activity_arrived_store), "", Snackbar.LENGTH_INDEFINITE);
-            View v = choicsSnackbar.getView();
-            v.setBackgroundColor(getResources().getColor(R.color.details_text));
-        } else {
-            choicsSnackbar = Snackbar.make(findViewById(R.id.activity_arrived_store), "相册选取", Snackbar.LENGTH_INDEFINITE);
-            View v = choicsSnackbar.getView();
-            v.setBackgroundColor(getResources().getColor(R.color.details_text));
-            final TextView tv_snackbar = (TextView) v.findViewById(R.id.snackbar_text);
-            tv_snackbar.setGravity(Gravity.CENTER);
-            tv_snackbar.setTextColor(getResources().getColor(R.color.white));
-            tv_snackbar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //从相册获取照片上传
-                    if (choicsSnackbar != null) {
-                        choicsSnackbar.dismiss();
-                    }
-                    mTempRequestCode *= 2;
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, mTempRequestCode);
-                }
-            });
-        }
-
-        choicsSnackbar.setAction("拍照上传", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                File dirFile = BitmapUtil.getCacheDirFile(mCacheFileName);
-                if (dirFile == null) {
-                    ToastUtil.showToastBottom("请先授权读写sd卡权限~", Toast.LENGTH_SHORT);
-                    return;
-                }
-                File pictureFile = new File(dirFile, mTempPictureFileName);
-                mTempPictureFilePath = pictureFile.getAbsolutePath();
-                Uri pictureUri = Uri.fromFile(pictureFile);
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, pictureUri);
-                startActivityForResult(intent, mTempRequestCode);
-            }
-        }).show();
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
-                case SystemCapture:
-                    Bitmap bitmap0 = BitmapUtil.resizeImage(mTempPictureFilePath, mBitmapWidth);
-                    getPictureResultHandle(imageView1, button1, bitmap0, mPictureFileName);
-                    break;
-                case SystemCapture * 2:
-                    Uri uri = data.getData();
-                    Bitmap bitmap1 = BitmapUtil.getBitmap(getApplicationContext(), uri, mBitmapWidth);
-                    getPictureResultHandle(imageView1, button1, bitmap1, mPictureFileName);
-                    break;
-                case SystemCapture2:
-                    Bitmap bitmap2 = BitmapUtil.resizeImage(mTempPictureFilePath, mBitmapWidth);
-                    getPictureResultHandle(imageView2, button2, bitmap2, mPictureFileName2);
-                    break;
-                case SystemCapture2 * 2:
-                    Uri uri1 = data.getData();
-                    Bitmap bitmap3 = BitmapUtil.getBitmap(getApplicationContext(), uri1, mBitmapWidth);
-                    getPictureResultHandle(imageView2, button2, bitmap3, mPictureFileName2);
+                case PictureConfig.CHOOSE_REQUEST:
+                    // 图片选择结果回调
+                    selectList = PictureSelector.obtainMultipleResult(data);
+                    // 例如 LocalMedia 里面返回三种path
+                    // 1.media.getPath(); 为原图path
+                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
+                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
+                    // 如果裁剪并压缩了，已取压缩路径为准，因为是先裁剪后压缩的
+                    for (LocalMedia media : selectList) {
+                        Log.i("图片-----》", media.getPath());
+                    }
+                    adapter.setList(selectList);
+                    adapter.notifyDataSetChanged();
                     break;
                 default:
                     ToastUtil.showToastBottom("图片传输失败，请重新取图", Toast.LENGTH_LONG);
                     break;
             }
-
         }
-
     }
-
 
     @Override
     public void onBackPressed() {
@@ -391,19 +294,6 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
             choicsSnackbar.dismiss();
         } else {
             super.onBackPressed();
-        }
-    }
-
-    private void getPictureResultHandle(ImageView imageView1, Button button1, Bitmap bitmap, String mPictureFileName) {
-        if (bitmap != null) {
-            imageView1.setImageBitmap(bitmap);
-            button1.setText("重新上传");
-            String picturePath = BitmapUtil.writeBimapToFile(bitmap, mPictureFileName, mCacheFileName, mPictureQuity);
-            if (mTempRequestCode == SystemCapture || mTempRequestCode == SystemCapture * 2) {
-                mPictureFilePath = picturePath;
-            } else if (mTempRequestCode == SystemCapture2 || mTempRequestCode == SystemCapture2 * 2) {
-                mPictureFilePath2 = picturePath;
-            }
         }
     }
 

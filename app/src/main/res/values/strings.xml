@@ -34,6 +34,10 @@
 
     <string name="menue_to_address">出库客户列表</string>
     <string name="hello"><u>phone:0123456</u></string>
+
+
+
+    <string name="yb_cancel">取消</string>
 </resources>
 
 

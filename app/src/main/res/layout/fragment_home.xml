@@ -150,7 +150,7 @@
                         app:layout_marginBottomPercent="@string/block_marginBottomPercent"
                         app:layout_marginLeftPercent="@string/block_marginLeftPercent"
                         app:layout_marginRightPercent="@string/block_marginRightPercent"
-                        android:src="@drawable/ic_information"
+                        android:src="@drawable/lm_visit_client"
                         android:scaleType="fitXY"
                         />
                     <TextView

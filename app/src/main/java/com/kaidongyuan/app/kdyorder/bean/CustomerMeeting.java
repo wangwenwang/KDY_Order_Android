@@ -33,6 +33,7 @@ public class CustomerMeeting implements Parcelable {
     private String VIVID_DISPLAY_CBX;
     private String VIVID_DISPLAY_TEXT;
     private String VISIT_IDX;
+    private String ADDRESS_IDX;
     public CustomerMeeting() {
     }
 
@@ -64,6 +65,7 @@ public class CustomerMeeting implements Parcelable {
         VIVID_DISPLAY_CBX = in.readString();
         VIVID_DISPLAY_TEXT = in.readString();
         VISIT_IDX = in.readString();
+        ADDRESS_IDX = in.readString();
     }
 
     public static final Creator<CustomerMeeting> CREATOR = new Creator<CustomerMeeting>() {
@@ -296,6 +298,14 @@ public class CustomerMeeting implements Parcelable {
         this.VISIT_IDX = VISIT_IDX;
     }
 
+    public String getADDRESS_IDX(){
+        return ADDRESS_IDX;
+    }
+
+    public void setADDRESS_IDX(String ADDRESS_IDX) {
+        this.ADDRESS_IDX = ADDRESS_IDX;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -329,5 +339,6 @@ public class CustomerMeeting implements Parcelable {
         dest.writeString(VIVID_DISPLAY_CBX);
         dest.writeString(VIVID_DISPLAY_TEXT);
         dest.writeString(VISIT_IDX);
+        dest.writeString(ADDRESS_IDX);
     }
 }

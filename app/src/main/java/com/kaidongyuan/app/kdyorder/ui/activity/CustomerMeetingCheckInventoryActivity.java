@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -27,12 +28,16 @@ import com.kaidongyuan.app.kdyorder.widget.loadingdialog.MyLoadingDialog;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomerMeetingCheckInventoryActivity extends BaseActivity {
+public class CustomerMeetingCheckInventoryActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 网络请求时显示的 Dialog
      */
     private MyLoadingDialog mLoadingDialog;
+    /**
+     * 返回上一界面按钮
+     */
+    private ImageView mImageViewGoBack;
 
     // 备注
     private EditText remark;
@@ -44,6 +49,8 @@ public class CustomerMeetingCheckInventoryActivity extends BaseActivity {
         setContentView(R.layout.activity_customer_check_inventory);
 
         remark = (EditText) findViewById(R.id.check_mark);
+        mImageViewGoBack = (ImageView) this.findViewById(R.id.button_goback);
+        setListener();
     }
 
     public void confirmOnclick(View view) {
@@ -102,6 +109,7 @@ public class CustomerMeetingCheckInventoryActivity extends BaseActivity {
             }
             mLoadingDialog = null;
             HttpUtil.cancelRequest(mTagCheckInventory);
+            mImageViewGoBack = null;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -137,13 +145,36 @@ public class CustomerMeetingCheckInventoryActivity extends BaseActivity {
                 Intent intent = new Intent(this, CustomerMeetingRecomOrderActivity.class);
                 intent.putExtra("CustomerMeeting", customerM);
                 startActivity(intent);
-            }else {
+            } else {
 
                 ToastUtil.showToastBottom(String.valueOf(msg), Toast.LENGTH_SHORT);
             }
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
             ToastUtil.showToastBottom("服务器返回数据异常！", Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        try {
+            switch (v.getId()) {
+                case R.id.button_goback:
+                    this.finish();
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
+        }
+    }
+
+    private void setListener() {
+        try {
+            mImageViewGoBack.setOnClickListener(CustomerMeetingCheckInventoryActivity.this);
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
         }
     }
 }

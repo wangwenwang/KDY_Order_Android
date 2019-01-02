@@ -36,4 +36,17 @@
     </style>
 
 
+    <!--  分割线 -->
+    <style name="my_line">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">0.1px</item>
+        <item name="android:background">@color/line_color</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar"  parent="android:Theme.Holo.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
 </resources>

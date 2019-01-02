@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:gravity="center"
+    android:background="@drawable/dialog_background_normal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择生动化陈列："
+        android:textSize="@dimen/dialog_title_textsize"
+        android:textColor="@color/black"
+        />
+
+    <ListView
+        android:id="@+id/listView_chart_choice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_widthPercent="75%w"
+        android:layout_marginTop="5dp"
+        android:divider="@null"
+        android:background="@null"
+        android:scrollbars="none"
+        android:cacheColorHint="#00000000"
+        >
+    </ListView>
+
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_marginLeftPercent="8%w"
+        app:layout_marginRightPercent="8%w"
+        android:layout_marginTop="10dp"
+        android:text="取消"
+        android:textSize="@dimen/dialog_button_textsize"
+        android:textColor="@color/white"
+        android:background="@drawable/button_background_normal_selector"
+        />
+
+</com.zhy.android.percent.support.PercentLinearLayout>
+
+

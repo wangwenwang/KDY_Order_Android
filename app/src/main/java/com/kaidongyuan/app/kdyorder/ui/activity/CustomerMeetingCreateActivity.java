@@ -43,19 +43,19 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
      */
     private ImageView mImageViewGoBack;
     private Dialog mDialog;
-    private Button bt_dialog_update,bt_dialog_cancel;
+    private Button bt_dialog_update, bt_dialog_cancel;
     private EditText ed_customer_name;
     private TextView ed_customer_address;
     private EditText ed_address_person;
     private EditText ed_address_tel;
 
     private final int RequestAddContact = 1001;
-    private final int RequestAddressBelong=1008;
+    private final int RequestAddressBelong = 1008;
     /**
      *
      */
-    public NormalAddress pv,ct,ar,ru;
-    public double lat=1,lng=1;
+    public NormalAddress pv, ct, ar, ru;
+    public double lat = 1, lng = 1;
     private TextView tvPartyCode;
     private TextView tvPartyName;
     private TextView tvPartyClass;
@@ -104,26 +104,25 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
 
     private void initData() {
         mBiz = new CustomerMeetingCreateActivityBiz(this);
-        if (getIntent().hasExtra("CustomerMeeting")){
+        if (getIntent().hasExtra("CustomerMeeting")) {
             mBiz.setCustomerMeeting((CustomerMeeting) getIntent().getParcelableExtra("CustomerMeeting"));
             setData();
-        }else {
+        } else {
             ToastUtil.showToastBottom(MyApplication.getmRes().getString(R.string.no_data), Toast.LENGTH_SHORT);
             finish();
         }
-
     }
 
     private void setData() {
-        CustomerMeeting customerMeeting=mBiz.getCustomerMeeting();
+        CustomerMeeting customerMeeting = mBiz.getCustomerMeeting();
         tvPartyCode.setText(customerMeeting.getPARTY_NO());
-        tvPartyName .setText(customerMeeting.getPARTY_NAME());
-        tvPartyClass .setText(customerMeeting.getPARTY_LEVEL());
-        tvPartyMark .setText(customerMeeting.getPARTY_STATES());
-        tvPartyChannel .setText(customerMeeting.getCHANNEL());
-        tvPartyLine .setText(customerMeeting.getLINE());
-        tvWeeklyVisitFrequency .setText(customerMeeting.getWEEKLY_VISIT_FREQUENCY());
-        tvSingleStoreSales .setText(customerMeeting.getSINGLE_STORE_SALES());
+        tvPartyName.setText(customerMeeting.getPARTY_NAME());
+        tvPartyClass.setText(customerMeeting.getPARTY_LEVEL());
+        tvPartyMark.setText(customerMeeting.getPARTY_STATES());
+        tvPartyChannel.setText(customerMeeting.getCHANNEL());
+        tvPartyLine.setText(customerMeeting.getLINE());
+        tvWeeklyVisitFrequency.setText(customerMeeting.getWEEKLY_VISIT_FREQUENCY());
+        tvSingleStoreSales.setText(customerMeeting.getSINGLE_STORE_SALES());
         tvContactName.setText(customerMeeting.getCONTACTS());
         tvContactTel.setText(customerMeeting.getCONTACTS_TEL());
         tvPartyAddress.setText(customerMeeting.getPARTY_ADDRESS());
@@ -135,13 +134,14 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
      * @param message 要显示的消息
      */
     public void updataError(String message) {
-        if (mLoadingDialog!=null)mLoadingDialog.dismiss();
+        if (mLoadingDialog != null) mLoadingDialog.dismiss();
         try {
             ToastUtil.showToastBottom(String.valueOf(message), Toast.LENGTH_SHORT);
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }
     }
+
     private void setTop() {
         //版本4.4以上设置状态栏透明，界面布满整个界面
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -187,9 +187,6 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
     }
 
 
-
-
-
     /**
      * 网络请求是显示 Dilaog
      */
@@ -207,11 +204,12 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
 
     /**
      * 确认客户信息成功
+     *
      * @param
      */
     public void getPartyVisitInsertSuccess() {
         try {
-            if (mLoadingDialog!=null)mLoadingDialog.dismiss();
+            if (mLoadingDialog != null) mLoadingDialog.dismiss();
             Intent intent = new Intent(this, ArrivedStoreActivity.class);
             intent.putExtra("CustomerMeeting", mBiz.getCustomerMeeting());
             startActivity(intent);
@@ -222,11 +220,12 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
 
     /**
      * 修改客户信息成功
+     *
      * @param
      */
     public void getVisitConfirmCustomerSuccess(String msg) {
         try {
-            if (mLoadingDialog!=null)mLoadingDialog.dismiss();
+            if (mLoadingDialog != null) mLoadingDialog.dismiss();
 
             ToastUtil.showToastBottom(msg, Toast.LENGTH_SHORT);
             setData();
@@ -242,7 +241,7 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
      */
     public void updataPartyError(String message) {
         try {
-            if (mLoadingDialog!=null)mLoadingDialog.dismiss();
+            if (mLoadingDialog != null) mLoadingDialog.dismiss();
             ToastUtil.showToastBottom(String.valueOf(message), Toast.LENGTH_SHORT);
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
@@ -251,11 +250,11 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
 
     private void showmEditDialog() {
 
-        if (mDialog==null){
-            mDialog=new Dialog(CustomerMeetingCreateActivity.this);
+        if (mDialog == null) {
+            mDialog = new Dialog(CustomerMeetingCreateActivity.this);
         }
         mDialog.setCanceledOnTouchOutside(false);
-        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);//这句话，就是决定上面的那个黑框，也就是dialog的title。
+//        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);//这句话，就是决定上面的那个黑框，也就是dialog的title。
         mDialog.show();
         Window window = mDialog.getWindow();
         window.setContentView(R.layout.dialog_edit_customerinfo);
@@ -264,7 +263,7 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
 //        lp.width = DensityUtil.dip2px(DensityUtil.getWidth_dp()-20);//宽高可设置具体大小
 //        lp.height = LinearLayout.LayoutParams.WRAP_CONTENT;
 //        mDialog.getWindow().setAttributes(lp);
-        ed_customer_name =(EditText) window.findViewById(R.id.ed_customer_name);
+        ed_customer_name = (EditText) window.findViewById(R.id.ed_customer_name);
         ed_customer_address = (EditText) window.findViewById(R.id.ed_customer_address);
         ed_address_person = (EditText) window.findViewById(R.id.ed_ADDRESS_PERSON);
         ed_address_tel = (EditText) window.findViewById(R.id.ed_ADDRESS_TEL);
@@ -272,9 +271,9 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
         ed_customer_address.setText(mBiz.getCustomerMeeting().getPARTY_ADDRESS());
         ed_address_person.setText(mBiz.getCustomerMeeting().getCONTACTS());
         ed_address_tel.setText(mBiz.getCustomerMeeting().getCONTACTS_TEL());
-        bt_dialog_update= (Button) window.findViewById(R.id.bt_dialog_update);
+        bt_dialog_update = (Button) window.findViewById(R.id.bt_dialog_update);
         bt_dialog_update.setOnClickListener(this);
-        bt_dialog_cancel= (Button) window.findViewById(R.id.bt_dialog_cancel);
+        bt_dialog_cancel = (Button) window.findViewById(R.id.bt_dialog_cancel);
         bt_dialog_cancel.setOnClickListener(this);
     }
 
@@ -287,25 +286,25 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
                     this.finish();
                     break;
                 case R.id.button_edit:
-                    if (mBiz.getCustomerMeeting()!=null){
+                    if (mBiz.getCustomerMeeting() != null) {
                         showmEditDialog();
                     }
                     break;
                 case R.id.button_updata:
-                   if (mBiz.GetPartyVisitInsert()){
-                       showLoadingDialog();
-                   }
+                    if (mBiz.GetPartyVisitInsert()) {
+                        showLoadingDialog();
+                    }
                     break;
                 case R.id.bt_dialog_update:
-                    if (mDialog!=null)mDialog.dismiss();
+                    if (mDialog != null) mDialog.dismiss();
 
-                   if (mBiz.GetVisitConfirmCustomer(ed_customer_name.getText().toString(),ed_customer_address.getText().toString(),
-                           ed_address_person.getText().toString(),ed_address_tel.getText().toString())){
-                       showLoadingDialog();
-                   }
+                    if (mBiz.GetVisitConfirmCustomer(ed_customer_name.getText().toString(), ed_customer_address.getText().toString(),
+                            ed_address_person.getText().toString(), ed_address_tel.getText().toString())) {
+                        showLoadingDialog();
+                    }
                     break;
                 case R.id.bt_dialog_cancel:
-                    if (mDialog!=null)mDialog.dismiss();
+                    if (mDialog != null) mDialog.dismiss();
                     break;
                 default:
                     break;
@@ -314,8 +313,6 @@ public class CustomerMeetingCreateActivity extends BaseActivity implements View.
             ExceptionUtil.handlerException(e);
         }
     }
-
-
 }
 
 
