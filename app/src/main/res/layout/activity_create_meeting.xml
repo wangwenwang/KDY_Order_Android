@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.android.percent.support.PercentLinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,8 +12,7 @@
         android:id="@+id/topview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/title_background"
-        />
+        android:background="@color/title_background" />
 
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:id="@+id/percentRL_title"
@@ -298,63 +296,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:textSize="@dimen/text_size_normal"
-        android:hint="填入备注信息~"
         android:gravity="start"
-        android:minLines="3"/>
+        android:hint="请输入备注信息/选填"
+        android:minLines="3"
+        android:textSize="@dimen/text_size_normal" />
 
-    <LinearLayout
+
+    <com.zhy.android.percent.support.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/button_edit"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_background_normal_selector"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
+            android:layout_height="@dimen/visit_button_height"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="@dimen/visit_button_marginbottom"
+            android:background="@drawable/lm_visit_button"
             android:text="修改客户信息"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_normal" />
+            android:textSize="@dimen/visit_button_size"
+            app:layout_marginLeftPercent="4.2%w"
+            app:layout_widthPercent="41%w" />
 
         <Button
             android:id="@+id/button_updata"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_background_blue"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
+            android:layout_height="@dimen/visit_button_height"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/visit_button_marginbottom"
+            android:background="@drawable/lm_visit_button"
             android:text="确认"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_normal" />
+            android:textSize="@dimen/visit_button_size"
+            app:layout_marginRightPercent="4.2%w"
+            app:layout_widthPercent="41%w" />
+    </com.zhy.android.percent.support.PercentFrameLayout>
 
-    </LinearLayout>
-
-    <View
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
 </com.zhy.android.percent.support.PercentLinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

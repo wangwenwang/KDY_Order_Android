@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- layout background -->
+    <item>
+        <!-- show rectangle area -->
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:centerColor="#F23030"
+                android:centerX="50%"
+                android:centerY="0"
+                android:endColor="#F23030"
+                android:startColor="#F23030" />
+
+            <corners
+                android:bottomLeftRadius="21.5dp"
+                android:bottomRightRadius="21.5dp"
+                android:topLeftRadius="21.5dp"
+                android:topRightRadius="21.5dp" />
+        </shape>
+    </item>
+    <!-- layout foreground -->
+    <!--<item-->
+        <!--android:bottom="4dp"-->
+        <!--android:left="3dp"-->
+        <!--android:right="3dp"-->
+        <!--android:top="3dp">-->
+        <!--&lt;!&ndash; show rectangle area &ndash;&gt;-->
+        <!--<shape android:shape="rectangle">-->
+            <!--<gradient-->
+                <!--android:angle="270"-->
+                <!--android:endColor="#FF4040"-->
+                <!--android:startColor="#FF4040" />-->
+
+            <!--<corners-->
+                <!--android:bottomLeftRadius="21dp"-->
+                <!--android:bottomRightRadius="21dp"-->
+                <!--android:topLeftRadius="21dp"-->
+                <!--android:topRightRadius="21dp" />-->
+        <!--</shape>-->
+    <!--</item>-->
+</layer-list>

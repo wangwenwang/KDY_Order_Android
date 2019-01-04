@@ -239,6 +239,7 @@ public class CustomerMeetingRecomOrderActivity extends BaseActivity implements V
     private void setListener() {
         try {
             mImageViewGoBack.setOnClickListener((View.OnClickListener) this);
+            mOutputOrderListView.setOnItemClickListener(this);
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }

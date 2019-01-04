@@ -62,7 +62,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/gray_holo_light"
                 android:padding="10dp"
-                android:text="进店" />
+                android:text="进店"
+                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,9 +94,7 @@
                 <TextView
                     android:id="@+id/ACTUAL_VISITING_ADDRESS"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:textSize="@dimen/text_size_small" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <TextView
@@ -103,7 +102,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/gray_holo_light"
                 android:padding="10dp"
-                android:text="确认客户资料信息" />
+                android:text="确认客户资料信息"
+                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,9 +130,7 @@
                         <TextView
                             android:id="@+id/PARTY_NO"
                             android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="2dp"
-                            android:textSize="@dimen/text_size_small" />
+                            android:layout_height="20dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -148,9 +146,7 @@
                         <TextView
                             android:id="@+id/PARTY_NAME"
                             android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="2dp"
-                            android:textSize="@dimen/text_size_small" />
+                            android:layout_height="20dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -166,9 +162,7 @@
                         <TextView
                             android:id="@+id/CONTACTS"
                             android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="2dp"
-                            android:textSize="@dimen/text_size_small" />
+                            android:layout_height="20dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -184,9 +178,7 @@
                         <TextView
                             android:id="@+id/CONTACTS_TEL"
                             android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="2dp"
-                            android:textSize="@dimen/text_size_small" />
+                            android:layout_height="20dp" />
 
                     </LinearLayout>
 
@@ -199,7 +191,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/gray_holo_light"
                 android:padding="10dp"
-                android:text="检查库存" />
+                android:text="检查库存"
+                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -208,29 +201,20 @@
                 android:padding="10dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:text="备注：" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="备注：" />
-
-                        <TextView
-                            android:id="@+id/CHECK_INVENTORY"
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="2dp"
-                            android:textSize="@dimen/text_size_small" />
-
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/CHECK_INVENTORY"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
 
                 </LinearLayout>
 
@@ -241,13 +225,13 @@
                 android:layout_height="wrap_content"
                 android:background="@color/gray_holo_light"
                 android:padding="10dp"
-                android:text="建议订单" />
+                android:text="建议订单"
+                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="vertical">
 
                 <com.kaidongyuan.app.kdyorder.widget.xlistview.XListView
                     android:id="@+id/lv_outputorder_list"
@@ -272,24 +256,24 @@
                     android:textSize="@dimen/no_data_textview_textsize"
                     android:visibility="gone" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginLeft="10dp"
+                        android:text="备注：" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="备注：" />
+                    <TextView
+                        android:id="@+id/RECOMMENDED_ORDER"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
 
-                        <TextView
-                            android:id="@+id/RECOMMENDED_ORDER"
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="2dp"
-                            android:textSize="@dimen/text_size_small" />
-
-                    </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -298,7 +282,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/gray_holo_light"
                 android:padding="10dp"
-                android:text="生动化陈列" />
+                android:text="生动化陈列"
+                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -333,9 +318,7 @@
                         <TextView
                             android:id="@+id/VIVID_DISPLAY_TEXT"
                             android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="2dp"
-                            android:textSize="@dimen/text_size_small" />
+                            android:layout_height="20dp" />
 
                     </LinearLayout>
 
@@ -348,7 +331,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/gray_holo_light"
                 android:padding="10dp"
-                android:text="拜访状态" />
+                android:text="拜访状态"
+                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -375,32 +359,40 @@
                         <TextView
                             android:id="@+id/VISIT_STATES"
                             android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="2dp"
-                            android:textSize="@dimen/text_size_small" />
+                            android:layout_height="20dp" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
+
+            <View
+                android:id="@+id/button_leave_shop_space"
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/button_leave_shop"
+    <com.zhy.android.percent.support.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="500dp"
-        android:background="@drawable/button_background_normal_selector"
-        android:onClick="confirmOnclick"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:text="确认离店"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_bigger" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_leave_shop"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/visit_button_height"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="@dimen/visit_button_marginbottom"
+            android:background="@drawable/lm_visit_button"
+            android:onClick="confirmOnclick"
+            android:text="确认离店"
+            android:textColor="@color/white"
+            android:textSize="@dimen/visit_button_size"
+            app:layout_widthPercent="41%w" />
+    </com.zhy.android.percent.support.PercentFrameLayout>
+
 
 </com.zhy.android.percent.support.PercentRelativeLayout>

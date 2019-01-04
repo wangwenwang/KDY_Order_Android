@@ -61,14 +61,15 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:background="@color/gray_holo_light">
+            android:background="@color/gray_holo_light"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
                 android:text="生动化陈列:" />
 
             <TextView
@@ -81,8 +82,8 @@
             <ImageView
                 android:layout_width="50px"
                 android:layout_height="50px"
-                android:scaleType="fitEnd"
                 android:layout_marginRight="10dp"
+                android:scaleType="fitEnd"
                 android:src="@drawable/more_max" />
         </LinearLayout>
 
@@ -97,9 +98,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -108,35 +109,41 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:text="备注:"
-                android:textColor="@color/red"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/display_mark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/lm_visit_edit_text"
                 android:gravity="start"
                 android:hint="请输入备注/选填"
-                android:lines="3" />
+                android:lines="5"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-
-    <Button
-        android:id="@+id/button_confirm"
+    <com.zhy.android.percent.support.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="520dp"
-        android:background="@drawable/button_background_normal_selector"
-        android:onClick="confirmOnclick"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:text="确认"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_bigger" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="@dimen/visit_button_height"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="@dimen/visit_button_marginbottom"
+            android:background="@drawable/lm_visit_button"
+            android:onClick="confirmOnclick"
+            android:text="确认"
+            android:textColor="@color/white"
+            android:textSize="@dimen/visit_button_size"
+            app:layout_widthPercent="41%w" />
+    </com.zhy.android.percent.support.PercentFrameLayout>
 
 </com.zhy.android.percent.support.PercentRelativeLayout>

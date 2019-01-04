@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/listview_item_paddingleft"
-    android:layout_marginRight="@dimen/listview_item_paddingright"
+    android:paddingLeft="@dimen/listview_item_paddingleft"
+    android:paddingRight="@dimen/listview_item_paddingright"
     android:background="@drawable/item_listview_shap_selector"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="7dp"
         android:orientation="horizontal"
        >
 
@@ -104,6 +104,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
         <TextView

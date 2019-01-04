@@ -90,7 +90,14 @@ public class OutputSimpleOrderListAdapter extends BaseAdapter {
             holder.tv_OUTPUT_WORKFLOW.setText("已确认");
             holder.tv_OUTPUT_WORKFLOW.setTextColor(mContext.getResources().getColor(R.color.dark_green));
         }
-        holder.tv_OUTPUT_QTY.setText(outPutSimpleOrder.getOUTPUT_QTY());
+        try {
+            String OUTPUT_QTYS = outPutSimpleOrder.getOUTPUT_QTY();
+            float OUTPUT_QTYF = Float.parseFloat(OUTPUT_QTYS);
+            OUTPUT_QTYS = String.format("%.1f", OUTPUT_QTYF);
+            holder.tv_OUTPUT_QTY.setText(OUTPUT_QTYS);
+        }catch (Exception e){
+            holder.tv_OUTPUT_QTY.setText(outPutSimpleOrder.getOUTPUT_QTY());
+        }
         return convertView;
     }
 

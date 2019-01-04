@@ -51,7 +51,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="208dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/percentRL_title"
@@ -61,21 +61,25 @@
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="0dp"
                 android:layout_marginTop="80dp"
                 android:text="建议订单:"
-                android:textColor="@color/red"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/recommend_mark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="80dp"
+                android:background="@drawable/lm_visit_edit_text"
                 android:gravity="start"
                 android:hint="请输入备注信息/选填"
-                android:lines="3" />
+                android:lines="5"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,7 +88,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/percentRL_title"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:background="@null"
             android:orientation="vertical">
 
@@ -93,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/gray_holo_light"
                 android:padding="10dp"
+                android:textSize="16sp"
                 android:text="已建议订单" />
 
             <com.kaidongyuan.app.kdyorder.widget.xlistview.XListView
@@ -123,42 +128,38 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
+
+    <com.zhy.android.percent.support.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <Button
-            android:id="@+id/button_makeOrder"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_background_normal_selector"
+            android:layout_height="@dimen/visit_button_height"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="@dimen/visit_button_marginbottom"
+            android:background="@drawable/lm_visit_button"
             android:onClick="makeOrderOnclick"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
             android:text="帮门店下单"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_normal" />
+            android:textSize="@dimen/visit_button_size"
+            app:layout_marginLeftPercent="4.2%w"
+            app:layout_widthPercent="41%w" />
 
         <Button
-            android:id="@+id/button_next"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_background_blue"
+            android:layout_height="@dimen/visit_button_height"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/visit_button_marginbottom"
+            android:background="@drawable/lm_visit_button"
             android:onClick="confirmOnclick"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
             android:text="下一步"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_normal" />
-    </LinearLayout>
+            android:textSize="@dimen/visit_button_size"
+            app:layout_marginRightPercent="4.2%w"
+            app:layout_widthPercent="41%w" />
+    </com.zhy.android.percent.support.PercentFrameLayout>
 
 </com.zhy.android.percent.support.PercentRelativeLayout>

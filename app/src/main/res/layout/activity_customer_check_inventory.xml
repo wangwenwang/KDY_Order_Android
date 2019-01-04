@@ -57,37 +57,46 @@
         <TextView
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="80dp"
             android:text="检查库存:"
-            android:textColor="@color/red"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <EditText
             android:id="@+id/check_mark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
             android:layout_marginTop="80dp"
+            android:background="@drawable/lm_visit_edit_text"
             android:gravity="start"
             android:hint="请检查库存"
-            android:lines="3" />
+            android:lines="7"
+            android:paddingLeft="8dp"
+            android:paddingTop="8dp" />
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/button_confirm"
+    <com.zhy.android.percent.support.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="520dp"
-        android:background="@drawable/button_background_normal_selector"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:text="确认"
-        android:textColor="@color/white"
-        android:onClick="confirmOnclick"
-        android:textSize="@dimen/text_size_bigger" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_confirm"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/visit_button_height"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="@dimen/visit_button_marginbottom"
+            android:background="@drawable/lm_visit_button"
+            android:onClick="confirmOnclick"
+            android:text="确认"
+            android:textColor="@color/white"
+            android:textSize="@dimen/visit_button_size"
+            app:layout_widthPercent="41%w" />
+    </com.zhy.android.percent.support.PercentFrameLayout>
 
 </com.zhy.android.percent.support.PercentRelativeLayout>

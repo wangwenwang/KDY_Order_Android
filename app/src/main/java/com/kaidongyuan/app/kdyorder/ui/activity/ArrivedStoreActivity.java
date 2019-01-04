@@ -57,7 +57,7 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
     private MyLoadingDialog mLoadingDialog;
 
     private final String Tag_Visit = "Tag_Visit";//客户拜访TAG
-    private Button cancelbutton, submitbutton;
+    private Button submitbutton;
     /**
      * 　签名和照片文件宽度 单位（px）
      */
@@ -105,7 +105,7 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
             // 定位码
             int errorCode = location.getLocType();
 
-            currAddress.setText("当前位置：" + strAddress);
+            currAddress.setText(strAddress);
         }
     }
 
@@ -150,8 +150,6 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
     private void initview() {
 
         mImageViewGoBack = (ImageView) this.findViewById(R.id.button_goback);
-        cancelbutton = (Button) findViewById(R.id.button_cancel);
-        cancelbutton.setOnClickListener(this);
         submitbutton = (Button) findViewById(R.id.button_submit);
         submitbutton.setOnClickListener(this);
         currAddress = (TextView) findViewById(R.id.tv_currAddress);
@@ -222,9 +220,6 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.button_goback:
                 this.finish();
-                break;
-            case R.id.button_cancel:
-                finish();
                 break;
             case R.id.button_submit:
                 nextOnclick();

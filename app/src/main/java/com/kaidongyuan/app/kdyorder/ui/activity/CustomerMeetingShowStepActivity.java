@@ -149,12 +149,15 @@ public class CustomerMeetingShowStepActivity extends BaseActivity implements Vie
             VIVID_DISPLAY_TEXT = (TextView) this.findViewById(R.id.VIVID_DISPLAY_TEXT);
             VISIT_STATES = (TextView) this.findViewById(R.id.VISIT_STATES);
             Button button_leave_shop = (Button) this.findViewById(R.id.button_leave_shop);
+            View button_leave_shop_space = (View) this.findViewById(R.id.button_leave_shop_space);
             if (isShowStep) {
                 textView.setText("查看拜访");
                 button_leave_shop.setVisibility(View.GONE);
+                button_leave_shop_space.setVisibility(View.GONE);
             } else {
                 textView.setText("离店");
                 button_leave_shop.setVisibility(View.VISIBLE);
+                button_leave_shop_space.setVisibility(View.VISIBLE);
             }
             // 展示订单
 //            this.mTextviewNodata = (TextView) this.findViewById(R.id.textview_nodata);
