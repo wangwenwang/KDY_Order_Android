@@ -39,6 +39,7 @@ import com.kaidongyuan.app.kdyorder.util.CheckStringEmptyUtil;
 import com.kaidongyuan.app.kdyorder.util.DensityUtil;
 import com.kaidongyuan.app.kdyorder.util.ExceptionUtil;
 import com.kaidongyuan.app.kdyorder.util.OrderUtil;
+import com.kaidongyuan.app.kdyorder.util.StringUtils;
 import com.kaidongyuan.app.kdyorder.util.ToastUtil;
 import com.kaidongyuan.app.kdyorder.util.logger.Logger;
 import com.kaidongyuan.app.kdyorder.widget.loadingdialog.MyLoadingDialog;
@@ -120,6 +121,10 @@ public class MakeOrderActivity extends BaseActivity implements View.OnClickListe
      * 客户地址联系人电话
      */
     private String mOrderAddressContactTel;
+    /**
+     * 客户拜访ID
+     */
+    private String mOrderVisitID;
     /**
      * 侧滑控件
      */
@@ -348,6 +353,9 @@ public class MakeOrderActivity extends BaseActivity implements View.OnClickListe
             }
             if (intent.hasExtra(EXTRAConstants.ORDER_ADDRESS_ContactTel)){
                 mOrderAddressContactTel=intent.getStringExtra(EXTRAConstants.ORDER_ADDRESS_ContactTel);
+            }
+            if (intent.hasExtra(EXTRAConstants.ORDER_VISIT_ID)){
+                mOrderVisitID=intent.getStringExtra(EXTRAConstants.ORDER_VISIT_ID);
             }
             mHandler = new InnerHandler(this);
         } catch (Exception e) {
@@ -604,6 +612,21 @@ public class MakeOrderActivity extends BaseActivity implements View.OnClickListe
                 ToastUtil.showToastBottom("至少选择一种产品！", Toast.LENGTH_SHORT);
                 return;
             }
+
+
+            // 当折算率不为0或1时，产品数量必须是折算率的位数
+            for (int i = 0; i < mBiz.getChoiceProducts().size(); i++) {
+                Product m =  mBiz.getChoiceProducts().get(i);
+                if(m.getBASE_RATE() != 1 && m.getBASE_RATE() != 0) {
+                    if((m.getCHOICED_SIZE() % m.getBASE_RATE()) != 0) {
+
+                        ToastUtil.showToastBottom("产品：" + StringUtils.getProductName(m.getPRODUCT_NAME()) + "\n数量必须要" + m.getBASE_RATE() + "的倍数", Toast.LENGTH_SHORT);
+                        return;
+                    }
+                }
+            }
+
+
             mBiz.setProdcutCurrentPrice();
             Intent intent = new Intent(this, OrderConfirmActivity.class);
             intent.putParcelableArrayListExtra(EXTRAConstants.CHOICED_PRODUCT_LIST, (ArrayList<? extends Parcelable>) choicedProducts);
@@ -611,6 +634,7 @@ public class MakeOrderActivity extends BaseActivity implements View.OnClickListe
             intent.putExtra(EXTRAConstants.ORDER_PARTY_ADDRESS_IDX, mOrderAddressIdx);
             intent.putExtra(EXTRAConstants.ORDER_PAYMENT_TYPE, mBiz.getCurrentPayType().getKey());
             intent.putExtra(EXTRAConstants.ORDER_PARTY_ID, mOrderPartyId);
+            intent.putExtra(EXTRAConstants.ORDER_VISIT_ID,mOrderVisitID);
             startActivity(intent);
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);

@@ -70,6 +70,9 @@ public class PromotionOrder implements java.io.Serializable {
     public String HAVE_GIFT;
     public List<OrderGift> GiftClasses;
 
+    // 客户拜访ID 添加者 王文望 20190128
+    public String VISIT_IDX;
+
 }
 
 

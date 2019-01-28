@@ -307,6 +307,10 @@ public class URLCostant {
     public static final String VividDisplayCBX=BASE_URL+"VividDisplayCBX";
     // 根据客户地址id，获取上级地址id
     public static final String GetFatherAddress=BASE_URL+"GetFatherAddress";
+    // 获取经销商客户列表
+    public static final String GetFirstPartyList=BASE_URL+"GetFirstPartyList";
+    // 根据业务代码，获取客户编号
+    public static final String ObtainPartyCode=BASE_URL+"ObtainPartyCode";
 }
 
 

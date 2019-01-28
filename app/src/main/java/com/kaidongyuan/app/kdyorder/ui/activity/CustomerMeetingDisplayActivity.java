@@ -181,6 +181,10 @@ public class CustomerMeetingDisplayActivity extends BaseActivity implements View
             ToastUtil.showToastBottom(String.valueOf("请选择生成化陈列类型"), Toast.LENGTH_SHORT);
             return;
         }
+        if(selectList.size() <= 0) {
+            ToastUtil.showToastBottom(String.valueOf("请拍照片"), Toast.LENGTH_SHORT);
+            return;
+        }
         showLoadingDialog();
 
         String image1 = "";

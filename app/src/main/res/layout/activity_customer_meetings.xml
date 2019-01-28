@@ -59,6 +59,39 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <LinearLayout
+            android:id="@+id/ll_meeting_first_party"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:background="@color/gray_holo_light">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="供货商名称:"
+                android:layout_marginLeft="15dp"
+                android:textSize="@dimen/text_size_normal"
+                />
+            <TextView
+                android:id="@+id/tv_meeting_first_party"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无数据"
+                android:textSize="@dimen/text_size_normal"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/more_black"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="3dp">
+        <LinearLayout
             android:id="@+id/ll_meeting_type"
             android:layout_width="0dp"
             android:layout_weight="1"

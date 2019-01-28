@@ -69,6 +69,7 @@ public class ArrivedStoreActivityBiz {
                     params.put("PictureFile2", strpicture2);
                     params.put("strAddress", strAddress);
                     params.put("strLicense", "");
+                    Log.d("LM", "GetVisitEnterShop|参数: " + params);
                     return params;
                 }
             };

@@ -1,6 +1,9 @@
 package com.kaidongyuan.app.kdyorder.model;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -73,158 +76,11 @@ public class CustomerCreateActivityBiz {
     private final String mTagGetPartyVisitChannel="mTagGetPartyVisitChannel";
     private final String mTagAddParty="mTagAddParty";
     private final String mTagAddPartyAddress="mTagAddPartyAddress";
+    private final String mTagObtainPartyCode="mTagObtainPartyCode";
     public CustomerCreateActivityBiz(CustomerCreateActivity activity) {
         this.mActivity = activity;
         meetingLines=new ArrayList<>();
         this.mCustomerList = new ArrayList<>();
-    }
-
-    /**
-     * 获取客户列表
-     *
-     * @return 是否成功发送请求
-     */
-    public boolean getCustomerData() {
-        try {
-            StringRequest request = new StringRequest(Request.Method.POST, URLCostant.GET_PARTY_LIST, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Logger.w(this.getClass() + "getCustomerData.Success:" + response);
-                    getCustomerDataResponseSuccess(response);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Logger.w(this.getClass() + "getCustomerData.VolleyError:" + error.toString());
-                    if (NetworkUtil.isNetworkAvailable()) {
-                        mActivity.getCustomerDataError("获取客户列表失败!");
-                    } else {
-                        mActivity.getCustomerDataError("获取客户列表失败!" + MyApplication.getmRes().getString(R.string.please_check_net));
-                    }
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("strUserId", MyApplication.getInstance().getUser().getIDX());
-                    params.put("strBusinessId", MyApplication.getInstance().getBusiness().getBUSINESS_IDX());
-                    params.put("strLicense", "");
-                    return params;
-                }
-            };
-            request.setTag(mTagGetCustomerList);
-            request.setRetryPolicy(new DefaultRetryPolicy(
-                    DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-            HttpUtil.getRequestQueue().add(request);
-            return true;
-        } catch (Exception e) {
-            ExceptionUtil.handlerException(e);
-            return false;
-        }
-    }
-
-    /**
-     * 网络请求成功返回数据
-     * @param response 返回的数据
-     */
-    private void getCustomerDataResponseSuccess(String response) {
-        try {
-            JSONObject object = JSON.parseObject(response);
-            int type = object.getInteger("type");
-            if (type == 1) {//获取数据成功
-                mTotalCustomerList = JSON.parseArray(object.getString("result"), Party.class);
-                mCustomerList = mTotalCustomerList;
-                mActivity.getCustomerDataSuccess();
-            } else {
-                mActivity.getCustomerDataError(object.getString("msg"));
-            }
-        } catch (Exception e) {
-            ExceptionUtil.handlerException(e);
-            mActivity.getCustomerDataError("获取客户列表失败!");
-        }
-    }
-
-    /**
-     * 获取客户列表
-     * @return 客户列表
-     */
-    public List<Party> getmCustomerList() {
-        return mCustomerList;
-    }
-
-    /**
-     * 获取客户地址
-     *
-     * @param positionInPartysListView 在客户 ListView 中的 Position
-     * @return 发送请求是否成功
-     */
-    public boolean getPartygetAddressInfo(final int positionInPartysListView) {
-        try {
-            StringRequest request = new StringRequest(Request.Method.POST, URLCostant.GET_ADDRESS, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Logger.w(this.getClass() + "getPartygetAddressInfo.Success:" + response);
-                    getCustomerAddressResponseSuccess(response);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Logger.w(this.getClass() + "getPartygetAddressInfo.VolleyError:" + error.toString());
-                    if (NetworkUtil.isNetworkAvailable()) {
-                        mActivity.getCustomerAdressDataError("获取客户地址失败!");
-                    } else {
-                        mActivity.getCustomerAdressDataError("获取客户地址失败!" + MyApplication.getmRes().getString(R.string.please_check_net));
-                    }
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    mSelectedParty = mCustomerList.get(positionInPartysListView);
-                    Map<String, String> params = new HashMap<>();
-                    params.put("strUserId", MyApplication.getInstance().getUser().getIDX());
-                    params.put("strPartyId", mSelectedParty.getIDX());
-                    params.put("strLicense", "");
-                    return params;
-                }
-            };
-            request.setTag(mTagGetCustomerAddressInfo);
-            request.setRetryPolicy(new DefaultRetryPolicy(
-                    DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-            HttpUtil.getRequestQueue().add(request);
-            return true;
-        } catch (Exception e) {
-            ExceptionUtil.handlerException(e);
-            return false;
-        }
-    }
-
-    /**
-     * 发送获取用户地址请求成功返回数据
-     *
-     * @param response 返回的消息
-     */
-    private void getCustomerAddressResponseSuccess(String response) {
-        try {
-            JSONObject object = JSON.parseObject(response);
-            int type = object.getInteger("type");
-            if (type == 1) {
-                mCustomerAddressList = JSON.parseArray(object.getString("result"), Address.class);
-                if (mCustomerAddressList.size() < 1) {
-                    mActivity.getCustomerAdressDataError("没有获取到客户有效地址，请联系供应商！");
-                } else {
-                    mActivity.getCustomerAdressDataSuccess();
-                }
-            } else {
-                mActivity.getCustomerAdressDataError("获取客户地址失败!" + object.getString("msg"));
-            }
-        } catch (Exception e) {
-            ExceptionUtil.handlerException(e);
-            mActivity.getCustomerAdressDataError("获取客户地址失败!");
-        }
     }
 
     /**
@@ -284,8 +140,6 @@ public class CustomerCreateActivityBiz {
             ExceptionUtil.handlerException(e);
             return false;
         }
-
-
     }
 
     /**
@@ -498,6 +352,7 @@ public class CustomerCreateActivityBiz {
                     params.put("strLINE",mActivity.linesParmas);
                     params.put("strCHANNEL",mActivity.strChannel);
                     params.put("strLicense", "");
+                    Log.d("LM", "接口AddParty|参数: " + params);
                     return params;
                 }
             };
@@ -550,10 +405,11 @@ public class CustomerCreateActivityBiz {
                     params.put("CONTACT_PERSON",mActivity.edContactPerson.getText().toString().trim());
                     params.put("CONTACT_TEL",mActivity.edContactTel.getText().toString().trim());
                     params.put("ADDRESS_INFO",mActivity.pv.getITEM_NAME()+mActivity.ct.getITEM_NAME()+mActivity.ar.getITEM_NAME()+mActivity.ru.getITEM_NAME()+mActivity.edAddressDetail.getText().toString());
-                    params.put("strFatherPartyIDX",mActivity.fatherPartyAddress.getIDX());
+                    params.put("strFatherPartyIDX",mActivity.fatherPartyAddressID);
                     params.put("LONGITUDE",mActivity.longitude);
                     params.put("LATITUDE",mActivity.latitude);
                     params.put("strLicense", "");
+                    Log.d("LM", "接口AddAddress|参数: " + params);
                     return params;
                 }
             };
@@ -567,6 +423,77 @@ public class CustomerCreateActivityBiz {
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
             return false;
+        }
+    }
+
+    /**
+     * 根据业务代码，获取客户编号
+     */
+    public boolean ObtainPartyCode(final String strBusinessCode, final String strBusinessIDX){
+        try {
+            StringRequest request = new StringRequest(Request.Method.POST, URLCostant.ObtainPartyCode, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Logger.w(CustomerCreateActivityBiz.this.getClass() + ".ObtainPartyCode:" + response);
+                    ObtainPartyCodeSuccess(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Logger.w(CustomerCreateActivityBiz.this.getClass() + ".ObtainPartyCode:" + error.toString());
+                    if (NetworkUtil.isNetworkAvailable()) {
+                        mActivity.updataPartyError("无推荐客户代码");
+                    } else {
+                        mActivity.updataPartyError("请检查网络是否正常连接！");
+                    }
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("strBusinessCode",strBusinessCode);
+                    params.put("strBusinessIDX",strBusinessIDX);
+                    params.put("strLicense", "");
+                    Log.d("LM", "ObtainPartyCode|参数: " + params);
+                    return params;
+                }
+            };
+            request.setTag(mTagObtainPartyCode);
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            HttpUtil.getRequestQueue().add(request);
+            return true;
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
+            return false;
+        }
+    }
+
+    /**
+     * 处理网络请求返回客户地址成功
+     * @param response 返回的数据
+     */
+    private void ObtainPartyCodeSuccess(String response) {
+        try {
+            JSONObject object = JSON.parseObject(response);
+            int type = object.getInteger("type");
+            if (type == 1) {
+
+                JSONArray list = object.getJSONArray("result");
+                if (list.size() > 0) {
+
+                    JSONObject o = (JSONObject) list.get(0);
+                    mActivity.ObtainPartyCodeSuccess(o.getString("PartyCode"));
+                }
+
+            } else {
+                mActivity.updataPartyError(object.getString("msg"));
+            }
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
+            mActivity.updataPartyError("推荐客户代码失败!");
         }
     }
 

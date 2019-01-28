@@ -64,6 +64,11 @@ public class EXTRAConstants {
      * 从下单 Fragment 跳转到下单界面的用户 收货联系人电话
      */
     public static final String ORDER_ADDRESS_ContactTel = "ORDER_ADDRESS_ContactTel";
+
+    /**
+     * 从下单 Fragment 跳转到下单界面的用户 拜访ID，添加都王文望 20190128
+     */
+    public static final String ORDER_VISIT_ID = "ORDER_VISIT_ID";
     /**
      * 订单支付类型
      */

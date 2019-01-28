@@ -14,6 +14,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.kaidongyuan.app.kdyorder.R;
 import com.kaidongyuan.app.kdyorder.app.MyApplication;
 import com.kaidongyuan.app.kdyorder.bean.CustomerMeeting;
+import com.kaidongyuan.app.kdyorder.bean.Order;
 import com.kaidongyuan.app.kdyorder.bean.OutPutSimpleOrder;
 import com.kaidongyuan.app.kdyorder.constants.FileConstants;
 import com.kaidongyuan.app.kdyorder.constants.URLCostant;
@@ -51,13 +52,18 @@ public class CustomerMeetingShowStepActivityBiz {
     private final String mTagGetVisitAppOrder = "mTagGetVisitAppOrder";
 
     /**
-     * 存放从后台获取的所有订单数据集合
+     * 存放从后台获取的所有订单数据集合_经销商的出售单
      */
     private List<OutPutSimpleOrder> mOutputSimpleOrderList;
+    /**
+     * 保存订单数据的集合_经销商的入库单
+     */
+    private List<Order> mOrderList;
 
     public CustomerMeetingShowStepActivityBiz(CustomerMeetingShowStepActivity activity) {
         this.mActivity = activity;
         this.mOutputSimpleOrderList = new ArrayList<>();
+        this.mOrderList = new ArrayList<>();
     }
 
     public CustomerMeeting getCustomerMeeting() {
@@ -77,6 +83,16 @@ public class CustomerMeetingShowStepActivityBiz {
     public List<OutPutSimpleOrder> getmOutputSimpleOrderList() {
         return mOutputSimpleOrderList;
     }
+
+    /**
+     * 返回请求到的账单列表集合
+     *
+     * @return
+     */
+    public List<Order> getmOrderList() {
+        return mOrderList;
+    }
+
 
     /**
      * 获取拜访照片成功
@@ -176,7 +192,7 @@ public class CustomerMeetingShowStepActivityBiz {
      *
      * @return 发送请求是否成功
      */
-    public boolean GetVisitAppOrder(final String strVisitIdx) {
+    public boolean GetVisitAppOrder(final String strVisitIdx, final String strType) {
 
         try {
             StringRequest request = new StringRequest(Request.Method.POST, URLCostant.GetVisitAppOrder, new Response.Listener<String>() {
@@ -200,6 +216,54 @@ public class CustomerMeetingShowStepActivityBiz {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
                     params.put("strVisitIdx", strVisitIdx);
+                    params.put("strType", strType);
+                    params.put("strLicense", "");
+                    return params;
+                }
+            };
+            request.setTag(mTagGetVisitAppOrder);
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            HttpUtil.getRequestQueue().add(request);
+            return true;
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
+            return false;
+        }
+    }
+
+    /**
+     * 获取订单数据
+     *
+     * @return 发送请求是否成功
+     */
+    public boolean GetVisitAppOrder_AGENT(final String strVisitIdx, final String strType) {
+
+        try {
+            StringRequest request = new StringRequest(Request.Method.POST, URLCostant.GetVisitAppOrder, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Logger.w(this.getClass() + ".GetVisitAppOrderSuccess_AGENT:" + response);
+                    GetVisitAppOrderSuccess_AGENT(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Logger.w(this.getClass() + ".GetVisitAppOrderSuccess_AGENT:" + error.toString());
+                    if (NetworkUtil.isNetworkAvailable()) {
+                        mActivity.requestError("获取订单失败!");
+                    } else {
+                        mActivity.requestError("请检查网络是否正常连接！");
+                    }
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("strVisitIdx", strVisitIdx);
+                    params.put("strType", strType);
                     params.put("strLicense", "");
                     return params;
                 }
@@ -234,6 +298,32 @@ public class CustomerMeetingShowStepActivityBiz {
                 List<OutPutSimpleOrder> tmpSimpleOrderList = JSON.parseArray(jo.getString("List"), OutPutSimpleOrder.class);
                 mOutputSimpleOrderList.addAll(tmpSimpleOrderList);
                 mActivity.GetVisitAppOrderSuccess();
+            } else {
+                mActivity.requestError(object.getString("msg"));
+            }
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
+            mActivity.requestError("获取订单失败!");
+        }
+    }
+
+    /**
+     * 处理网络请求返回数据成功
+     *
+     * @param response 返回的数据
+     */
+    private void GetVisitAppOrderSuccess_AGENT(String response) {
+        try {
+            JSONObject object = JSON.parseObject(response);
+            int type = object.getInteger("type");
+            if (type == 1) {
+
+                mOrderList.clear();
+                JSONArray ar = JSON.parseArray(object.getString("result"));
+                JSONObject jo = (JSONObject) ar.get(0);
+                List<Order> orderList = JSON.parseArray(jo.getString("List"), Order.class);
+                mOrderList.addAll(orderList);
+                mActivity.GetVisitAppOrderSuccess_AGENT();
             } else {
                 mActivity.requestError(object.getString("msg"));
             }

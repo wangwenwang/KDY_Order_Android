@@ -2,6 +2,7 @@ package com.kaidongyuan.app.kdyorder.ui.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.kaidongyuan.app.kdyorder.R;
 import com.kaidongyuan.app.kdyorder.adapter.CustomerMeetingAdapter;
+import com.kaidongyuan.app.kdyorder.adapter.FirstPartyChoiceAdapter;
 import com.kaidongyuan.app.kdyorder.adapter.LineChoiceAdapter;
 import com.kaidongyuan.app.kdyorder.adapter.StateChoiceAdapter;
 import com.kaidongyuan.app.kdyorder.app.MyApplication;
@@ -72,14 +74,31 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
      */
     private ImageView mImageViewGoBack;
     private TextView tvTitleRight;
-    private LinearLayout llMeetingType, llMeetingState;
-    private TextView tvMeetingType, tvMeetingState;
+    private LinearLayout llMeetingType, llMeetingState, llmeetingFirstParty;
+    private TextView tvMeetingType, tvMeetingState, tvMeetingFirstParty;
     private EditText edSearch;
     private ImageView ivSearch;
     public String strSearch = "";
     public String strLine = "";
     public String strState = "未拜访";//已拜访,未拜访,拜访中,全部
+    public String strFartherPartyID = "";//供货商ID
     private List<String> statelist = new ArrayList<String>(Arrays.asList("未拜访", "拜访中", "已拜访", "全部"));
+    /**
+     * 选择供货商的 Dialog
+     */
+    private Dialog mChoiceFirstPartyDialog;
+    /**
+     * 显示供货商的 ListView
+     */
+    private ListView mListViewChoiceFirstPartys;
+    /**
+     * 选择供货商的 Adapter
+     */
+    private FirstPartyChoiceAdapter mFirstPartysChoiceAdapter;
+    /**
+     * 记录当前选中的报表在 ListView 中的位置
+     */
+    private int mCurrentFirstPartyIndex = 0;
     /**
      * 选择拜访线路的 Dialog
      */
@@ -118,12 +137,26 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_meetings);
         Log.d("LM", "onCreate: ");
+
         try {
             initData();
             setTop();
             initView();
             setListener();
-            getMeetingLineDatas();
+
+            // 先请求供货商
+            new Thread() {
+                public void run() {
+                    try {
+                        sleep(100 * 3);
+                        getMeetingLineDatas();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+
+            getMeetingFirstPartyDatas();
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }
@@ -200,6 +233,8 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
 
     private void initView() {
         try {
+            tvMeetingFirstParty = (TextView) findViewById(R.id.tv_meeting_first_party);
+            llmeetingFirstParty = (LinearLayout) findViewById(R.id.ll_meeting_first_party);
             tvTitleRight = (TextView) findViewById(R.id.tv_title_right);
             llMeetingType = (LinearLayout) findViewById(R.id.ll_meeting_type);
             tvMeetingType = (TextView) findViewById(R.id.tv_meeting_type);
@@ -226,6 +261,7 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
             tvTitleRight.setOnClickListener(this);
             llMeetingType.setOnClickListener(this);
             llMeetingState.setOnClickListener(this);
+            llmeetingFirstParty.setOnClickListener(this);
             edSearch.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -253,11 +289,26 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
     }
 
     /**
-     * 获取客服拜访线路数据集
+     * 获取客户拜访线路数据集
      */
     private void getMeetingLineDatas() {
         try {
             if (mBiz.GetPartyVisitLines()) {
+                //  showLoadingDialog();
+            } else {
+                ToastUtil.showToastBottom(MyApplication.getmRes().getString(R.string.sendrequest_fail), Toast.LENGTH_SHORT);
+            }
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
+        }
+    }
+
+    /**
+     * 获取客户拜访供货商数据集
+     */
+    private void getMeetingFirstPartyDatas() {
+        try {
+            if (mBiz.GetFirstPartyList()) {
                 //  showLoadingDialog();
             } else {
                 ToastUtil.showToastBottom(MyApplication.getmRes().getString(R.string.sendrequest_fail), Toast.LENGTH_SHORT);
@@ -308,6 +359,14 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
         }
     }
 
+    public void getMeetingFirstPartySuccess(List<CustomerMeeting> customerMeetings) {
+        if (mLoadingDialog != null) mLoadingDialog.dismiss();
+        if (customerMeetings != null && customerMeetings.size() > 0) {
+            strFartherPartyID = customerMeetings.get(0).getIDX();
+            tvMeetingFirstParty.setText(customerMeetings.get(0).getPARTY_NAME());
+        }
+    }
+
     public void getMeetingLinesSuccess(List<CustomerMeetingLine> customerMeetingLines) {
         if (mLoadingDialog != null) mLoadingDialog.dismiss();
         if (customerMeetingLines != null && customerMeetingLines.size() > 0) {
@@ -325,6 +384,36 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
                 showLoadingDialog();
             }
 
+        }
+    }
+
+    /**
+     * 显示选择供货商 Dialog
+     */
+    private void showChoiceFartherIdDialog() {
+        try {
+            if (mChoiceFirstPartyDialog == null) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.create();
+                mChoiceFirstPartyDialog = builder.show();
+                mChoiceFirstPartyDialog.setCanceledOnTouchOutside(false);
+                Window window = mChoiceFirstPartyDialog.getWindow();
+                window.setContentView(R.layout.dialog_state_choice);
+                window.findViewById(R.id.button_cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mChoiceFirstPartyDialog.dismiss();
+                    }
+                });
+                mListViewChoiceFirstPartys = (ListView) window.findViewById(R.id.listView_chart_choice);
+                mFirstPartysChoiceAdapter = new FirstPartyChoiceAdapter(null, this);
+                mListViewChoiceFirstPartys.setAdapter(mFirstPartysChoiceAdapter);
+                mListViewChoiceFirstPartys.setOnItemClickListener(new CustomerMeetingsActivity.InnerOnItemClickListener());
+            }
+            mChoiceFirstPartyDialog.show();
+            mFirstPartysChoiceAdapter.notifyChange(mBiz.getMeetingFirstPartys());
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
         }
     }
 
@@ -349,7 +438,7 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
                 mListViewChoiceLines = (ListView) window.findViewById(R.id.listView_chart_choice);
                 mLinesChoiceAdapter = new LineChoiceAdapter(null, this);
                 mListViewChoiceLines.setAdapter(mLinesChoiceAdapter);
-                mListViewChoiceLines.setOnItemClickListener(new CustomerMeetingsActivity.InnerOnItemClickListener());
+                mListViewChoiceLines.setOnItemClickListener(new CustomerMeetingsActivity.InnerOnItemClickListener1());
             }
             mChoiceLineDialog.show();
             mLinesChoiceAdapter.notifyChange(mBiz.getMeetingLines());
@@ -379,7 +468,7 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
                 mListViewChoiceStates = (ListView) window.findViewById(R.id.listView_chart_choice);
                 mStatesChoiceAdapter = new StateChoiceAdapter(null, this);
                 mListViewChoiceStates.setAdapter(mStatesChoiceAdapter);
-                mListViewChoiceStates.setOnItemClickListener(new CustomerMeetingsActivity.InnerOnItemClickListener1());
+                mListViewChoiceStates.setOnItemClickListener(new CustomerMeetingsActivity.InnerOnItemClickListener2());
             }
             mChoiceStateDialog.show();
             mStatesChoiceAdapter.notifyChange(statelist);
@@ -426,9 +515,36 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
     }
 
     /**
-     * Dialog 中选择拜访线路的监听
+     * Dialog 中选择供货商的监听
      */
     private class InnerOnItemClickListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            try {
+                mChoiceFirstPartyDialog.dismiss();
+                mCurrentFirstPartyIndex = position;
+
+                List<CustomerMeeting> meetingFirstPartys = mBiz.getMeetingFirstPartys();
+                if (meetingFirstPartys.size() <= 0) {//集合中没有数据网络请求数据
+                    mBiz.GetFirstPartyList();
+                    showLoadingDialog();
+                } else {//集合中已有数据，直接显示
+                    strFartherPartyID = mBiz.getMeetingFirstPartys().get(mCurrentFirstPartyIndex).getIDX();
+                    tvMeetingFirstParty.setText(mBiz.getMeetingFirstPartys().get(mCurrentFirstPartyIndex).getPARTY_NAME());
+                }
+                showLoadingDialog();
+                mBiz.reFreshCustomerMeetingDatas();
+
+            } catch (Exception e) {
+                ExceptionUtil.handlerException(e);
+            }
+        }
+    }
+
+    /**
+     * Dialog 中选择拜访线路的监听
+     */
+    private class InnerOnItemClickListener1 implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             try {
@@ -458,7 +574,7 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
     /**
      * Dialog 中选择拜访状态的监听
      */
-    private class InnerOnItemClickListener1 implements AdapterView.OnItemClickListener {
+    private class InnerOnItemClickListener2 implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             try {
@@ -518,13 +634,25 @@ public class CustomerMeetingsActivity extends BaseActivity implements View.OnCli
                     this.finish();
                     break;
                 case R.id.tv_title_right:
-                    startActivity(new Intent(CustomerMeetingsActivity.this, CustomerCreateActivity.class));
+                    if(tvMeetingFirstParty.getText().equals("")) {
+
+                        ToastUtil.showToastBottom(String.valueOf("供应商不能为空"), Toast.LENGTH_SHORT);
+                    }else {
+
+                        Intent intent = new Intent(CustomerMeetingsActivity.this, CustomerCreateActivity.class);
+                        intent.putExtra("fatherPartyAddressID", mBiz.getMeetingFirstPartys().get(mCurrentFirstPartyIndex).getADDRESS_IDX());
+                        intent.putExtra("fatherPartyAddressName", mBiz.getMeetingFirstPartys().get(mCurrentFirstPartyIndex).getPARTY_NAME());
+                        startActivity(intent);
+                    }
                     break;
                 case R.id.ll_meeting_type:
                     showChoiceLineDialog();
                     break;
                 case R.id.ll_meeting_state:
                     showChoiceStateDialog();
+                    break;
+                case R.id.ll_meeting_first_party:
+                    showChoiceFartherIdDialog();
                     break;
                 case R.id.iv_search:
                     showLoadingDialog();

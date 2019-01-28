@@ -46,17 +46,68 @@ public class CustomerMeetingsActivityBiz {
      * 保存客户拜访线路类型集合
      */
     private List<CustomerMeetingLine> meetingLines;
+    /**
+     * 保存供货商列表集合
+     */
+    private List<CustomerMeeting> meetingFirstPartys;
 
     /**
      * 保存客户拜访数据集合
      */
     private List<CustomerMeeting> customerMeetingList;
+    private final String mTagGetFirstPartyList = "mTagGetFirstPartyList";
     private final String mTagGetPartyVisitLine = "mTagGetPartyVisitLine";
     private final String mTagGetMeetingList = "mTagGetMeetingList";
 
     public CustomerMeetingsActivityBiz(CustomerMeetingsActivity activity) {
         this.mActivity = activity;
         customerMeetingList = new ArrayList<>();
+    }
+
+    /**
+     * 获取客户拜访供货商列表
+     */
+    public boolean GetFirstPartyList() {
+        try {
+            StringRequest request = new StringRequest(Request.Method.POST, URLCostant.GetFirstPartyList, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Logger.w(CustomerMeetingsActivityBiz.this.getClass() + ".GetFirstPartyList----:" + response);
+                    GetCustomerMeetingFirstPartySuccess(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Logger.w(CustomerMeetingsActivityBiz.this.getClass() + ".GetFirstPartyList:" + error.toString());
+                    if (NetworkUtil.isNetworkAvailable()) {
+                        mActivity.getMeetingLinesError("获取供货商列表数据失败!");
+                    } else {
+                        mActivity.getMeetingLinesError("请检查网络是否正常连接！");
+                    }
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("strUserId", MyApplication.getInstance().getUser().getIDX());
+                    params.put("strBusinessId", MyApplication.getInstance().getBusiness().getBUSINESS_IDX());
+                    params.put("strLicense", "");
+                    return params;
+                }
+            };
+            request.setTag(mTagGetFirstPartyList);
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            HttpUtil.getRequestQueue().add(request);
+            return true;
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
+            return false;
+        }
+
+
     }
 
     /**
@@ -139,6 +190,7 @@ public class CustomerMeetingsActivityBiz {
                     params.put("strStates", mActivity.strState);
                     params.put("strPage", mPageIndex + "");
                     params.put("strPageCount", mPageSize + "");
+                    params.put("strFartherPartyID", mActivity.strFartherPartyID);
                     params.put("strLicense", "");
                     return params;
                 }
@@ -171,6 +223,15 @@ public class CustomerMeetingsActivityBiz {
         }
     }
 
+
+    public List<CustomerMeeting> getMeetingFirstPartys() {
+        return meetingFirstPartys;
+    }
+
+    public void setMeetingFirstPartys(List<CustomerMeeting> meetingFirstPartys) {
+        this.meetingFirstPartys = meetingFirstPartys;
+    }
+
     public List<CustomerMeetingLine> getMeetingLines() {
         return meetingLines;
     }
@@ -190,6 +251,31 @@ public class CustomerMeetingsActivityBiz {
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
             return false;
+        }
+    }
+
+    /**
+     * 处理网络请求返回数据成功
+     *
+     * @param response 返回的数据
+     */
+    private void GetCustomerMeetingFirstPartySuccess(String response) {
+        try {
+            JSONObject object = JSON.parseObject(response);
+            int type = object.getInteger("type");
+            if (type == 1) {
+                meetingFirstPartys = new ArrayList<>();
+                if (object.containsKey("result")) {
+                    meetingFirstPartys = JSON.parseArray(object.getString("result"), CustomerMeeting.class);
+                }
+                mActivity.getMeetingFirstPartySuccess(meetingFirstPartys);
+
+            } else {
+                mActivity.getMeetingLinesError(object.getString("msg"));
+            }
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
+            mActivity.getMeetingLinesError("获取客户拜访数据失败!");
         }
     }
 

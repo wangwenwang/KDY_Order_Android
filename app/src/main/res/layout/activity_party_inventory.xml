@@ -443,7 +443,7 @@
                             app:layout_heightPercent="@string/block_partyInventory_textview_height"
                             android:layout_alignParentBottom="true"
                             android:gravity="center_horizontal|top"
-                            android:text="出库"
+                            android:text="销售出库"
                             android:textSize="@dimen/blockTextSize"
                             android:textColor="@color/text_color_normal"
                             />

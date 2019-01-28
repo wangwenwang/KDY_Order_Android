@@ -152,7 +152,17 @@ public class OrderProductAdapter extends BaseExpandableListAdapter implements Vi
         String name = product.getPRODUCT_NAME();
         groupViewHolder.textViewProductName.setText(StringUtils.getProductName(name));
         groupViewHolder.textViewProductStyle.setText(StringUtils.getProductStyle(name));
-        groupViewHolder.textViewOriginPrice.setText("￥" + product.getPRODUCT_PRICE());
+
+        // 没有单位，不显示
+        if(product.getPRODUCT_UOM().equals("") || product.getPRODUCT_UOM() == null) {
+            groupViewHolder.textViewOriginPrice.setText("￥" + product.getPRODUCT_PRICE());
+        }
+        // 有单位，显示
+        else{
+            groupViewHolder.textViewOriginPrice.setText("￥" + product.getPRODUCT_PRICE() + "/" + product.getPRODUCT_UOM());
+        }
+
+
 
 
         //库存是否显示

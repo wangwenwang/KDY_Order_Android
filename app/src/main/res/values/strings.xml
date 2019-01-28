@@ -18,7 +18,7 @@
     <string name="login">登\t\t录</string>
     <string name="register">注\t册\t帐\t号</string>
     <!-- MainActivity -->
-    <string name="menue_makeOrder">下单</string>
+    <string name="menue_makeOrder">采购订单</string>
     <string name="menue_checkOrder">查单</string>
     <string name="menue_home">主页</string>
     <string name="menue_mine">我的</string>

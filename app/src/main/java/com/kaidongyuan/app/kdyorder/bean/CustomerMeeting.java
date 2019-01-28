@@ -34,6 +34,9 @@ public class CustomerMeeting implements Parcelable {
     private String VIVID_DISPLAY_TEXT;
     private String VISIT_IDX;
     private String ADDRESS_IDX;
+    private String GRADE;
+    private String FARTHER_PARTY_ID;
+    private String FARTHER_ADDRESS_ID;
     public CustomerMeeting() {
     }
 
@@ -66,6 +69,9 @@ public class CustomerMeeting implements Parcelable {
         VIVID_DISPLAY_TEXT = in.readString();
         VISIT_IDX = in.readString();
         ADDRESS_IDX = in.readString();
+        GRADE = in.readString();
+        FARTHER_PARTY_ID = in.readString();
+        FARTHER_ADDRESS_ID = in.readString();
     }
 
     public static final Creator<CustomerMeeting> CREATOR = new Creator<CustomerMeeting>() {
@@ -306,6 +312,30 @@ public class CustomerMeeting implements Parcelable {
         this.ADDRESS_IDX = ADDRESS_IDX;
     }
 
+    public String getGRADE(){
+        return GRADE;
+    }
+
+    public void setGRADE(String GRADE) {
+        this.GRADE = GRADE;
+    }
+
+    public String getFARTHER_PARTY_ID(){
+        return FARTHER_PARTY_ID;
+    }
+
+    public void setFARTHER_PARTY_ID(String FARTHER_PARTY_ID) {
+        this.FARTHER_PARTY_ID = FARTHER_PARTY_ID;
+    }
+
+    public String getFARTHER_ADDRESS_ID(){
+        return FARTHER_ADDRESS_ID;
+    }
+
+    public void setFARTHER_ADDRESS_ID(String FARTHER_ADDRESS_ID) {
+        this.FARTHER_ADDRESS_ID = FARTHER_ADDRESS_ID;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -340,5 +370,8 @@ public class CustomerMeeting implements Parcelable {
         dest.writeString(VIVID_DISPLAY_TEXT);
         dest.writeString(VISIT_IDX);
         dest.writeString(ADDRESS_IDX);
+        dest.writeString(GRADE);
+        dest.writeString(FARTHER_PARTY_ID);
+        dest.writeString(FARTHER_ADDRESS_ID);
     }
 }

@@ -34,6 +34,7 @@ import com.kaidongyuan.app.kdyorder.bean.Address;
 import com.kaidongyuan.app.kdyorder.bean.CustomerChannel;
 import com.kaidongyuan.app.kdyorder.bean.CustomerMeetingLine;
 import com.kaidongyuan.app.kdyorder.bean.NormalAddress;
+import com.kaidongyuan.app.kdyorder.constants.EXTRAConstants;
 import com.kaidongyuan.app.kdyorder.model.CustomerCreateActivityBiz;
 import com.kaidongyuan.app.kdyorder.util.DateUtil;
 import com.kaidongyuan.app.kdyorder.util.DensityUtil;
@@ -72,28 +73,11 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
     public String linesParmas;
 
     private LinearLayout llMeetingType, llPartyChannel, llSendAddress;
-    private TextView tvMeetingType, tvPartyChannel;
+    private TextView tvMeetingType, tvPartyChannel, tvFatherAddressName;
     public EditText edPartyName, edPartyCode;
-    public String strSearch = "";
     public String strChannel = "";
     public String strLine = "";
-    public Address fatherPartyAddress;
-    /**
-     * 选择上级客户的 Dialog
-     */
-    private Dialog mChoiceFatherPartyDialog;
-    /**
-     * 显示上级客户的 ListView
-     */
-    private ListView mListViewChoiceFatherPartys;
-    /**
-     * 选择上级客户的 Adapter
-     */
-    private PartyList1Adapter mPartyListAdapter;
-    /**
-     * 记录当前选中的报表在 ListView 中的位置
-     */
-    private int mCurrentFatherPartyIndex = 0;
+    public String fatherPartyAddressID;
 
     /**
      * 选择客户渠道的 Dialog
@@ -155,7 +139,9 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
             setTop();
             initView();
             setListener();
-            getCustomerData();
+            mBiz.ObtainPartyCode(MyApplication.getInstance().getBusiness().getBUSINESS_CODE(), MyApplication.getInstance().getBusiness().getBUSINESS_IDX());
+            fatherPartyAddressID = getIntent().getStringExtra("fatherPartyAddressID");
+            tvFatherAddressName.setText(getIntent().getStringExtra("fatherPartyAddressName"));
             getMeetingLineDatas();
             getPartyVisitChannel();
         } catch (Exception e) {
@@ -201,6 +187,7 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
             tvMeetingType = (TextView) findViewById(R.id.tv_meeting_type);
             llPartyChannel = (LinearLayout) findViewById(R.id.ll_party_channel);
             tvPartyChannel = (TextView) findViewById(R.id.tv_party_channel);
+            tvFatherAddressName = (TextView) findViewById(R.id.tv_father_address_name);
             edPartyCode = (EditText) findViewById(R.id.ed_party_code);
             edPartyName = (EditText) findViewById(R.id.ed_party_name);
             edPartyRemark = (EditText) findViewById(R.id.ed_party_remark);
@@ -227,22 +214,6 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
             tvAddressBelong.setOnClickListener(this);
             buttonUpdata.setOnClickListener(this);
             llSendAddress.setOnClickListener(this);
-        } catch (Exception e) {
-            ExceptionUtil.handlerException(e);
-        }
-    }
-
-    /**
-     * 网络获取数据
-     */
-    private void getCustomerData() {
-        try {
-            boolean isSuccess = mBiz.getCustomerData();
-            if (isSuccess) {//发送请求成功
-                showLoadingDialog();
-            } else {//发送请求失败
-                ToastUtil.showToastBottom(MyApplication.getmRes().getString(R.string.sendrequest_fail), Toast.LENGTH_SHORT);
-            }
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }
@@ -321,30 +292,13 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
     }
 
     /**
-     * 处理获取客户地址成功
-     */
-    public void getCustomerAdressDataSuccess() {
-        try {
-            mLoadingDialog.dismiss();
-            List<Address> customerAddress = mBiz.getmCustomerAddress();
-
-            if (customerAddress != null && customerAddress.size() > 0) {
-                fatherPartyAddress = customerAddress.get(0);
-            } else {
-                ToastUtil.showToastBottom("未获取到上级客户地址信息", Toast.LENGTH_SHORT);
-            }
-        } catch (Exception e) {
-            ExceptionUtil.handlerException(e);
-        }
-    }
-
-    /**
      * 获取客户拜访线路类型失败
      *
      * @param message 要显示的消息
      */
     public void getChannelsError(String message) {
         try {
+            if (mLoadingDialog != null) mLoadingDialog.dismiss();
             ToastUtil.showToastBottom(String.valueOf(message), Toast.LENGTH_SHORT);
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
@@ -398,6 +352,7 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
      */
     public void updataPartyError(String message) {
         try {
+            if (mLoadingDialog != null) mLoadingDialog.dismiss();
             ToastUtil.showToastBottom(String.valueOf(message), Toast.LENGTH_SHORT);
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
@@ -418,47 +373,6 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
 //            strLine = strLine.equals("") ? customerMeetingLines.get(0).getITEM_NAME() : strLine;
 //            tvMeetingType.setText(strLine);
 //        }
-    }
-
-    /**
-     * 获取数据成功
-     */
-    public void getCustomerDataSuccess() {
-        try {
-            showChoiceFatherPartyDialog();
-        } catch (Exception e) {
-            ExceptionUtil.handlerException(e);
-        }
-    }
-
-    /**
-     * 显示选择上级客户 Dialog
-     */
-    private void showChoiceFatherPartyDialog() {
-        try {
-            if (mChoiceFatherPartyDialog == null) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.create();
-                mChoiceFatherPartyDialog = builder.show();
-                mChoiceFatherPartyDialog.setCanceledOnTouchOutside(false);
-                Window window = mChoiceFatherPartyDialog.getWindow();
-                window.setContentView(R.layout.dialog_fatherparty_choice);
-                window.findViewById(R.id.button_cancel).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mChoiceFatherPartyDialog.dismiss();
-                    }
-                });
-                mListViewChoiceFatherPartys = (ListView) window.findViewById(R.id.listView_chart_choice);
-                mPartyListAdapter = new PartyList1Adapter(this, null);
-                mListViewChoiceFatherPartys.setAdapter(mPartyListAdapter);
-                mListViewChoiceFatherPartys.setOnItemClickListener(new CustomerCreateActivity.InnerOnItemClickListener1());
-            }
-            mChoiceFatherPartyDialog.show();
-            mPartyListAdapter.notifyChange(mBiz.getmCustomerList());
-        } catch (Exception e) {
-            ExceptionUtil.handlerException(e);
-        }
     }
 
     /**
@@ -581,23 +495,6 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
     }
 
     /**
-     * Dialog 中选择上级客户的监听
-     */
-    private class InnerOnItemClickListener1 implements AdapterView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            try {
-                mChoiceFatherPartyDialog.dismiss();
-                mCurrentFatherPartyIndex = position;
-                mBiz.getPartygetAddressInfo(mCurrentFatherPartyIndex);
-                showLoadingDialog();
-            } catch (Exception e) {
-                ExceptionUtil.handlerException(e);
-            }
-        }
-    }
-
-    /**
      * Dialog 中选择客户渠道的监听
      */
     private class InnerOnItemClickListener2 implements AdapterView.OnItemClickListener {
@@ -641,15 +538,49 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
                     startActivityForResult(intent, RequestAddressBelong);
                     break;
                 case R.id.button_updata:
-                    if (StringUtils.isBlank(edPartyName.getText().toString()) || StringUtils.isBlank(edPartyCode.getText().toString()) || StringUtils.isBlank(strChannel)
-                            || StringUtils.isBlank(linesParmas) || fatherPartyAddress == null || StringUtils.isBlank(edContactPerson.getText().toString())
-                            || StringUtils.isBlank(edContactTel.getText().toString()) || pv == null || StringUtils.isBlank(edAddressDetail.getText().toString())
-                            || latitude.length() <= 0 || latitude.length() <= 0) {
-                        updataPartyError("请填写完整新建客户资料必填项");
-                    } else {
-                        showLoadingDialog();
-                        mBiz.AddParty();
+
+                    if(StringUtils.isBlank(edPartyName.getText().toString())) {
+                        updataPartyError("客户名称不能为空");
+                        return;
                     }
+                    if(StringUtils.isBlank(edPartyCode.getText().toString())) {
+                        updataPartyError("客户代码不能为空");
+                        return;
+                    }
+                    if(StringUtils.isBlank(strChannel)) {
+                        updataPartyError("渠道不能为空");
+                        return;
+                    }
+                    if(StringUtils.isBlank(linesParmas)) {
+                        updataPartyError("拜访线路不能为空");
+                        return;
+                    }
+                    if(StringUtils.isBlank(edContactPerson.getText().toString())) {
+                        updataPartyError("收货人名称不能为空");
+                        return;
+                    }
+                    if(StringUtils.isBlank(edContactTel.getText().toString())) {
+                        updataPartyError("收货人电话不能为空");
+                        return;
+                    }
+                    if(StringUtils.isBlank(tvAddressBelong.getText().toString())) {
+                        updataPartyError("所在地区不能为空");
+                        return;
+                    }
+                    if(StringUtils.isBlank(edAddressDetail.getText().toString())) {
+                        updataPartyError("详细地址不能为空");
+                        return;
+                    }
+                    if(latitude.length() <= 0 || latitude.length() <= 0) {
+                        updataPartyError("经纬坐标不能为空");
+                        return;
+                    }
+                    if(fatherPartyAddressID == null) {
+                        updataPartyError("供货商不能为空");
+                        return;
+                    }
+                    showLoadingDialog();
+                    mBiz.AddParty();
                     break;
                 case R.id.ll_send_address:
                     Intent bls = new Intent(CustomerCreateActivity.this, YBMyAddressAdd2.class);
@@ -735,18 +666,18 @@ public class CustomerCreateActivity extends BaseActivity implements View.OnClick
         }
         return contact;
     }
+
+    /**
+     * 推荐客户代码
+     *
+     * @param
+     */
+    public void ObtainPartyCodeSuccess(String partyCode) {
+        try {
+            edPartyCode.setText(partyCode);
+        } catch (Exception e) {
+            ExceptionUtil.handlerException(e);
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 

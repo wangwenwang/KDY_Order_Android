@@ -1,5 +1,6 @@
 package com.kaidongyuan.app.kdyorder.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -26,9 +27,11 @@ import com.kaidongyuan.app.kdyorder.adapter.GridImageShowAdapter;
 import com.kaidongyuan.app.kdyorder.adapter.OutputSimpleOrderListAdapter;
 import com.kaidongyuan.app.kdyorder.app.MyApplication;
 import com.kaidongyuan.app.kdyorder.bean.CustomerMeeting;
+import com.kaidongyuan.app.kdyorder.bean.Order;
 import com.kaidongyuan.app.kdyorder.bean.OutPutSimpleOrder;
 import com.kaidongyuan.app.kdyorder.constants.EXTRAConstants;
 import com.kaidongyuan.app.kdyorder.constants.URLCostant;
+import com.kaidongyuan.app.kdyorder.model.AgentOrderListAdapter;
 import com.kaidongyuan.app.kdyorder.model.CheckOrderPictureActivityBiz;
 import com.kaidongyuan.app.kdyorder.model.CustomerMeetingCreateActivityBiz;
 import com.kaidongyuan.app.kdyorder.model.CustomerMeetingRecomOrderActivityBiz;
@@ -93,15 +96,21 @@ public class CustomerMeetingShowStepActivity extends BaseActivity implements Vie
     // 显示出库单
     private XListView mOutputOrderListView;
     private OutputSimpleOrderListAdapter mAdapter;
+    private AgentOrderListAdapter mAgentAdapter;
+
+    private Context mContext;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_show_step);
+
+        mContext = this;
+
         initData();
         initView();
         setData();
         setListener();
-        mBiz.GetVisitAppOrder(customerM.getVISIT_IDX());
+
         fillInfo();
     }
 
@@ -164,8 +173,30 @@ public class CustomerMeetingShowStepActivity extends BaseActivity implements Vie
 //            mTextviewNodata.setVisibility(View.GONE);
             this.mOutputOrderListView = (XListView) this.findViewById(R.id.lv_outputorder_list);
             mOutputOrderListView.setPullRefreshEnable(false);
-            this.mAdapter = new OutputSimpleOrderListAdapter(null, CustomerMeetingShowStepActivity.this);
-            mOutputOrderListView.setAdapter(mAdapter);
+
+
+            if (customerM.getGRADE().equals("0")) {
+
+                ToastUtil.showToastBottom(String.valueOf("当前被拜访的客户为供货商，无出库单"), Toast.LENGTH_SHORT);
+            }
+            //『供货商』对『经销商』的入库单
+            else if (customerM.getGRADE().equals("1")) {
+
+                this.mAgentAdapter = new AgentOrderListAdapter(null, CustomerMeetingShowStepActivity.this);
+                mOutputOrderListView.setAdapter(mAgentAdapter);
+                mBiz.GetVisitAppOrder_AGENT(customerM.getVISIT_IDX(), "AppOrder");
+            }
+            //『经销商』对『门店』的出库单
+            else if (customerM.getGRADE().equals("2")) {
+
+                this.mAdapter = new OutputSimpleOrderListAdapter(null, CustomerMeetingShowStepActivity.this);
+                mOutputOrderListView.setAdapter(mAdapter);
+                mBiz.GetVisitAppOrder(customerM.getVISIT_IDX(), "OutPut");
+            } else {
+
+                ToastUtil.showToastBottom(String.valueOf("未知客户类型，字段GRADE"), Toast.LENGTH_SHORT);
+            }
+
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }
@@ -392,18 +423,8 @@ public class CustomerMeetingShowStepActivity extends BaseActivity implements Vie
     /**
      * 获取数据成功时业务类调用的方法
      */
+    // 出库单
     public void GetVisitAppOrderSuccess() {
-        try {
-            handleRequest();
-        } catch (Exception e) {
-            ExceptionUtil.handlerException(e);
-        }
-    }
-
-    /**
-     * 处理获取在途订单后的结果
-     */
-    private void handleRequest() {
         try {
             List<OutPutSimpleOrder> outPutSimpleOrders = mBiz.getmOutputSimpleOrderList();
             mAdapter.setData(outPutSimpleOrders);
@@ -412,16 +433,38 @@ public class CustomerMeetingShowStepActivity extends BaseActivity implements Vie
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        setListViewHeight();
-//        this.mAdapter.notifyDataSetChanged();
+    // 入库单
+    public void GetVisitAppOrderSuccess_AGENT() {
         try {
-            Intent outputOrderDetailIntent = new Intent(this, OutPutOrderDetailActivity.class);
-            outputOrderDetailIntent.putExtra(EXTRAConstants.EXTRA_ORDER_IDX, mBiz.getmOutputSimpleOrderList().get(position - 1).getIDX());
-            this.startActivity(outputOrderDetailIntent);
+            List<Order> orders = mBiz.getmOrderList();
+            mAgentAdapter.setData(orders);
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        //『供货商』对『经销商』的入库单
+        if (mBiz.getmOrderList().size() > 0) {
+            try {
+                Intent orderDetailsIntent = new Intent(mContext, OrderDetailsActivity.class);
+                orderDetailsIntent.putExtra(EXTRAConstants.ORDER_DETAILSACTIVITY_ORDER_ID, mBiz.getmOrderList().get(position - 1).getIDX());
+                mContext.startActivity(orderDetailsIntent);
+            } catch (Exception e) {
+                ExceptionUtil.handlerException(e);
+            }
+        }
+        //『经销商』对『门店』的出库单
+        else{
+            try {
+                Intent outputOrderDetailIntent = new Intent(this, OutPutOrderDetailActivity.class);
+                outputOrderDetailIntent.putExtra(EXTRAConstants.EXTRA_ORDER_IDX, mBiz.getmOutputSimpleOrderList().get(position - 1).getIDX());
+                this.startActivity(outputOrderDetailIntent);
+            } catch (Exception e) {
+                ExceptionUtil.handlerException(e);
+            }
         }
     }
 
@@ -447,7 +490,7 @@ public class CustomerMeetingShowStepActivity extends BaseActivity implements Vie
         mOutputOrderListView.setLayoutParams(params);
     }
 
-    void fillInfo(){
+    void fillInfo() {
         try {
             StringRequest request = new StringRequest(Request.Method.POST, URLCostant.GetPartyVisitList, new Response.Listener<String>() {
                 @Override
@@ -462,7 +505,7 @@ public class CustomerMeetingShowStepActivity extends BaseActivity implements Vie
                             for (int i = 0; i < tmpCustomerMeetings.size(); i++) {
                                 CustomerMeeting m = tmpCustomerMeetings.get(i);
                                 Log.d("LM", "寻找拜访id: " + customerM.getVISIT_IDX());
-                                if(customerM.getVISIT_IDX().equals(m.getVISIT_IDX())) {
+                                if (customerM.getVISIT_IDX().equals(m.getVISIT_IDX())) {
 
                                     Log.d("LM", "已找到" + m.getVISIT_IDX());
                                     customerM.setACTUAL_VISITING_ADDRESS(m.getACTUAL_VISITING_ADDRESS());
@@ -500,7 +543,8 @@ public class CustomerMeetingShowStepActivity extends BaseActivity implements Vie
                     params.put("strLine", "全部");
                     params.put("strStates", "全部");
                     params.put("strPage", "1");
-                    params.put("strPageCount",  "20");
+                    params.put("strPageCount", "99");
+                    params.put("strFartherPartyID", customerM.getFARTHER_ADDRESS_ID());
                     params.put("strLicense", "");
                     return params;
                 }
@@ -515,5 +559,4 @@ public class CustomerMeetingShowStepActivity extends BaseActivity implements Vie
 
         }
     }
-
 }

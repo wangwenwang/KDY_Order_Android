@@ -29,6 +29,8 @@ public class Product implements Parcelable {
     //20170922 流通服务商经销商库存管理 所用 库存、单位
     private double STOCK_QTY;
     private String PRODUCT_UOM;
+    // 20190128 客户拜访时，判断产品是否有折算率
+    private double BASE_RATE;
     /**
      * 根据用户选择的支付类型设置的产品价格
      */
@@ -195,6 +197,13 @@ public class Product implements Parcelable {
     public void setPRODUCT_CURRENT_PRICE(double PRODUCT_CURRENT_PRICE) {
         this.PRODUCT_CURRENT_PRICE = PRODUCT_CURRENT_PRICE;
     }
+    public double getBASE_RATE() {
+        return BASE_RATE;
+    }
+
+    public void setBASE_RATE(double BASE_RATE) {
+        this.BASE_RATE = BASE_RATE;
+    }
 
 
     @Override
@@ -223,6 +232,7 @@ public class Product implements Parcelable {
         dest.writeDouble(STOCK_QTY);
         dest.writeString(PRODUCT_UOM);
         dest.writeDouble(PRODUCT_CURRENT_PRICE);
+        dest.writeDouble(BASE_RATE);
 
     }
 
@@ -258,6 +268,7 @@ public class Product implements Parcelable {
         STOCK_QTY=in.readDouble();
         PRODUCT_UOM=in.readString();
         PRODUCT_CURRENT_PRICE=in.readDouble();
+        BASE_RATE=in.readDouble();
     }
 
     @Override

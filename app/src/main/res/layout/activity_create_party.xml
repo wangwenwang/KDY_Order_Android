@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.android.percent.support.PercentLinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.activity.UpdataPasswordActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.activity.UpdataPasswordActivity">
 
     <View
         android:id="@+id/topview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/title_background"
-        />
+        android:background="@color/title_background" />
 
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:id="@+id/percentRL_title"
@@ -45,286 +43,381 @@
             android:paddingTop="@dimen/title_imageview_paddingtop"
             android:src="@drawable/back" />
     </com.zhy.android.percent.support.PercentRelativeLayout>
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="客户信息"
-    android:padding="10dp"
-    android:background="@color/gray_holo_light"/>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:orientation="horizontal"
-    >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="客户名称："
-        />
-    <EditText
-        android:id="@+id/ed_party_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_bg"
-        android:hint="必填"
-        android:layout_marginLeft="2dp"
-        android:textSize="@dimen/text_size_small"/>
-</LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="客户代码："
-            />
-        <EditText
-            android:id="@+id/ed_party_code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_bg"
-            android:hint="必填"
-            android:layout_marginLeft="2dp"
-            android:textSize="@dimen/text_size_small"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:id="@+id/ll_party_channel"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:gravity="center_vertical"
-            android:background="@color/gray_holo_light">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="渠道:"
-                android:textSize="@dimen/text_size_normal"
-                />
-            <TextView
-                android:id="@+id/tv_party_channel"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="@dimen/text_size_small"
-                />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/more_black"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_meeting_type"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:layout_marginLeft="3dp"
-            android:gravity="center"
-            android:background="@color/gray_holo_light">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="拜访线路:"
-                android:textSize="@dimen/text_size_normal"
-                />
-            <TextView
-                android:id="@+id/tv_meeting_type"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="@dimen/text_size_small"
-                />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/more_black"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="备注："
-            />
-        <EditText
-            android:id="@+id/ed_party_remark"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_bg"
-            android:hint="选填"
-            android:layout_marginLeft="2dp"
-            android:textSize="@dimen/text_size_small"/>
-    </LinearLayout>
 
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="地址信息"
-        android:padding="10dp"
-        android:background="@color/gray_holo_light"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal"
-        >
+        android:layout_below="@id/percentRL_title"
+        android:background="@color/default_bg"
+        android:scrollbars="none">
+
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_holo_light"
+                android:padding="10dp"
+                android:text="供货商信息" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                >
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="收 货 人 ："
-                    />
-                <EditText
-                    android:id="@+id/ed_contact_person"
+                    android:text="供货商名称：" />
+
+                <TextView
+                    android:id="@+id/tv_father_address_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/edittext_bg"
+                    android:padding="6dp"
+                    android:textSize="@dimen/text_size_small" />
+            </LinearLayout>
+
+            <!--</ScrollView>-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_holo_light"
+                android:padding="10dp"
+                android:text="客户信息" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="3dp"
+                    android:text="客户名称：" />
+
+                <EditText
+                    android:id="@+id/ed_party_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="3dp"
                     android:background="@drawable/edittext_bg"
                     android:hint="必填"
-                    android:layout_marginLeft="2dp"
-                    android:textSize="@dimen/text_size_small"/>
-
+                    android:padding="6dp"
+                    android:textSize="@dimen/text_size_small" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                >
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="联系电话："
-                    />
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="3dp"
+                    android:text="客户代码：" />
+
                 <EditText
-                    android:id="@+id/ed_contact_tel"
+                    android:id="@+id/ed_party_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="3dp"
                     android:background="@drawable/edittext_bg"
                     android:hint="必填"
-                    android:inputType="number"
+                    android:padding="6dp"
+                    android:textSize="@dimen/text_size_small" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_party_channel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/gray_holo_light"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="渠道:"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:id="@+id/tv_party_channel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="@dimen/text_size_small" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/more_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_meeting_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:background="@color/gray_holo_light"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="拜访线路:"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:id="@+id/tv_meeting_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="@dimen/text_size_small" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/more_black" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注：" />
+
+                <EditText
+                    android:id="@+id/ed_party_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
                     android:layout_marginLeft="2dp"
-                    android:textSize="@dimen/text_size_small"/>
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="选填"
+                    android:padding="6dp"
+                    android:textSize="@dimen/text_size_small" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_holo_light"
+                android:padding="10dp"
+                android:text="地址信息" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="收 货 人  ：" />
+
+                        <EditText
+                            android:id="@+id/ed_contact_person"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/edittext_bg"
+                            android:hint="必填"
+                            android:padding="4dp"
+                            android:textSize="@dimen/text_size_small" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="联系电话：" />
+
+                        <EditText
+                            android:id="@+id/ed_contact_tel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/edittext_bg"
+                            android:hint="必填"
+                            android:inputType="number"
+                            android:padding="4dp"
+                            android:textSize="@dimen/text_size_small" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_add_contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:drawableTop="@drawable/user"
+                    android:gravity="bottom"
+                    android:text="选择联系人"
+                    android:textSize="@dimen/text_size_small" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+android:layout_marginTop="-3dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="所在地区：" />
+
+                <TextView
+                    android:id="@+id/tv_address_belong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/edittext_bg"
+                    android:drawableRight="@drawable/more_black"
+                    android:padding="3dp"
+                    android:textSize="@dimen/text_size_small" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="详细地址：" />
+
+                <EditText
+                    android:id="@+id/ed_address_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="必填"
+                    android:padding="6dp"
+                    android:textSize="@dimen/text_size_small" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_send_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="经纬坐标：" />
+
+                <TextView
+                    android:id="@+id/tv_address_gps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/edittext_bg"
+                    android:drawableRight="@drawable/more_black"
+                    android:padding="4dp"
+                    android:textSize="@dimen/text_size_small" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/button_updata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/button_background_normal_selector"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="提交"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_bigger" />
+
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/tv_add_contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="选择联系人"
-            android:textSize="@dimen/text_size_small"
-            android:drawableTop="@drawable/user"
-            android:gravity="bottom"/>
+    </ScrollView>
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="所在地区："
-            />
-        <TextView
-            android:id="@+id/tv_address_belong"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_bg"
-            android:layout_marginLeft="2dp"
-            android:textSize="@dimen/text_size_small"
-            android:drawableRight="@drawable/more_black"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="详细地址："
-            />
-        <EditText
-            android:id="@+id/ed_address_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_bg"
-            android:hint="必填"
-            android:layout_marginLeft="2dp"
-            android:textSize="@dimen/text_size_small"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal"
-        android:id="@+id/ll_send_address"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="经纬坐标："
-            />
-        <TextView
-            android:id="@+id/tv_address_gps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_bg"
-            android:layout_marginLeft="2dp"
-            android:textSize="@dimen/text_size_small"
-            android:drawableRight="@drawable/more_black"/>
-    </LinearLayout>
-    <View
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-    <Button
-        android:id="@+id/button_updata"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:background="@drawable/button_background_normal_selector"
-        android:text="提交"
-        android:textSize="@dimen/text_size_bigger"
-        android:textColor="@color/white"
-        />
 
 </com.zhy.android.percent.support.PercentLinearLayout>
 

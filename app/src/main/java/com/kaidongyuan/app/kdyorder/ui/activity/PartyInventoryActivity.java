@@ -262,6 +262,8 @@ public class PartyInventoryActivity extends BaseActivity implements View.OnClick
                     startActivity(intent2);
                     break;
                 case R.id.percentrl_checkInventory:
+
+                    ToastUtil.showToastBottom("维护中...", Toast.LENGTH_SHORT);
                     break;
                 case R.id.percentrl_input_other:
                     //其它入库

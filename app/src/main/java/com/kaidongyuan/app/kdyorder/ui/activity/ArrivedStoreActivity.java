@@ -228,33 +228,38 @@ public class ArrivedStoreActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void nextOnclick() {
-        if (selectList.size() > 0) {
 
-            LocalMedia LM = selectList.get(0);
-            Bitmap pictureBitmap1 = BitmapUtil.resizeImage(LM.getPath(), mBitmapWidth);
-            Log.d("LM", "进店图片1大小|" + BitmapUtil.getBitmapSize(pictureBitmap1));
-            Bitmap pictureBitmap2 = null;
-            if (selectList.size() > 1) {
-                LM = selectList.get(1);
-                pictureBitmap2 = BitmapUtil.resizeImage(LM.getPath(), mBitmapWidth);
-                Log.d("LM", "进店图片2大小|" + BitmapUtil.getBitmapSize(pictureBitmap2));
-            }
-            if (pictureBitmap1 != null) {
-                try {
-                    String strpicture = BitmapUtil.changeBitmapToString(pictureBitmap1);
-                    String strpicture2 = (pictureBitmap2 != null) ? BitmapUtil.changeBitmapToString(pictureBitmap2) : "";
-                    showLoadingDialog();
-                    strAddress = (strAddress == null) ? "" : strAddress;
-                    mBiz.GetVisitEnterShop(customerM.getVISIT_IDX(), strpicture, strpicture2, strAddress);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {
-                ToastUtil.showToastBottom("照片处理异常", Toast.LENGTH_SHORT);
+        if (selectList.size() <= 0) {
+            ToastUtil.showToastBottom("请将门店照片上传!", Toast.LENGTH_SHORT);
+            return;
+        }
+
+        LocalMedia LM = selectList.get(0);
+        Bitmap pictureBitmap1 = BitmapUtil.resizeImage(LM.getPath(), mBitmapWidth);
+        Log.d("LM", "进店图片1大小|" + BitmapUtil.getBitmapSize(pictureBitmap1));
+
+
+
+        Bitmap pictureBitmap2 = null;
+        if (selectList.size() > 1) {
+            LocalMedia LM2 = selectList.get(1);
+            pictureBitmap2 = BitmapUtil.resizeImage(LM2.getPath(), mBitmapWidth);
+            Log.d("LM", "进店图片2大小|" + BitmapUtil.getBitmapSize(pictureBitmap2));
+        }
+        if (pictureBitmap1 != null) {
+            try {
+                String strpicture = BitmapUtil.changeBitmapToString(pictureBitmap1);
+                String strpicture2 = (pictureBitmap2 != null) ? BitmapUtil.changeBitmapToString(pictureBitmap2) : "";
+                showLoadingDialog();
+                strAddress = (strAddress == null) ? "" : strAddress;
+                mBiz.GetVisitEnterShop(customerM.getVISIT_IDX(), strpicture, strpicture2, strAddress);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } else {
-            ToastUtil.showToastBottom("请将门店照片上传!", Toast.LENGTH_SHORT);
+            ToastUtil.showToastBottom("照片处理异常", Toast.LENGTH_SHORT);
         }
+
     }
 
     @Override

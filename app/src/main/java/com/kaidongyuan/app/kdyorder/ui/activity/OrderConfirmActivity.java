@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -150,6 +151,11 @@ public class OrderConfirmActivity extends BaseFragmentActivity implements View.O
      */
     private List<OrderGift> mGiftCategoryData;
 
+    /**
+     * 拜访ID
+     */
+    public String visit_idx = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,6 +212,10 @@ public class OrderConfirmActivity extends BaseFragmentActivity implements View.O
             mBiz = new OrderConfirmActivityBiz(this);
             Intent intent = getIntent();
             mChoicedProducts = intent.getParcelableArrayListExtra(EXTRAConstants.CHOICED_PRODUCT_LIST);
+            if (intent.hasExtra(EXTRAConstants.ORDER_VISIT_ID)) {
+                visit_idx = intent.getStringExtra(EXTRAConstants.ORDER_VISIT_ID);
+            }
+            Log.d("LM", "initData: ");
         } catch (Exception e) {
             ExceptionUtil.handlerException(e);
         }

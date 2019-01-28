@@ -2,6 +2,7 @@ package com.kaidongyuan.app.kdyorder.model;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -205,6 +206,11 @@ public class OrderConfirmActivityBiz {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
+
+                    if(mActivity.visit_idx.equals("")) {
+                        Log.d("LM", "visit_idx: " + mActivity.visit_idx);
+                    }
+                    mOrder.VISIT_IDX = mActivity.visit_idx;
                     String strorder=JSON.toJSONString(mOrder);
                     params.put("strOrderInfo",strorder);
                     params.put("strLicense", "");
