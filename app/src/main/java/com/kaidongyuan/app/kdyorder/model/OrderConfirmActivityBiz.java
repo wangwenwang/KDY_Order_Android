@@ -207,10 +207,7 @@ public class OrderConfirmActivityBiz {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
 
-                    if(mActivity.visit_idx.equals("")) {
-                        Log.d("LM", "visit_idx: " + mActivity.visit_idx);
-                    }
-                    mOrder.VISIT_IDX = mActivity.visit_idx;
+                    mOrder.VISIT_IDX = (mActivity.visit_idx != null) ? mActivity.visit_idx : "";
                     String strorder=JSON.toJSONString(mOrder);
                     params.put("strOrderInfo",strorder);
                     params.put("strLicense", "");

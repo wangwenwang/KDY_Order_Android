@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">配货易(订单)</string>
+    <string name="app_name">配货易订单</string>
     <string name="please_check_net">请检查网络是否正常连接！</string>
     <string name="no_set">暂无设置</string>
     <string name="no_data">无数据！</string>
