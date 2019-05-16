@@ -100,7 +100,7 @@ public class ZoomImageviewActivity extends BaseActivity implements View.OnClickL
             if (intent.hasExtra(EXTRAConstants.EXTRA_IMAGE_URL)) {
                 String url = intent.getStringExtra(EXTRAConstants.EXTRA_IMAGE_URL);
                 Picasso.with(this).load(url).error(R.drawable.ic_imageview_default_bg)
-                        .transform(new CropSquareTransformation()).into(mImageViewZoom);
+                        .into(mImageViewZoom);
             }else if (intent.hasExtra(EXTRAConstants.EXTRA_IMAGE_PATH)){
                 String path=intent.getStringExtra(EXTRAConstants.EXTRA_IMAGE_PATH);
                 Uri uri=Uri.fromFile(new File(path));

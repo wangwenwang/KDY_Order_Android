@@ -161,6 +161,7 @@ public class OrderDetailsActivityBiz {
                 if (ja.size() > 0) {
                     object = JSON.parseObject(ja.get(0).toString());
                     mOrder = JSON.parseObject(object.getString("order"), Order.class);
+                    MyApplication.getInstance().getBusiness().setIS_SAAS(mOrder.getIS_SAAS());
                     mActivity.getOrderDetailsDataSuccess();
                 } else {
                     mActivity.getOrderDetailsDataError("获取订单详情数据失败,返回数据为空！");

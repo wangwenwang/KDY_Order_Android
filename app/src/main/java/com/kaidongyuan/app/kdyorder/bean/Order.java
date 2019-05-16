@@ -47,6 +47,8 @@ public class Order implements java.io.Serializable {
 
     private String DRIVER_PAY;
 
+    private String IS_SAAS;
+
     private List<OrderDetails> OrderDetails;
     private List<StateTack> StateTack;
 
@@ -370,6 +372,14 @@ public class Order implements java.io.Serializable {
         StateTack = stateTack;
     }
 
+    public String getIS_SAAS() {
+        return IS_SAAS;
+    }
+
+    public void setIS_SAAS(String IS_SAAS) {
+        this.IS_SAAS = IS_SAAS;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -405,6 +415,7 @@ public class Order implements java.io.Serializable {
                 ", TMS_PLATE_NUMBER='" + TMS_PLATE_NUMBER + '\'' +
                 ", TMS_DRIVER_TEL='" + TMS_DRIVER_TEL + '\'' +
                 ", PAYMENT_TYPE='" + PAYMENT_TYPE + '\'' +
+                ", IS_SAAS='" + IS_SAAS + '\'' +
                 ", ORG_PRICE=" + ORG_PRICE +
                 ", ACT_PRICE=" + ACT_PRICE +
                 ", MJ_PRICE=" + MJ_PRICE +

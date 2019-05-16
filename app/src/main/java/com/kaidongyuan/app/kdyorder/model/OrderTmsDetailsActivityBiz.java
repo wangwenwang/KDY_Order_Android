@@ -1,5 +1,7 @@
 package com.kaidongyuan.app.kdyorder.model;
 
+import android.widget.Toast;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -17,6 +19,7 @@ import com.kaidongyuan.app.kdyorder.ui.activity.OrderTmsDetailsActivity;
 import com.kaidongyuan.app.kdyorder.util.ExceptionUtil;
 import com.kaidongyuan.app.kdyorder.util.HttpUtil;
 import com.kaidongyuan.app.kdyorder.util.NetworkUtil;
+import com.kaidongyuan.app.kdyorder.util.ToastUtil;
 import com.kaidongyuan.app.kdyorder.util.logger.Logger;
 
 import java.util.HashMap;
@@ -54,7 +57,21 @@ public class OrderTmsDetailsActivityBiz {
             if (orderId == null || orderId.length() <= 0) {
                 mActivity.getOrderDetailsDataError("获取订单物流详情失败！");
             }
-            StringRequest request = new StringRequest(Request.Method.POST, URLCostant.GET_ORDER_TMS_INFORMATION, new Response.Listener<String>() {
+
+            String url = "";
+            if(MyApplication.getInstance().getBusiness().getIS_SAAS().equals("Y")) {
+
+                url = URLCostant.GET_ORDER_TMS_INFORMATION_SAAS;
+            }else if(MyApplication.getInstance().getBusiness().getIS_SAAS().equals("N")) {
+
+                url = URLCostant.GET_ORDER_TMS_INFORMATION;
+            }else {
+
+                ToastUtil.showToastBottom("IS_SAAS不合法", Toast.LENGTH_SHORT);
+            }
+
+
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     Logger.w(OrderTmsDetailsActivityBiz.this.getClass() + "getTransInformationDataSuccess:" + response);

@@ -126,6 +126,11 @@ public class URLCostant {
      */
     public static final String GET_ORDER_TMSLIST = BASE_URL + "GetOrderTmsList";
 
+    /**
+     * 获取订单物流信息
+     */
+    public static final String GET_ORDER_TMSLIST_SAAS = BASE_URL + "GetOrderTmsListSaaS";
+
 //    /**
 //     * 获取物流信息详情
 //     */
@@ -137,9 +142,19 @@ public class URLCostant {
     public static final String GET_ORDER_TMS_INFORMATION = BASE_URL + "GetOrderTmsOrderNoInfo";
 
     /**
+     * 获取物流信息详情
+     */
+    public static final String GET_ORDER_TMS_INFORMATION_SAAS = BASE_URL + "GetOrderTmsOrderNoInfoSaaS";
+
+    /**
      * 获取订单位置信息
      */
     public static final String GET_LOCATION = BASE_URL + "GetLocaltion";
+
+    /**
+     * 获取订单位置信息
+     */
+    public static final String GET_LOCATION_SAAS = BASE_URL + "GetLocaltionSaaS";
 
     /**
      * 获取最新版本 app 信息
@@ -190,6 +205,11 @@ public class URLCostant {
      * 获取电子签名和交货现场图片
      */
     public static final String GETAUTOGRAPH = BASE_URL + "GetAutograph";
+
+    /**
+     * 获取电子签名和交货现场图片
+     */
+    public static final String GETAUTOGRAPH_SAAS = BASE_URL + "GetAutographSaaS";
 
     /**
      * 1.1 、添加客户库存

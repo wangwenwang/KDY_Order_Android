@@ -19,12 +19,26 @@ public class Business implements java.io.Serializable {
      */
     private String BUSINESS_NAME;
 
+    /**
+     * IDX
+     */
+    private String IS_SAAS;
+
     public String getBUSINESS_IDX() {
         return BUSINESS_IDX;
     }
 
     public void setBUSINESS_IDX(String BUSINESS_IDX) {
         this.BUSINESS_IDX = BUSINESS_IDX;
+    }
+
+
+    public String getIS_SAAS() {
+        return IS_SAAS;
+    }
+
+    public void setIS_SAAS(String IS_SAAS) {
+        this.IS_SAAS = IS_SAAS;
     }
 
     public String getBUSINESS_CODE() {

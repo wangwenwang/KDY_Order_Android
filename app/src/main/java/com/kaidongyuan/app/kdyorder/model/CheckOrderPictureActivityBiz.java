@@ -1,5 +1,7 @@
 package com.kaidongyuan.app.kdyorder.model;
 
+import android.widget.Toast;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.AuthFailureError;
@@ -8,6 +10,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.kaidongyuan.app.kdyorder.app.MyApplication;
 import com.kaidongyuan.app.kdyorder.bean.CustomerAutographAndPicture;
 import com.kaidongyuan.app.kdyorder.constants.FileConstants;
 import com.kaidongyuan.app.kdyorder.constants.URLCostant;
@@ -15,6 +18,7 @@ import com.kaidongyuan.app.kdyorder.ui.activity.CheckOrderPictureActivity;
 import com.kaidongyuan.app.kdyorder.util.ExceptionUtil;
 import com.kaidongyuan.app.kdyorder.util.HttpUtil;
 import com.kaidongyuan.app.kdyorder.util.NetworkUtil;
+import com.kaidongyuan.app.kdyorder.util.ToastUtil;
 import com.kaidongyuan.app.kdyorder.util.logger.Logger;
 
 import java.io.File;
@@ -51,7 +55,20 @@ public class CheckOrderPictureActivityBiz {
      */
     public boolean getAutographAndPictureData(final String orderIdx) {
         try {
-            StringRequest request = new StringRequest(Request.Method.POST, URLCostant.GETAUTOGRAPH, new Response.Listener<String>() {
+
+            String url = "";
+            if(MyApplication.getInstance().getBusiness().getIS_SAAS().equals("Y")) {
+
+                url = URLCostant.GETAUTOGRAPH_SAAS;
+            }else if(MyApplication.getInstance().getBusiness().getIS_SAAS().equals("N")) {
+
+                url = URLCostant.GETAUTOGRAPH;
+            }else {
+
+                ToastUtil.showToastBottom("IS_SAAS不合法", Toast.LENGTH_SHORT);
+            }
+
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     Logger.w(CheckOrderPictureActivityBiz.this.getClass() + "getAutographAndPictureDataSuccess:" + response);
@@ -143,7 +160,16 @@ public class CheckOrderPictureActivityBiz {
             for (CustomerAutographAndPicture customerAutographAndPicture : customerAutographAndPictures) {
                 try {
                     String productUrl = customerAutographAndPicture.getPRODUCT_URL();
-                    productUrl = URLCostant.LOA_URL + FileConstants.SERVER_AUTOGRAPH_AND_PICTURE_FILE + File.separator + productUrl;
+                    if(MyApplication.getInstance().getBusiness().getIS_SAAS().equals("Y")) {
+
+                        productUrl = "http://k56.kaidongyuan.com/" + productUrl;
+                    }else if(MyApplication.getInstance().getBusiness().getIS_SAAS().equals("N")) {
+
+                        productUrl = URLCostant.LOA_URL + FileConstants.SERVER_AUTOGRAPH_AND_PICTURE_FILE + File.separator + productUrl;
+                    }else {
+
+                        ToastUtil.showToastBottom("IS_SAAS不合法", Toast.LENGTH_SHORT);
+                    }
                     String remark = customerAutographAndPicture.getREMARK();
                     if (CustomerAutographAndPicture.AUTOGRAPH.equals(remark) && remarkInt == 0) {//为客户签名图片
                         return productUrl;

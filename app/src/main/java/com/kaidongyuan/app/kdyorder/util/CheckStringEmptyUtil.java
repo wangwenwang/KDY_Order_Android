@@ -18,7 +18,7 @@ public class CheckStringEmptyUtil {
      */
     public static String checkStringIsEmptyWithNoSet(String str) {
         if (TextUtils.isEmpty(str)) {
-            str = MyApplication.getmRes().getString(R.string.no_set);
+            str = "";
         }
         return str;
     }
