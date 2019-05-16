@@ -122,7 +122,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             mCycleviewpager = (CycleViewpager) mParentView.findViewById(R.id.cycleViewpager_carousel);
             mMoveButtonMakeOrder = (MoveButton) mParentView.findViewById(R.id.movebutton_makeOrder);
             mPercentrlChart = (PercentRelativeLayout) mParentView.findViewById(R.id.percentrl_chart);
-            mPercentrlInformation = (PercentRelativeLayout) mParentView.findViewById(R.id.percentrl_information);
+//            mPercentrlInformation = (PercentRelativeLayout) mParentView.findViewById(R.id.percentrl_information);
             mPercentrlSelling = (PercentRelativeLayout) mParentView.findViewById(R.id.percentrl_selling);
             mPercentrlTrackPress = (PercentRelativeLayout) mParentView.findViewById(R.id.percentrl_trackpress);
             mPercentrlCheckOrder = (PercentRelativeLayout) mParentView.findViewById(R.id.percentrl_checkorder);
@@ -202,7 +202,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 }
             });
             mPercentrlChart.setOnClickListener(this);
-            mPercentrlInformation.setOnClickListener(this);
+//            mPercentrlInformation.setOnClickListener(this);
             mPercentrlSelling.setOnClickListener(this);
             mPercentrlTrackPress.setOnClickListener(this);
             mPercentrlCheckOrder.setOnClickListener(this);
@@ -268,12 +268,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     Intent chartCheckIntent = new Intent(this.getActivity(), ChartCheckActivity.class);
                     startActivity(chartCheckIntent);
                     break;
-                case R.id.percentrl_information:
-                    //跳转到最新资讯界面
-//                    Intent newestInformationIntent = new Intent(this.getActivity(), NewestInformationActivity.class);
-//                    startActivity(newestInformationIntent);
-                    startActivity(new Intent(this.getActivity(), CustomerMeetingsActivity.class));
-                    break;
+//                case R.id.percentrl_information:
+//                    //跳转到最新资讯界面
+////                    Intent newestInformationIntent = new Intent(this.getActivity(), NewestInformationActivity.class);
+////                    startActivity(newestInformationIntent);
+//                    startActivity(new Intent(this.getActivity(), CustomerMeetingsActivity.class));
+//                    break;
                 case R.id.percentrl_selling://跳转到热销产品界面
                     Intent hotSellProductIntent = new Intent(this.getActivity(), HotSellProductActivity.class);
                     startActivity(hotSellProductIntent);

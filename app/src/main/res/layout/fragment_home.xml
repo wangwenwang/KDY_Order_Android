@@ -133,15 +133,16 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/line_color"/>
+
                 <com.zhy.android.percent.support.PercentRelativeLayout
-                    android:id="@+id/percentrl_information"
+                    android:id="@+id/percentrl_fee_manage"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/block_pressed_background"
                     >
                     <ImageView
-                        android:id="@+id/imageview_information"
+                        android:id="@+id/imageview_fee"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         app:layout_widthPercent="@string/block_imageview_width"
@@ -150,18 +151,18 @@
                         app:layout_marginBottomPercent="@string/block_marginBottomPercent"
                         app:layout_marginLeftPercent="@string/block_marginLeftPercent"
                         app:layout_marginRightPercent="@string/block_marginRightPercent"
-                        android:src="@drawable/lm_visit_client"
+                        android:src="@drawable/fee_table"
                         android:scaleType="fitXY"
                         />
                     <TextView
-                        android:id="@+id/textview_information"
+                        android:id="@+id/textview_fee"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        app:layout_widthPercent="100%w"
-                        app:layout_heightPercent="30%h"
+                        app:layout_widthPercent="@string/block_textview_width"
+                        app:layout_heightPercent="@string/block_textview_height"
                         android:layout_alignParentBottom="true"
                         android:gravity="center_horizontal|top"
-                        android:text="客户拜访"
+                        android:text="费用账单"
                         android:textSize="@dimen/blockTextSize"
                         android:textColor="@color/text_color_normal"
                         />
@@ -335,7 +336,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_heightPercent="33%h"
-                app:layout_widthPercent="100%w"
+                app:layout_widthPercent="66.9%w"
                 android:visibility="visible">
                 <com.zhy.android.percent.support.PercentRelativeLayout
                     android:id="@+id/percentrl_party_inventory"
@@ -412,39 +413,6 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/line_color"/>
-                <com.zhy.android.percent.support.PercentRelativeLayout
-                    android:id="@+id/percentrl_fee_manage"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/block_pressed_background"
-                    >
-                    <ImageView
-                        android:id="@+id/imageview_fee"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_widthPercent="@string/block_imageview_width"
-                        app:layout_heightPercent="@string/block_imageview_height"
-                        app:layout_marginTopPercent="@string/block_marginTopPercent"
-                        app:layout_marginBottomPercent="@string/block_marginBottomPercent"
-                        app:layout_marginLeftPercent="@string/block_marginLeftPercent"
-                        app:layout_marginRightPercent="@string/block_marginRightPercent"
-                        android:src="@drawable/fee_table"
-                        android:scaleType="fitXY"
-                        />
-                    <TextView
-                        android:id="@+id/textview_fee"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_widthPercent="@string/block_textview_width"
-                        app:layout_heightPercent="@string/block_textview_height"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="center_horizontal|top"
-                        android:text="费用账单"
-                        android:textSize="@dimen/blockTextSize"
-                        android:textColor="@color/text_color_normal"
-                        />
-                </com.zhy.android.percent.support.PercentRelativeLayout>
 
             </com.zhy.android.percent.support.PercentLinearLayout>
 
